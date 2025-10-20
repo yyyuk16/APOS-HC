@@ -1,0 +1,704 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>APOS-HC 調査票 - フォーム3</title>
+  <link rel="stylesheet" href="main.css">
+  <style>
+    /* セクション表示の修正 */
+    .section { 
+      display: block !important; 
+    }
+    
+    /* iPad用の追加スタイル */
+    @media screen and (min-width: 768px) {
+      body {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      
+      .container {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        padding: 25px;
+        margin: 15px 0;
+      }
+      
+      h1 {
+        font-size: 1.8em;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 15px;
+      }
+      
+      h2 {
+        font-size: 1.4em;
+        color: #34495e;
+        margin: 25px 0 15px 0;
+        padding: 10px 0;
+        border-left: 4px solid #3498db;
+        padding-left: 15px;
+        background: linear-gradient(90deg, #f8f9fa 0%, transparent 100%);
+      }
+      
+      fieldset {
+        border: 2px solid #e0e6ed;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        background: #fafbfc;
+        transition: all 0.3s ease;
+      }
+      
+      fieldset:hover {
+        border-color: #3498db;
+        box-shadow: 0 2px 10px rgba(52, 152, 219, 0.1);
+      }
+      
+      legend {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #2c3e50;
+        padding: 0 10px;
+        background: #fff;
+        border-radius: 6px;
+        border: 2px solid #3498db;
+      }
+      
+      label {
+        display: block;
+        margin: 10px 0 5px 0;
+        font-weight: 600;
+        color: #34495e;
+        font-size: 1em;
+      }
+      
+      input[type="text"], input[type="tel"], input[type="email"], 
+      input[type="number"], select, textarea {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 1em;
+        border: 2px solid #e0e6ed;
+        border-radius: 6px;
+        background: #fff;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+        margin-top: 5px;
+      }
+      
+      input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        transform: translateY(-2px);
+      }
+      
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+        font-family: inherit;
+      }
+      
+      .daily-rhythm-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      }
+      
+      .daily-rhythm-table th {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+        padding: 12px 10px;
+        font-size: 1em;
+        font-weight: bold;
+        text-align: center;
+      }
+      
+      .daily-rhythm-table td {
+        padding: 10px;
+        border-bottom: 1px solid #e8f4f8;
+        text-align: center;
+        vertical-align: middle;
+      }
+      
+      .daily-rhythm-table td:first-child {
+        background: #f8f9fa;
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 0.9em;
+        width: 150px;
+      }
+      
+      .daily-rhythm-table input {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 0.9em;
+        border: 2px solid #e0e6ed;
+        border-radius: 6px;
+        background: #fff;
+        transition: all 0.3s ease;
+        margin: 0;
+      }
+      
+      .daily-rhythm-table input:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+      }
+      
+      .daily-rhythm-table tr:hover {
+        background: #f8f9fa;
+      }
+      
+      .note {
+        font-size: 0.9em;
+        color: #7f8c8d;
+        margin-top: 10px;
+        padding: 10px;
+        background: #ecf0f1;
+        border-radius: 6px;
+        border-left: 3px solid #95a5a6;
+      }
+      
+      .nav-buttons {
+        margin-top: 25px;
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+      }
+      
+      .nav-buttons button {
+        padding: 12px 25px;
+        font-size: 1em;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-width: 120px;
+      }
+      
+      .nav-buttons button:first-child {
+        background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+        color: white;
+      }
+      
+      .nav-buttons button:last-child {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+      }
+      
+      .nav-buttons button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      }
+      
+      .nav-buttons button:active {
+        transform: translateY(-1px);
+      }
+      
+      /* プログレスバーのスタイル */
+      .progress-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid #e0e0e0;
+        padding: 20px;
+        z-index: 1000;
+      }
+      
+      .progress-wrapper {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      
+      .progress-bar {
+        width: 100%;
+        height: 6px;
+        background: #f0f0f0;
+        border-radius: 3px;
+        overflow: hidden;
+        margin-bottom: 15px;
+      }
+      
+      .progress-fill {
+        height: 100%;
+        background: #003366;
+        border-radius: 3px;
+        transition: width 0.5s ease;
+        width: 25%;
+      }
+      
+      .progress-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.1em;
+        color: #333;
+        font-weight: 500;
+      }
+      
+      .progress-page {
+        color: #003366;
+        font-weight: 600;
+      }
+      
+      .progress-total {
+        color: #999;
+      }
+      
+      /* フォームの下部に余白を追加（プログレスバーの分） */
+      body {
+        padding-bottom: 100px;
+      }
+    }
+    
+    /* タブレット用の追加調整 */
+    @media screen and (max-width: 1024px) and (min-width: 768px) {
+      .daily-rhythm-table td:first-child {
+        width: 140px;
+      }
+      
+      .daily-rhythm-table input {
+        font-size: 0.85em;
+        padding: 6px 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+<h1>APOS-HC 調査票</h1>
+<form id="surveyForm">
+
+<div class="section" id="section-care-burden">
+  <h2>Ⅰ　介護負担の状況</h2>
+  <fieldset>
+    <legend>1) 心身への影響１</legend>
+    <label for="care_burden_feeling">介護をしていて不安やイライラ・疲れ・怒りの気持ちがありますか</label>
+    <select id="care_burden_feeling" name="care_burden_feeling" required>
+      <option value="">選択してください</option>
+      <option value="0">0 全く思わない</option>
+      <option value="1">1 ごく軽く思う</option>
+      <option value="2">2 軽く思う</option>
+      <option value="3">3 かなり思う</option>
+      <option value="4">4 非常に思う</option>
+    </select>
+  </fieldset>
+  <fieldset>
+    <legend>2) 心身への影響２</legend>
+    <label for="care_burden_health">介護が始まり、自分の体調や健康に影響がありますか</label>
+    <select id="care_burden_health" name="care_burden_health" required>
+      <option value="">選択してください</option>
+      <option value="0">0 全く思わない</option>
+      <option value="1">1 ごく軽く思う</option>
+      <option value="2">2 軽く思う</option>
+      <option value="3">3 かなり思う</option>
+      <option value="4">4 非常に思う</option>
+    </select>
+  </fieldset>
+  <fieldset>
+    <legend>3) 生活への影響１</legend>
+    <label for="care_burden_life">介護をしていて家族や友人との付き合いに支障をきたしていますか</label>
+    <select id="care_burden_life" name="care_burden_life" required>
+      <option value="">選択してください</option>
+      <option value="0">0 全く思わない</option>
+      <option value="1">1 ごく軽く思う</option>
+      <option value="2">2 軽く思う</option>
+      <option value="3">3 かなり思う</option>
+      <option value="4">4 非常に思う</option>
+    </select>
+  </fieldset>
+  <fieldset>
+    <legend>4) 生活への影響２</legend>
+    <label for="care_burden_work">介護をしていて自分の趣味や社会参加に支障を来たしていますか</label>
+    <select id="care_burden_work" name="care_burden_work" required>
+      <option value="">選択してください</option>
+      <option value="0">0 全く思わない</option>
+      <option value="1">1 ごく軽く思う</option>
+      <option value="2">2 軽く思う</option>
+      <option value="3">3 かなり思う</option>
+      <option value="4">4 非常に思う</option>
+    </select>
+  </fieldset>
+  <fieldset>
+    <legend>5) 仕事・学業への影響</legend>
+    <label for="care_burden_work">介護のために自分の仕事に影響がでていますか</label>
+    <select id="care_burden_work" name="care_burden_work" required>
+      <option value="">選択してください</option>
+      <option value="0">0 全く思わない</option>
+      <option value="1">1 ごく軽く思う</option>
+      <option value="2">2 軽く思う</option>
+      <option value="3">3 かなり思う</option>
+      <option value="4">4 非常に思う</option>
+    </select>
+  </fieldset>
+  <fieldset>
+    <legend>介護の期間 </legend>
+    <label for="care_period_years">どの位の期間介護を続けられていますか</label>
+    <input type="number" id="care_period_years" name="care_period_years" min="0" max="99" style="width:80px;" placeholder="年">年
+    <label for="care_period_months" style="margin-left:10px;"></label>
+    <input type="number" id="care_period_months" name="care_period_months" min="0" max="11" style="width:80px;" placeholder="か月">ヶ月
+  </fieldset>
+  <fieldset>
+    <legend>介護継続意向</legend>
+    <label for="care_intention">今後の介護について</label>
+    <select id="care_intention" name="care_intention" required>
+      <option value="">選択してください</option>
+      <option value="0">0. いろいろな制度や社会的サービスを使いながら常にこのままつづけたい</option>
+      <option value="1">1. いろいろな制度や社会的サービスを使わしてもらいつづけたい</option>
+      <option value="2">2. 息子を見ながらつづけるか判断したい</option>
+      <option value="3">3. 兄弟・姉妹等介護の代役を予定している</option>
+      <option value="4">4. 施設を考えているが手続きはしていない</option>
+      <option value="5">5. 在宅の継続は考えていない、施設入所を申し込み順番を待っている</option>
+    </select>
+  </fieldset>
+  
+</div>
+<script>
+  function toggleFutureCareOther() {
+    const val = document.getElementById('future_care_plan').value;
+    const inputDiv = document.getElementById('future_care_other_input');
+    if (val === 'other') {
+      inputDiv.style.display = 'block';
+    } else {
+      inputDiv.style.display = 'none';
+      document.getElementById('future_care_other').value = '';
+    }
+  }
+</script>
+
+
+
+    <div class="section" id="section-reform-tools-equipment">
+      <h2>Ⅱ　介護の実態</h2>
+
+      <fieldset>
+        <legend>1. 創傷の発生（身体的虐待）</legend>
+        <label for="abuse_injury">過去1か月の間に新たな傷はないか</label>
+        <select name="abuse_injury" id="abuse_injury" required>
+          <option value="">選択してください</option>
+          <option value="0">0 創傷や負傷はない</option>
+          <option value="1">1 過去あったが1ヶ月間に創傷はない</option>
+          <option value="2">2 既に治った創傷はあるが新たなものはない</option>
+          <option value="3">3 様々な治癒段階の傷や骨折がある</option>
+          <option value="4">4 多くの創傷や骨折がある</option>
+        </select>
+      </fieldset>
+
+      <fieldset>
+        <legend>2. 身体の不衛生（ケアの放置）</legend>
+        <label for="neglect_hygiene">不衛生による影響はあるか</label>
+        <select name="neglect_hygiene" id="neglect_hygiene" required>
+          <option value="">選択してください</option>
+          <option value="0">0　不衛生による発疹や感染はない</option>
+          <option value="1">1　過去あったが1ヶ月間に不衛生による発疹・感染はない</option>
+          <option value="2">2　既に治った発疹・感染はあるがあらたなものはない</option>
+          <option value="3">3　不衛生による発疹・感染が様々にある</option>
+          <option value="4">4　多くの不衛生による発疹・感染がある</option>
+        </select>
+      </fieldset>
+
+      <fieldset>
+        <legend>3. 言葉による攻撃や否定的メッセージの持続（心理的虐待）</legend>
+        <label for="psychological_abuse">否定的な言動の持続があるか</label>
+        <select name="psychological_abuse" id="psychological_abuse" required>
+          <option value="">選択してください</option>
+          <option value="0">0 言葉の攻撃や否定的メッセージはない</option>
+          <option value="1">1 過去あったが1か月間に言葉や否定的メッセージはない</option>
+          <option value="2">2 過去言葉の攻撃や否定的メッセージがあったが、新たなものはない</option>
+          <option value="3">3 時に言葉の攻撃または否定的メッセージをおこなっている</option>
+          <option value="4">4 数多く言葉の攻撃または否定的メッセージをおこなっている</option>
+        </select>
+      </fieldset>
+
+      <fieldset>
+        <legend>4. 介護等世話の放棄（ネグレクト）/ 拘束</legend>
+        <label for="neglect_care">適切な清掃・世話・拘束の有無</label>
+        <select name="neglect_care" id="neglect_care" required>
+          <option value="">選択してください</option>
+          <option value="0">0　介護放棄・拘束の状態は全く見当たらない</option>
+          <option value="1">1　過去1ヶ月間に介護放棄・拘束の状態はない</option>
+          <option value="2">2　過去介護放棄・拘束の状態があったが新たにはない</option>
+          <option value="3">3　時に介護を放棄・拘束している</option>
+          <option value="4">4　殆ど介護されず放棄・拘束状態となっている</option>
+        </select>
+      </fieldset>
+
+      <fieldset>
+        <legend>5. 性的暴力</legend>
+        <label for="sexual_abuse">性的行為の強制・不適切な接触</label>
+        <select name="sexual_abuse" id="sexual_abuse" required>
+          <option value="">選択してください</option>
+          <option value="0">0 性的暴力は全くない</option>
+          <option value="1">1 過去1ヶ月間に性的暴力はない</option>
+          <option value="2">2 過去性的暴力にあったが新たなものはない</option>
+          <option value="3">3 時に性的暴力をおこなっている</option>
+          <option value="4">4 頻繁に性的暴力をおこなっている</option>
+        </select>
+      </fieldset>
+
+      <fieldset>
+        <legend>6. 金銭的な受け渡しの参加</legend>
+        <label for="financial_abuse">金銭的トラブル・搾取</label>
+        <select name="financial_abuse" id="financial_abuse" required>
+          <option value="">選択してください</option>
+          <option value="0">0　本人の金銭は本人の意思に沿って使用している</option>
+          <option value="1">1　過去1ヶ月間に金銭的授受のトラブルはない</option>
+          <option value="2">2　過去に金銭的受け渡しのトラブルにあったが新たなものはない</option>
+          <option value="3">3　時に金銭的受け渡しのトラブル行為が周囲により行われている</option>
+          <option value="4">4　頻繁に金銭的受け渡しのトラブル行為がおこなわれている</option>
+        </select>
+      </fieldset>
+
+    <div class="nav-buttons">
+      <button type="button" onclick="location.href='form3.html'">← 戻る</button>
+      <button type="button" onclick="location.href='form5.html'">次へ →</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  // 高額費用の利用：理由欄表示
+  function toggleExpensiveCostDetail() {
+    const val = document.getElementById('expensive_cost_usage').value;
+    const reasonDiv = document.getElementById('expensive_cost_reason');
+    if (val === '2a' || val === '2b') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費医療の利用：理由欄表示
+  function togglePublicMedicalReason() {
+    const val = document.getElementById('public_medical_usage').value;
+    const reasonDiv = document.getElementById('public_medical_reason');
+    if (val === '2') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費医療の詳細：病名入力欄表示
+  function toggleMedicalDiseaseInput() {
+    const val = document.getElementById('public_medical_detail').value;
+    const inputDiv = document.getElementById('medical_disease_input');
+    if (val === '5' || val === '3') {
+      inputDiv.style.display = 'block';
+    } else {
+      inputDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費制度の利用：理由欄表示
+  function togglePublicSystemReason() {
+    const val = document.getElementById('public_system_usage').value;
+    const reasonDiv = document.getElementById('public_system_reason');
+    if (val === '2') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費制度の詳細：詳細入力欄表示
+  function toggleSystemDetailInput() {
+    const val = document.getElementById('public_system_detail').value;
+    const inputDiv = document.getElementById('system_detail_input');
+    if (val === '1' || val === '2') {
+      inputDiv.style.display = 'block';
+    } else {
+      inputDiv.style.display = 'none';
+    }
+  }
+
+  // フォームの自動保存機能
+  const form = document.getElementById('surveyForm');
+  form.addEventListener('input', () => {
+    const data = Object.fromEntries(new FormData(form));
+    localStorage.setItem('surveyData_form2', JSON.stringify(data));
+  });
+
+  // 保存されたデータの復元
+  window.addEventListener('load', () => {
+    const saved = localStorage.getItem('surveyData_form2');
+    if (saved) {
+      const data = JSON.parse(saved);
+      Object.keys(data).forEach(key => {
+        const el = form.elements[key];
+        if (el) {
+          el.value = data[key];
+        }
+      });
+    }
+  });
+</script>
+
+  <!-- プログレスバー -->
+  <div class="progress-container">
+    <div class="progress-wrapper">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-info">
+        <span class="progress-page" id="currentPage">5</span>
+        <span class="progress-total">/ 20</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // プログレスバーの更新
+    function updateProgress() {
+      const progressPercentage = (5 / 20) * 100;
+      const progressFill = document.getElementById('progressFill');
+      const currentPageElement = document.getElementById('currentPage');
+      
+      progressFill.style.width = progressPercentage + '%';
+      currentPageElement.textContent = '5';
+      progressFill.style.background = '#003366';
+    }
+    
+    // 初期プログレス更新
+    document.addEventListener('DOMContentLoaded', function() {
+      updateProgress();
+      
+      // フォームの自動保存機能
+      const form = document.getElementById('surveyForm');
+      const formNumber = 4;
+      
+      if (form) {
+        function collectFormData() {
+          const formData = new FormData(form);
+          const data = {};
+          for (let [key, value] of formData.entries()) {
+            if (data[key]) {
+              if (Array.isArray(data[key])) {
+                data[key].push(value);
+              } else {
+                data[key] = [data[key], value];
+              }
+            } else {
+              data[key] = value;
+            }
+          }
+          
+          // Canvas画像データを保存
+          const canvases = form.querySelectorAll('canvas');
+          canvases.forEach((canvas, index) => {
+            try {
+              const canvasId = canvas.id || `canvas_${index}`;
+              data[canvasId + '_image'] = canvas.toDataURL('image/png');
+            } catch (e) {
+              console.error('Canvas保存エラー:', e);
+            }
+          });
+          
+          // 非表示項目も含めて全入力要素を確認
+          const allInputs = form.querySelectorAll('input, select, textarea');
+          allInputs.forEach(input => {
+            if (!input.name) return;
+            const isProcessed = data.hasOwnProperty(input.name);
+            if (input.type === 'checkbox') {
+              if (input.checked) {
+                if (!data[input.name]) {
+                  data[input.name] = [];
+                }
+                if (Array.isArray(data[input.name])) {
+                  if (!data[input.name].includes(input.value)) {
+                    data[input.name].push(input.value);
+                  }
+                } else {
+                  data[input.name] = [data[input.name], input.value];
+                }
+              }
+            } else if (input.type === 'radio') {
+              if (input.checked && !isProcessed) {
+                data[input.name] = input.value;
+              }
+            } else {
+              if (!isProcessed && input.value) {
+                data[input.name] = input.value;
+              }
+            }
+          });
+          
+          return data;
+        }
+        
+        form.addEventListener('input', function() {
+          const data = collectFormData();
+          localStorage.setItem(`surveyData_form${formNumber}`, JSON.stringify(data));
+          console.log(`Form ${formNumber} データを自動保存しました`);
+        });
+        
+        form.addEventListener('change', function() {
+          const data = collectFormData();
+          localStorage.setItem(`surveyData_form${formNumber}`, JSON.stringify(data));
+          console.log(`Form ${formNumber} データを自動保存しました`);
+        });
+        
+        const savedData = localStorage.getItem(`surveyData_form${formNumber}`);
+        if (savedData) {
+          const data = JSON.parse(savedData);
+          Object.keys(data).forEach(key => {
+            const elements = form.elements[key];
+            if (elements) {
+              if (elements.length > 1) {
+                Array.from(elements).forEach(el => {
+                  if (el.type === 'checkbox' || el.type === 'radio') {
+                    if (Array.isArray(data[key])) {
+                      el.checked = data[key].includes(el.value);
+                    } else {
+                      el.checked = el.value === data[key];
+                    }
+                  }
+                });
+              } else if (elements.length === 1) {
+                const el = elements[0];
+                if (el.type === 'checkbox' || el.type === 'radio') {
+                  if (Array.isArray(data[key])) {
+                    el.checked = data[key].includes(el.value);
+                  } else {
+                    el.checked = el.value === data[key];
+                  }
+                } else {
+                  el.value = data[key] || '';
+                }
+              } else {
+                if (elements.type === 'checkbox' || elements.type === 'radio') {
+                  if (Array.isArray(data[key])) {
+                    elements.checked = data[key].includes(elements.value);
+                  } else {
+                    elements.checked = elements.value === data[key];
+                  }
+                } else {
+                  elements.value = data[key] || '';
+                }
+              }
+            }
+          });
+          console.log(`Form ${formNumber} の保存データを復元しました`);
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

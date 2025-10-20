@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>APOS-HC 調査票 - 完了</title>
+  <link rel="stylesheet" href="main.css">
+  <style>
+    body {
+      font-family: 'Hiragino Sans', 'ヒラギノ角ゴシック', 'Yu Gothic', '游ゴシック', sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f8f9fa;
+    }
+    
+    .completion-container {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 50px;
+      text-align: center;
+      margin: 50px 0;
+    }
+    
+    .completion-icon {
+      font-size: 4em;
+      color: #27ae60;
+      margin-bottom: 20px;
+    }
+    
+    .completion-title {
+      font-size: 2em;
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+    
+    .completion-message {
+      font-size: 1.2em;
+      color: #7f8c8d;
+      margin-bottom: 30px;
+    }
+    
+    /* プログレスバーのスタイル */
+    .progress-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-top: 1px solid #e0e0e0;
+      padding: 20px;
+      z-index: 1000;
+    }
+    
+    .progress-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: #f0f0f0;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 15px;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: #27ae60;
+      border-radius: 3px;
+      transition: width 0.5s ease;
+      width: 100%;
+    }
+    
+    .progress-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.1em;
+      color: #333;
+      font-weight: 500;
+    }
+    
+    .progress-page {
+      color: #27ae60;
+      font-weight: 600;
+    }
+    
+    .progress-total {
+      color: #999;
+    }
+    
+    /* フォームの下部に余白を追加（プログレスバーの分） */
+    body {
+      padding-bottom: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="completion-container">
+    <div class="completion-icon">✅</div>
+    <h1 class="completion-title">調査完了</h1>
+    <p class="completion-message">
+      ご協力いただき、ありがとうございました。<br>
+      調査結果は適切に保存されました。
+    </p>
+  </div>
+
+  <!-- プログレスバー -->
+  <div class="progress-container">
+    <div class="progress-wrapper">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-info">
+        <span class="progress-page" id="currentPage">完了</span>
+        <span class="progress-total">/ 20</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // プログレスバーの更新
+    function updateProgress() {
+      const progressPercentage = 100;
+      const progressFill = document.getElementById('progressFill');
+      const currentPageElement = document.getElementById('currentPage');
+      
+      progressFill.style.width = progressPercentage + '%';
+      currentPageElement.textContent = '完了';
+      progressFill.style.background = '#27ae60';
+    }
+    
+    // 初期プログレス更新
+    document.addEventListener('DOMContentLoaded', async function() {
+      updateProgress();
+      
+      // ユーザーIDとセッションを取得
+      const userId = localStorage.getItem('user_id');
+      const session = parseInt(localStorage.getItem('session') || '1');
+      
+      if (!userId) {
+        const messageElement = document.querySelector('.completion-message');
+        if (messageElement) {
+          messageElement.innerHTML = `
+            <strong style="color: #e74c3c;">エラー：ユーザー情報が見つかりません</strong><br>
+            <span style="font-size: 0.9em;">最初のページから再度開始してください。</span><br>
+            <button onclick="location.href='/'" style="margin-top: 15px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">最初に戻る</button>
+          `;
+        }
+        return;
+      }
+      
+      // 全フォームデータを収集してサーバーに送信
+      console.log('全フォームデータを収集中...');
+      console.log('ユーザーID:', userId);
+      console.log('セッション:', session);
+      
+      // 全フォーム（form0～form19）のデータを収集
+      const allData = {};
+      
+      // ユーザーごとのlocalStorageキーを使用
+      function ensurePid() {
+        let pid = localStorage.getItem('apos_pid');
+        if (!pid) {
+          pid = userId; // user_idをpidとして使用
+        }
+        return pid;
+      }
+      const pid = ensurePid();
+      
+      for (let i = 0; i <= 19; i++) {
+        // 複数のキーパターンを試す
+        const keys = [
+          `surveyData_${pid}_form${i}`,
+          `surveyData_form${i}`,
+          `form${i}_data`
+        ];
+        
+        let savedData = null;
+        for (const key of keys) {
+          savedData = localStorage.getItem(key);
+          if (savedData) {
+            console.log(`Form ${i} のデータを取得 (キー: ${key})`);
+            break;
+          }
+        }
+        
+        if (savedData) {
+          try {
+            allData[`form${i}`] = JSON.parse(savedData);
+            console.log(`Form ${i} のデータを収集しました`);
+          } catch (error) {
+            console.error(`Form ${i} のデータ解析エラー:`, error);
+          }
+        } else {
+          console.log(`Form ${i} のデータが見つかりませんでした`);
+        }
+      }
+      
+      console.log('収集した全データ:', allData);
+      
+      // データが存在する場合のみサーバーに送信
+      if (Object.keys(allData).length > 0) {
+        try {
+          const messageElement = document.querySelector('.completion-message');
+          
+          // 送信中メッセージを表示
+          if (messageElement) {
+            messageElement.innerHTML = `
+              ご協力いただき、ありがとうございました。<br>
+              <strong style="color: #3498db;">データを保存中...</strong><br>
+              <span style="font-size: 0.9em;">ユーザー: ${userId} | セッション: ${session}回目</span>
+            `;
+          }
+          
+          // 保存用のデータを準備
+          const saveData = {
+            user_id: userId,
+            session: session,
+            form_data: allData,
+            completed: 1  // 完了フラグ
+          };
+          
+          // 環境に応じてAPI URLを決定
+          const baseURL = window.location.hostname.includes("localhost") 
+            ? "http://localhost:8000" 
+            : "https://homecare-form.com";
+          
+          // サーバーに送信
+          const response = await fetch(`${baseURL}/api/save-survey`, {
+            method: 'POST',
+            headers: { 
+              'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify(saveData)
+          });
+          
+          if (response.ok) {
+            const result = await response.json();
+            console.log('データ保存成功:', result);
+            
+            // 成功メッセージを表示
+            if (messageElement) {
+              messageElement.innerHTML = `
+                ご協力いただき、ありがとうございました。<br>
+                <strong style="color: #27ae60;">調査結果は正常に保存されました。</strong><br>
+                <span style="font-size: 0.9em; color: #7f8c8d;">
+                  ユーザー: ${userId}<br>
+                  セッション: ${session}回目<br>
+                  保存ID: ${result.id || '---'}
+                </span><br>
+                <button onclick="location.href='/'" style="margin-top: 15px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">最初に戻る</button>
+              `;
+            }
+            
+            // localStorageのフォームデータをクリア（オプション）
+            // for (let i = 0; i <= 19; i++) {
+            //   localStorage.removeItem(`surveyData_${pid}_form${i}`);
+            // }
+          } else {
+            const errorData = await response.text();
+            console.error('保存エラー:', response.status, errorData);
+            
+            // エラーメッセージを表示
+            if (messageElement) {
+              messageElement.innerHTML = `
+                ご協力いただき、ありがとうございました。<br>
+                <strong style="color: #e74c3c;">データの保存に失敗しました。</strong><br>
+                <span style="font-size: 0.9em;">管理者にお問い合わせください。</span><br>
+                <span style="font-size: 0.8em; color: #999;">エラー: ${response.status}</span><br>
+                <button onclick="location.href='/'" style="margin-top: 15px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">最初に戻る</button>
+              `;
+            }
+          }
+        } catch (error) {
+          console.error('送信エラー:', error);
+          
+          // ネットワークエラーメッセージを表示
+          const messageElement = document.querySelector('.completion-message');
+          if (messageElement) {
+            messageElement.innerHTML = `
+              ご協力いただき、ありがとうございました。<br>
+              <strong style="color: #e74c3c;">通信エラーが発生しました。</strong><br>
+              <span style="font-size: 0.9em;">サーバーに接続できません。管理者にお問い合わせください。</span><br>
+              <span style="font-size: 0.8em; color: #999;">エラー: ${error.message}</span><br>
+              <button onclick="location.href='/'" style="margin-top: 15px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">最初に戻る</button>
+            `;
+          }
+        }
+      } else {
+        console.log('保存するデータがありません');
+        const messageElement = document.querySelector('.completion-message');
+        if (messageElement) {
+          messageElement.innerHTML = `
+            ご協力いただき、ありがとうございました。<br>
+            <strong style="color: #f39c12;">保存するデータが見つかりませんでした。</strong><br>
+            <span style="font-size: 0.9em;">フォームに入力してから完了ページに進んでください。</span><br>
+            <button onclick="location.href='/'" style="margin-top: 15px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">最初に戻る</button>
+          `;
+        }
+      }
+    });
+  </script>
+</body>
+</html>

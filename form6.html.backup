@@ -1,0 +1,899 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>APOS-HC 調査票 - フォーム3</title>
+  <link rel="stylesheet" href="main.css">
+  <style>
+    /* セクション表示の修正 */
+    .section { 
+      display: block !important; 
+    }
+    
+    /* iPad用の追加スタイル */
+    @media screen and (min-width: 768px) {
+      body {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      
+      .container {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        padding: 25px;
+        margin: 15px 0;
+      }
+      
+      h1 {
+        font-size: 1.8em;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 15px;
+      }
+      
+      h2 {
+        font-size: 1.4em;
+        color: #34495e;
+        margin: 25px 0 15px 0;
+        padding: 10px 0;
+        border-left: 4px solid #3498db;
+        padding-left: 15px;
+        background: linear-gradient(90deg, #f8f9fa 0%, transparent 100%);
+      }
+      
+      fieldset {
+        border: 2px solid #e0e6ed;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        background: #fafbfc;
+        transition: all 0.3s ease;
+      }
+      
+      fieldset:hover {
+        border-color: #3498db;
+        box-shadow: 0 2px 10px rgba(52, 152, 219, 0.1);
+      }
+      
+      legend {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #2c3e50;
+        padding: 0 10px;
+        background: #fff;
+        border-radius: 6px;
+        border: 2px solid #3498db;
+      }
+      
+      label {
+        display: block;
+        margin: 10px 0 5px 0;
+        font-weight: 600;
+        color: #34495e;
+        font-size: 1em;
+      }
+      
+      input[type="text"], input[type="tel"], input[type="email"], 
+      input[type="number"], select, textarea {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 1em;
+        border: 2px solid #e0e6ed;
+        border-radius: 6px;
+        background: #fff;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+        margin-top: 5px;
+      }
+      
+      input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        transform: translateY(-2px);
+      }
+      
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+        font-family: inherit;
+      }
+      
+      .daily-rhythm-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      }
+      
+      .daily-rhythm-table th {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+        padding: 12px 10px;
+        font-size: 1em;
+        font-weight: bold;
+        text-align: center;
+      }
+      
+      .daily-rhythm-table td {
+        padding: 10px;
+        border-bottom: 1px solid #e8f4f8;
+        text-align: center;
+        vertical-align: middle;
+      }
+      
+      .daily-rhythm-table td:first-child {
+        background: #f8f9fa;
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 0.9em;
+        width: 150px;
+      }
+      
+      .daily-rhythm-table input {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 0.9em;
+        border: 2px solid #e0e6ed;
+        border-radius: 6px;
+        background: #fff;
+        transition: all 0.3s ease;
+        margin: 0;
+      }
+      
+      .daily-rhythm-table input:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+      }
+      
+      .daily-rhythm-table tr:hover {
+        background: #f8f9fa;
+      }
+      
+      .note {
+        font-size: 0.9em;
+        color: #7f8c8d;
+        margin-top: 10px;
+        padding: 10px;
+        background: #ecf0f1;
+        border-radius: 6px;
+        border-left: 3px solid #95a5a6;
+      }
+      
+      .nav-buttons {
+        margin-top: 25px;
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+      }
+      
+      .nav-buttons button {
+        padding: 12px 25px;
+        font-size: 1em;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-width: 120px;
+      }
+      
+      .nav-buttons button:first-child {
+        background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+        color: white;
+      }
+      
+      .nav-buttons button:last-child {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+      }
+      
+      .nav-buttons button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      }
+      
+      .nav-buttons button:active {
+        transform: translateY(-1px);
+      }
+      
+      /* プログレスバーのスタイル */
+      .progress-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid #e0e0e0;
+        padding: 20px;
+        z-index: 1000;
+      }
+      
+      .progress-wrapper {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      
+      .progress-bar {
+        width: 100%;
+        height: 6px;
+        background: #f0f0f0;
+        border-radius: 3px;
+        overflow: hidden;
+        margin-bottom: 15px;
+      }
+      
+      .progress-fill {
+        height: 100%;
+        background: #003366;
+        border-radius: 3px;
+        transition: width 0.5s ease;
+        width: 40%;
+      }
+      
+      .progress-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.1em;
+        color: #333;
+        font-weight: 500;
+      }
+      
+      .progress-page {
+        color: #003366;
+        font-weight: 600;
+      }
+      
+      .progress-total {
+        color: #999;
+      }
+      
+      /* フォームの下部に余白を追加（プログレスバーの分） */
+      body {
+        padding-bottom: 100px;
+      }
+    }
+    
+    /* タブレット用の追加調整 */
+    @media screen and (max-width: 1024px) and (min-width: 768px) {
+      .daily-rhythm-table td:first-child {
+        width: 140px;
+      }
+      
+      .daily-rhythm-table input {
+        font-size: 0.85em;
+        padding: 6px 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+<h1>APOS-HC 調査票</h1>
+<form id="surveyForm">
+<div class="section" id="section-lifestyle-habits">
+  <h2>Ⅰ　生活習慣・健康状態</h2>
+  <fieldset>
+    <legend>日々の健康づくりについてご回答ください</legend>
+    <table class="family-table" style="width:100%; font-size:1em;">
+      <tr>
+        <th style="width:30%;">項目</th>
+        <th style="width:70%;">入力内容</th>
+      </tr>
+      <tr>
+        <td>飲酒による問題</td>
+        <td>
+          <select name="alcohol_problem" required>
+            <option value="">選択してください</option>
+            <option value="0">0. なし</option>
+            <option value="1">1. 過去にトラブル有</option>
+            <option value="2">2. 現在トラブル有</option>
+            <option value="3">3. 10年以上の多量飲酒</option>
+          </select>
+          <div style="font-size:0.95em; color:#444; margin-top:4px;">
+            ※厚労省生活習慣病のリスクを高める量＝1日当りの純アルコール摂取量：男性 40g以上、女性 20g
+            <br>
+            （「純アルコール量＝酒量（ml）×アルコール度数（度/100）×0.8」<span style="font-size:0.9em;">アルコールの比重</span>）
+            <br>
+            例：ビール500ml（5%）×0.05×0.8＝20g　　日本酒1合（15%）×180ml×0.8＝21.6g
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>WHO診断基準（飲酒）<br><span style="font-size:0.9em;">（該当する症状を選択）</span></td>
+        <td>
+          <div style="margin-bottom: 0.5em;">
+            <div style="font-weight:bold;">
+              判定＝3項目以上にあてはまる場合に、アルコール依存症と判断
+            </div>
+            <label><input type="checkbox" name="who_alcohol_criteria[]" value="1">① 飲酒量の制御ができない</label><br>
+            <label><input type="checkbox" name="who_alcohol_criteria[]" value="2">② 飲酒を続けたい強い欲求</label><br>
+            <label><input type="checkbox" name="who_alcohol_criteria[]" value="3">③ 飲酒制限に失敗した経験</label><br>
+            <label><input type="checkbox" name="who_alcohol_criteria[]" value="4">④ 飲酒を優先して重要な用事を放棄</label><br>
+            <label><input type="checkbox" name="who_alcohol_criteria[]" value="5">⑤ 飲酒後に事故・トラブル</label><br>
+            <label><input type="checkbox" name="who_alcohol_criteria[]" value="6">⑥ 離脱症状（震え・不安・発汗・不眠）</label><br>
+            <label><input type="checkbox" name="who_alcohol_criteria[]" value="7">⑦ 耐性（必要量の増加）</label><br>
+            <label><input type="checkbox" name="who_alcohol_criteria[]" value="8">⑧ 飲酒継続による健康被害を認識しているがやめられない</label>
+          </div>
+          <div style="margin-bottom: 0.5em;">
+            <span style="font-weight:bold;">0. 該当なし　</span>
+            <span>1. 1～2項目あり（生活指導）　</span>
+            <span style="font-weight:bold;">2. 3項目以上あり（診察等の勧め）</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>喫煙習慣</td>
+        <td>
+          <select name="smoking_habit" id="smoking_habit" required onchange="toggleSmokingInputs()">
+            <option value="">選択してください</option>
+            <option value="0">0. なし</option>
+            <option value="1">1. あり（ブリンクマン指数計算可）</option>
+          </select>
+          <span id="smoking_inputs" style="display:none; margin-left:8px;">
+            <input type="number" name="smoking_amount" id="smoking_amount" min="1" placeholder="1日あたりの本数" style="width:8em;">
+            ×
+            <input type="number" name="smoking_years" id="smoking_years" min="1" placeholder="喫煙年数" style="width:8em;">
+            ＝
+            <span id="brinkman_index" style="font-weight:bold;">0</span> 点
+            <button type="button" onclick="calcBrinkmanIndex()" style="margin-left:8px;">判定</button>
+          </span>
+          <div id="brinkman_judgement" style="margin-top:4px; font-size:0.95em; color:#333;"></div>
+          <div style="font-size:0.9em; margin-top:2px;">
+            <span style="font-weight:bold;">判定：</span>
+            <span>400点以上：肺がんが発生しやすい　</span>
+            <span>600点以上：肺がんの高度危険群　</span>
+            <span>1200点以上：咽頭がんの危険群</span>
+          <div style="margin-top: 1em;">
+            <label for="family_impact" style="font-weight:bold; display:block;">
+              家族への影響 /<br>注意している事
+            </label>
+            <textarea name="family_impact" id="family_impact" rows="2" style="width:98%;" placeholder="家族への影響や注意していることがあればご記入ください"></textarea>
+          </div>
+          </div>
+        </td>
+        <script>
+          function toggleSmokingInputs() {
+            const val = document.getElementById('smoking_habit').value;
+            document.getElementById('smoking_inputs').style.display = val === '1' ? 'inline-block' : 'none';
+            if (val !== '1') {
+              document.getElementById('brinkman_index').textContent = '0';
+              document.getElementById('brinkman_judgement').textContent = '';
+              document.getElementById('smoking_amount').value = '';
+              document.getElementById('smoking_years').value = '';
+            }
+          }
+          function calcBrinkmanIndex() {
+            const amount = parseInt(document.getElementById('smoking_amount').value, 10);
+            const years = parseInt(document.getElementById('smoking_years').value, 10);
+            let index = 0;
+            let judgement = '';
+            if (!isNaN(amount) && !isNaN(years) && amount > 0 && years > 0) {
+              index = amount * years;
+              if (index >= 1200) {
+                judgement = '咽頭がんの危険群';
+              } else if (index >= 600) {
+                judgement = '肺がんの高度危険群';
+              } else if (index >= 400) {
+                judgement = '肺がんが発生しやすい';
+              } else {
+                judgement = '危険群ではありません';
+              }
+            } else {
+              judgement = '本数と年数を正しく入力してください';
+            }
+            document.getElementById('brinkman_index').textContent = index;
+            document.getElementById('brinkman_judgement').textContent = judgement;
+          }
+        </script>
+      </tr>
+      <tr>
+        <td>4. 睡眠と休息</td>
+        <td>
+          <select name="sleep_quality" id="sleep_quality" required>
+            <option value="">選択してください</option>
+            <option value="0">0. 夜間に日中/夜間の睡眠をとっており休息感がある</option>
+            <option value="1">1. 日中/夜間の睡眠をとっているが休息感がない</option>
+            <option value="2">2. 日中/夜間の睡眠をとれず中休息感がない</option>
+            <option value="3">3. 睡眠のパターンがない、日中眠すぎて夜眠れない、夜間眠れず休息感がない</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>5. 疲労感</td>
+        <td>
+          <select name="fatigue" id="fatigue" required onchange="document.getElementById('fatigue_detail').style.display = this.value === '1' ? 'inline-block' : 'none';">
+            <option value="">選択してください</option>
+            <option value="0">0. なし</option>
+            <option value="1">1. あり（身体や精神的に）</option>
+          </select>
+          <select name="fatigue_detail" id="fatigue_detail" style="display:none; margin-left:8px;">
+            <option value="">該当するものを選択</option>
+            <option value="だるい">① だるい</option>
+            <option value="疲れやすい">② 疲れやすい</option>
+            <option value="疲れが残ってる">③ 疲れが残ってる</option>
+            <option value="慢性的に疲れている">④ 慢性的に疲れている</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>6. アレルギー</td>
+        <td>
+          <select name="allergy" id="allergy" required onchange="document.getElementById('allergy_detail').style.display = this.value === '1' ? 'inline-block' : 'none';">
+            <option value="">選択してください</option>
+            <option value="0">0. なし</option>
+            <option value="1">1. あり</option>
+          </select>
+          <select name="allergy_detail" id="allergy_detail" style="display:none; margin-left:8px;">
+            <option value="">該当するものを選択</option>
+            <option value="花粉症">花粉症</option>
+            <option value="食物アレルギー">食物アレルギー</option>
+            <option value="ハウスダスト">ハウスダスト</option>
+            <option value="薬物">薬物</option>
+            <option value="その他">その他</option>
+            </select>
+            <input type="text" name="allergy_other" id="allergy_other" style="display:none; margin-left:8px; margin-top:6px;" placeholder="その他の場合はご記入ください">
+            <script>
+              document.addEventListener('DOMContentLoaded', function() {
+                var allergyDetail = document.getElementById('allergy_detail');
+                var allergyOther = document.getElementById('allergy_other');
+                if(allergyDetail && allergyOther){
+                  allergyDetail.addEventListener('change', function() {
+                    allergyOther.style.display = (allergyDetail.value === 'その他') ? 'inline-block' : 'none';
+                    if (allergyDetail.value !== 'その他') {
+                      allergyOther.value = '';
+                    }
+                  });
+                }
+              });
+            </script>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>7. 身体活動・運動</td>
+        <td>
+          <select name="physical_activity" id="physical_activity" required onchange="document.getElementById('physical_activity_detail').style.display = this.value === '1' ? 'inline-block' : 'none';">
+            <option value="">選択してください</option>
+            <option value="0">0. 動くようにしている・手足を動かしている・散歩する・TV体操・簡単運動などをしている</option>
+            <option value="1">1. ねたきり・動きたくない・座るのいや・運動習慣がない</option>
+          <input type="text" name="physical_activity_detail" id="physical_activity_detail" style="display:none; margin-left:8px;" placeholder="内容を記入してください">
+        </td>
+      </tr>
+    </table>
+  </fieldset>
+</div>
+<script>
+  // 喫煙本数入力欄表示
+  document.addEventListener('DOMContentLoaded', function() {
+    var smokingSelect = document.getElementById('smoking_habit');
+    var smokingInput = document.getElementById('smoking_amount');
+    if(smokingSelect && smokingInput){
+      smokingSelect.addEventListener('change', function() {
+        smokingInput.style.display = (smokingSelect.value === '1') ? 'inline-block' : 'none';
+      });
+    }
+    var fatigueSelect = document.getElementById('fatigue');
+    var fatigueInput = document.getElementById('fatigue_detail');
+    if(fatigueSelect && fatigueInput){
+      fatigueSelect.addEventListener('change', function() {
+        fatigueInput.style.display = (fatigueSelect.value === '1') ? 'inline-block' : 'none';
+      });
+    }
+    var allergySelect = document.getElementById('allergy');
+    var allergyDetail = document.getElementById('allergy_detail');
+    if(allergySelect && allergyDetail){
+      allergySelect.addEventListener('change', function() {
+        allergyDetail.style.display = (allergySelect.value === '1') ? 'inline-block' : 'none';
+      });
+    }
+    var activitySelect = document.getElementById('physical_activity');
+    var activityInput = document.getElementById('physical_activity_detail');
+    if(activitySelect && activityInput){
+      activitySelect.addEventListener('change', function() {
+        activityInput.style.display = (activitySelect.value === '1') ? 'inline-block' : 'none';
+      });
+    }
+  });
+</script>
+<script>
+  // プルダウンで「あり」を選択した場合のみテキスト入力欄を表示
+  document.addEventListener('DOMContentLoaded', function() {
+    ['enjoyment_1', 'enjoyment_2', 'enjoyment_3'].forEach(function(id) {
+      var select = document.getElementById(id);
+      var input = document.getElementById(id + '_text');
+      if (select && input) {
+        select.addEventListener('change', function() {
+          input.style.display = (select.value === 'あり') ? 'block' : 'none';
+        });
+      }
+    });
+  });
+</script>
+
+
+    <div class="section" id="section-reform-tools-equipment">
+      <h2>Ⅱ　感染症の予防</h2>
+      <fieldset>
+        <fieldset style="margin-bottom: 1.5em; ">
+          <legend>1. 1年以内ののり患</legend>
+          <div style="margin-bottom: 0.5em;">
+            <label><input type="radio" name="disease_within_year" value="0" required>0. なし</label>
+            <label><input type="radio" name="disease_within_year" value="1" id="disease_within_year_yes">1. あり</label>
+            <div id="disease_within_year_detail" style="display:none; margin-top:0.7em;">
+              <div style="font-weight:bold;">
+                「あり」の方は、下記から選択してください。（複数選択可）
+              </div>
+              <span style="margin-bottom: 0.5em; display:block;">
+                <label><input type="checkbox" name="disease_type[]" value="a.肺炎">a. 肺炎</label>
+                <label><input type="checkbox" name="disease_type[]" value="b.鼻咽炎">b. 鼻咽炎（水痘・たむし・カンジダ・毛包炎・毛嚢炎など）</label>
+                <label><input type="checkbox" name="disease_type[]" value="c.インフルエンザ">c. インフルエンザ</label>
+                <label><input type="checkbox" name="disease_type[]" value="d.新型コロナ">d. 新型コロナ（COVID-19）</label>
+                <label><input type="checkbox" name="disease_type[]" value="e.エイズ">e. エイズ</label>
+                <label><input type="checkbox" name="disease_type[]" value="f.ウイルス性肝炎">f. ウイルス性肝炎</label>
+                <label><input type="checkbox" name="disease_type[]" value="g.動物（ヒトやペンダー）に咬まれた">g. 動物（ヒトやペンダー）に咬まれた</label>
+                <label><input type="checkbox" name="disease_type[]" value="h.虫刺咬">h. 虫刺咬</label>
+                <label><input type="checkbox" name="disease_type[]" value="i.蜂毒">i. 蜂毒</label>
+                <label><input type="checkbox" name="disease_type[]" value="j.その他">j. その他</label>
+                <input type="text" name="disease_type_other" placeholder="その他の場合はご記入ください" style="margin-left:1em;">
+              </span>
+            </div>
+            <script>
+              document.addEventListener('DOMContentLoaded', function() {
+                var radios = document.getElementsByName('disease_within_year');
+                var detail = document.getElementById('disease_within_year_detail');
+                radios.forEach(function(radio) {
+                  radio.addEventListener('change', function() {
+                    if (radio.value === '1' && radio.checked) {
+                      detail.style.display = 'block';
+                    } else if (radio.value === '0' && radio.checked) {
+                      detail.style.display = 'none';
+                      // チェックボックス等リセット
+                      var checks = detail.querySelectorAll('input[type="checkbox"]');
+                      checks.forEach(function(cb) { cb.checked = false; });
+                      var other = detail.querySelector('input[type="text"][name="disease_type_other"]');
+                      if (other) other.value = '';
+                    }
+                  });
+                });
+                // 初期表示
+                var checked = Array.from(radios).find(r => r.checked && r.value === '1');
+                detail.style.display = checked ? 'block' : 'none';
+              });
+            </script>
+          </div>
+        </fieldset>
+<fieldset> 
+        <legend>2. 予防接種（MA）</legend>
+        <div style="margin-bottom: 0.5em;">
+          <div style="display: flex; flex-wrap: wrap; align-items: center;">
+            <!-- ０．接種ありラジオボタン追加 -->
+            <label style="margin-right: 2em; font-weight:bold;">
+              <input type="radio" name="vaccination_status" value="0" id="vaccinated_yes" required>0. 接種あり
+            </label>
+            <label style="margin-right: 2em; font-weight:bold;">
+              <input type="radio" name="vaccination_status" value="1" id="vaccinated_none">1. すべて未接種
+            </label>
+          </div>
+          <div id="vaccinated_list_section" style="display:none; margin-top: 1em;">
+            <div style="font-weight:bold;">
+              接種したものを選択してください（複数選択可）
+            </div>
+            <div style="display: flex; flex-wrap: wrap; align-items: center;">
+              <label style="margin-right: 1em;">
+                <input type="checkbox" name="vaccination[]" value="a.肺炎球菌">a. 肺炎球菌
+              </label>
+              <label style="margin-right: 1em;">
+                <input type="checkbox" name="vaccination[]" value="b.インフルエンザ">b. インフルエンザ
+              </label>
+              <label style="margin-right: 1em;">
+                <input type="checkbox" name="vaccination[]" value="c.新型コロナ">c. 新型コロナ
+              </label>
+              <label style="margin-right: 1em;">
+                <input type="checkbox" name="vaccination[]" value="d.三種混合">d. 三種混合
+              </label>
+              <label style="margin-right: 1em;">
+                <input type="checkbox" name="vaccination[]" value="e.帯状疱疹ワクチン">e. 帯状疱疹ワクチン
+              </label>
+              <label style="margin-right: 1em;">
+                <input type="checkbox" name="vaccination[]" value="f.B型肝炎ワクチン">f. B型肝炎ワクチン
+              </label>
+              <label style="margin-right: 1em;">
+                <label>
+                  <input type="checkbox" name="vaccination[]" value="h.その他">h. その他（<input type="text" name="vaccination_other" placeholder="　　　　　　　　　" style="width:8em;">）
+                </label>
+              </label>
+            </div>
+          </div>
+        
+
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              var yesRadio = document.getElementById('vaccinated_yes');
+              var noneRadio = document.getElementById('vaccinated_none');
+              var listSection = document.getElementById('vaccinated_list_section');
+              var noneSection = document.getElementById('vaccinated_none_section');
+              function toggleVaccinationSections() {
+                if (yesRadio.checked) {
+                  listSection.style.display = 'block';
+                  noneSection.style.display = 'none';
+                  // 未接種理由クリア
+                  var noneReason = document.getElementsByName('vaccination_none_reason')[0];
+                  if (noneReason) noneReason.value = '';
+                } else if (noneRadio.checked) {
+                  listSection.style.display = 'none';
+                  noneSection.style.display = 'block';
+                  // チェックリスト/テキスト欄クリア
+                  var checks = listSection.querySelectorAll('input[type="checkbox"]');
+                  checks.forEach(function(cb) { cb.checked = false; });
+                  var other = listSection.querySelector('input[type="text"][name="vaccination_other"]');
+                  if (other) other.value = '';
+                } else {
+                  listSection.style.display = 'none';
+                  noneSection.style.display = 'none';
+                }
+              }
+              if (yesRadio && noneRadio) {
+                yesRadio.addEventListener('change', toggleVaccinationSections);
+                noneRadio.addEventListener('change', toggleVaccinationSections);
+                // 初期表示用
+                toggleVaccinationSections();
+              }
+            });
+          </script>
+        </div>
+          <div style="margin-top:0.5em;">
+            1．すべて未接種の場合その理由：
+            <input type="text" name="vaccination_none_reason" placeholder="理由を記入" style="margin-left:1em; width: 20em;">
+          </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>3. 感染対策</legend>
+        <div style="margin-bottom: 0.5em;">
+          <label><input type="radio" name="infection_control" value="0" required>0. 感染症を正確に理解し、他者への感染予防や適切な治療・感染管理を心がけている</label><br>
+          <label><input type="radio" name="infection_control" value="1">1. やや感染管理を理解し、他者への感染予防がさせない行動をとり、適切な治療を受けている</label><br>
+          <label><input type="radio" name="infection_control" value="2">2. 自身の感染症に理解はあるが、他人への感染には心がけない</label><br>
+          <label><input type="radio" name="infection_control" value="3">3. ケア提供者からの治療や感染管理を受け取るが、自分から治療や予防管理はしない</label><br>
+          <label><input type="radio" name="infection_control" value="4">4. 治療計画や感染ガイドラインに従うことを拒否している、できない状態</label>
+        </div>
+      </fieldset>
+
+
+    <div class="nav-buttons">
+      <button type="button" onclick="location.href='form5.html'">← 戻る</button>
+      <button type="button" onclick="location.href='form7.html'">次へ →</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  // 高額費用の利用：理由欄表示
+  function toggleExpensiveCostDetail() {
+    const val = document.getElementById('expensive_cost_usage').value;
+    const reasonDiv = document.getElementById('expensive_cost_reason');
+    if (val === '2a' || val === '2b') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費医療の利用：理由欄表示
+  function togglePublicMedicalReason() {
+    const val = document.getElementById('public_medical_usage').value;
+    const reasonDiv = document.getElementById('public_medical_reason');
+    if (val === '2') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費医療の詳細：病名入力欄表示
+  function toggleMedicalDiseaseInput() {
+    const val = document.getElementById('public_medical_detail').value;
+    const inputDiv = document.getElementById('medical_disease_input');
+    if (val === '5' || val === '3') {
+      inputDiv.style.display = 'block';
+    } else {
+      inputDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費制度の利用：理由欄表示
+  function togglePublicSystemReason() {
+    const val = document.getElementById('public_system_usage').value;
+    const reasonDiv = document.getElementById('public_system_reason');
+    if (val === '2') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費制度の詳細：詳細入力欄表示
+  function toggleSystemDetailInput() {
+    const val = document.getElementById('public_system_detail').value;
+    const inputDiv = document.getElementById('system_detail_input');
+    if (val === '1' || val === '2') {
+      inputDiv.style.display = 'block';
+    } else {
+      inputDiv.style.display = 'none';
+    }
+  }
+
+  // フォームの自動保存機能
+  const form = document.getElementById('surveyForm');
+  form.addEventListener('input', () => {
+    const data = Object.fromEntries(new FormData(form));
+    localStorage.setItem('surveyData_form2', JSON.stringify(data));
+  });
+
+  // 保存されたデータの復元
+  window.addEventListener('load', () => {
+    const saved = localStorage.getItem('surveyData_form2');
+    if (saved) {
+      const data = JSON.parse(saved);
+      Object.keys(data).forEach(key => {
+        const el = form.elements[key];
+        if (el) {
+          el.value = data[key];
+        }
+      });
+    }
+  });
+</script>
+
+  <!-- プログレスバー -->
+  <div class="progress-container">
+    <div class="progress-wrapper">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-info">
+        <span class="progress-page" id="currentPage">8</span>
+        <span class="progress-total">/ 20</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // プログレスバーの更新
+    function updateProgress() {
+      const progressPercentage = (8 / 20) * 100;
+      const progressFill = document.getElementById('progressFill');
+      const currentPageElement = document.getElementById('currentPage');
+      
+      progressFill.style.width = progressPercentage + '%';
+      currentPageElement.textContent = '8';
+      progressFill.style.background = '#003366';
+    }
+    
+    // 初期プログレス更新
+    document.addEventListener('DOMContentLoaded', function() {
+      updateProgress();
+      
+      // フォームの自動保存機能
+      const form = document.getElementById('surveyForm');
+      const formNumber = 6;
+      
+      if (form) {
+        function collectFormData() {
+          const formData = new FormData(form);
+          const data = {};
+          for (let [key, value] of formData.entries()) {
+            if (data[key]) {
+              if (Array.isArray(data[key])) {
+                data[key].push(value);
+              } else {
+                data[key] = [data[key], value];
+              }
+            } else {
+              data[key] = value;
+            }
+          }
+          const canvases = form.querySelectorAll('canvas');
+          canvases.forEach((canvas, index) => {
+            try {
+              const canvasId = canvas.id || `canvas_${index}`;
+              data[canvasId + '_image'] = canvas.toDataURL('image/png');
+            } catch (e) {
+              console.error('Canvas保存エラー:', e);
+            }
+          });
+          const allInputs = form.querySelectorAll('input, select, textarea');
+          allInputs.forEach(input => {
+            if (!input.name) return;
+            const isProcessed = data.hasOwnProperty(input.name);
+            if (input.type === 'checkbox') {
+              if (input.checked) {
+                if (!data[input.name]) data[input.name] = [];
+                if (Array.isArray(data[input.name])) {
+                  if (!data[input.name].includes(input.value)) data[input.name].push(input.value);
+                } else {
+                  data[input.name] = [data[input.name], input.value];
+                }
+              }
+            } else if (input.type === 'radio') {
+              if (input.checked && !isProcessed) data[input.name] = input.value;
+            } else {
+              if (!isProcessed && input.value) data[input.name] = input.value;
+            }
+          });
+          return data;
+        }
+        
+        form.addEventListener('input', function() {
+          const data = collectFormData();
+          localStorage.setItem(`surveyData_form${formNumber}`, JSON.stringify(data));
+          console.log(`Form ${formNumber} データを自動保存しました`);
+        });
+        
+        form.addEventListener('change', function() {
+          const data = collectFormData();
+          localStorage.setItem(`surveyData_form${formNumber}`, JSON.stringify(data));
+          console.log(`Form ${formNumber} データを自動保存しました`);
+        });
+        
+        const savedData = localStorage.getItem(`surveyData_form${formNumber}`);
+        if (savedData) {
+          const data = JSON.parse(savedData);
+          Object.keys(data).forEach(key => {
+            const elements = form.elements[key];
+            if (elements) {
+              if (elements.length > 1) {
+                Array.from(elements).forEach(el => {
+                  if (el.type === 'checkbox' || el.type === 'radio') {
+                    if (Array.isArray(data[key])) {
+                      el.checked = data[key].includes(el.value);
+                    } else {
+                      el.checked = el.value === data[key];
+                    }
+                  }
+                });
+              } else if (elements.length === 1) {
+                const el = elements[0];
+                if (el.type === 'checkbox' || el.type === 'radio') {
+                  if (Array.isArray(data[key])) {
+                    el.checked = data[key].includes(el.value);
+                  } else {
+                    el.checked = el.value === data[key];
+                  }
+                } else {
+                  el.value = data[key] || '';
+                }
+              } else {
+                if (elements.type === 'checkbox' || elements.type === 'radio') {
+                  if (Array.isArray(data[key])) {
+                    elements.checked = data[key].includes(elements.value);
+                  } else {
+                    elements.checked = elements.value === data[key];
+                  }
+                } else {
+                  elements.value = data[key] || '';
+                }
+              }
+            }
+          });
+          console.log(`Form ${formNumber} の保存データを復元しました`);
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

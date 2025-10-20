@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /
+
+# サイト全体を検索エンジンから除外
+# このファイルは https://homecare-form.com/robots.txt でアクセス可能

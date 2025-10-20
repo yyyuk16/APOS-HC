@@ -1,0 +1,259 @@
+
+body { font-family: "Noto Sans JP", sans-serif; padding: 20px; }
+.section { display: none; }
+.section.active { display: block; }
+h2 { font-size: 1.3em; margin-bottom: 10px; }
+label { display: block; margin-top: 10px; }
+.required::after { content:" *"; color:red; }
+.toggle {
+  appearance: none; width: 50px; height: 25px;
+  background: #ccc; border-radius: 15px; position: relative;
+  cursor: pointer;
+}
+.toggle:checked { background: #4CAF50; }
+.toggle:before {
+  content:""; position:absolute; top:2px; left:2px;
+  width:20px; height:20px; background:white;
+  border-radius:50%; transition:0.2s;
+}
+.toggle:checked:before { transform: translateX(25px); }
+.nav-buttons { margin-top: 20px; display: flex; justify-content: space-between; }
+button { padding: 10px 20px; font-size: 1em; }
+table.family-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background: #f9f9f9;
+}
+table.family-table th, table.family-table td {
+  border: 1px solid #aaa;
+  padding: 6px 4px;
+  text-align: center;
+  font-size: 0.95em;
+}
+table.family-table th {
+  background: #e0e0e0;
+}
+.note {
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 8px;
+}
+.input-small { width: 60px; }
+.input-medium { width: 100px; }
+.input-large { width: 180px; }
+
+
+/* セクション表示の修正 */
+.section { 
+  display: block !important; 
+}
+
+/* iPad用の追加スタイル */
+@media screen and (min-width: 768px) {
+  body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  
+  .container {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    padding: 40px;
+    margin: 20px 0;
+  }
+  
+  h1 {
+    font-size: 2.2em;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 20px;
+  }
+  
+  h2 {
+    font-size: 1.8em;
+    color: #34495e;
+    margin: 40px 0 25px 0;
+    padding: 15px 0;
+    border-left: 5px solid #3498db;
+    padding-left: 20px;
+    background: linear-gradient(90deg, #f8f9fa 0%, transparent 100%);
+  }
+  
+  fieldset {
+    border: 2px solid #e0e6ed;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    background: #fafbfc;
+    transition: all 0.3s ease;
+  }
+  
+  fieldset:hover {
+    border-color: #3498db;
+    box-shadow: 0 2px 10px rgba(52, 152, 219, 0.1);
+  }
+  
+  legend {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #2c3e50;
+    padding: 0 15px;
+    background: #fff;
+    border-radius: 8px;
+    border: 2px solid #3498db;
+  }
+  
+  label {
+    display: block;
+    margin: 15px 0 8px 0;
+    font-weight: 600;
+    color: #34495e;
+    font-size: 1.1em;
+  }
+  
+  input[type="text"], input[type="tel"], input[type="email"], 
+  input[type="number"], select, textarea {
+    width: 100%;
+    padding: 15px 18px;
+    font-size: 1.1em;
+    border: 2px solid #e0e6ed;
+    border-radius: 10px;
+    background: #fff;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    margin-top: 8px;
+  }
+  
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    transform: translateY(-2px);
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+    font-family: inherit;
+  }
+  
+  .daily-rhythm-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+  }
+  
+  .daily-rhythm-table th {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    padding: 20px 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .daily-rhythm-table td {
+    padding: 18px 15px;
+    border-bottom: 1px solid #e8f4f8;
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  .daily-rhythm-table td:first-child {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 1.1em;
+    width: 200px;
+  }
+  
+  .daily-rhythm-table input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1.05em;
+    border: 2px solid #e0e6ed;
+    border-radius: 8px;
+    background: #fff;
+    transition: all 0.3s ease;
+    margin: 0;
+  }
+  
+  .daily-rhythm-table input:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  }
+  
+  .daily-rhythm-table tr:hover {
+    background: #f8f9fa;
+  }
+  
+  .note {
+    font-size: 1em;
+    color: #7f8c8d;
+    margin-top: 15px;
+    padding: 15px;
+    background: #ecf0f1;
+    border-radius: 8px;
+    border-left: 4px solid #95a5a6;
+  }
+  
+  .nav-buttons {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .nav-buttons button {
+    padding: 18px 35px;
+    font-size: 1.2em;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 150px;
+  }
+  
+  .nav-buttons button:first-child {
+    background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+    color: white;
+  }
+  
+  .nav-buttons button:last-child {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+  }
+  
+  .nav-buttons button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  }
+  
+  .nav-buttons button:active {
+    transform: translateY(-1px);
+  }
+}
+
+/* タブレット用の追加調整 */
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+  .daily-rhythm-table td:first-child {
+    width: 180px;
+  }
+  
+  .daily-rhythm-table input {
+    font-size: 1em;
+    padding: 10px 12px;
+  }
+}

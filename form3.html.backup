@@ -1,0 +1,955 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>APOS-HC 調査票 - フォーム3</title>
+  <link rel="stylesheet" href="main.css">
+  <style>
+    /* セクション表示の修正 */
+    .section { 
+      display: block !important; 
+    }
+    
+    /* iPad用の追加スタイル */
+    @media screen and (min-width: 768px) {
+      body {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      
+      .container {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        padding: 25px;
+        margin: 15px 0;
+      }
+      
+      h1 {
+        font-size: 1.8em;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 15px;
+      }
+      
+      h2 {
+        font-size: 1.4em;
+        color: #34495e;
+        margin: 25px 0 15px 0;
+        padding: 10px 0;
+        border-left: 4px solid #3498db;
+        padding-left: 15px;
+        background: linear-gradient(90deg, #f8f9fa 0%, transparent 100%);
+      }
+      
+      fieldset {
+        border: 2px solid #e0e6ed;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        background: #fafbfc;
+        transition: all 0.3s ease;
+      }
+      
+      fieldset:hover {
+        border-color: #3498db;
+        box-shadow: 0 2px 10px rgba(52, 152, 219, 0.1);
+      }
+      
+      legend {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #2c3e50;
+        padding: 0 10px;
+        background: #fff;
+        border-radius: 6px;
+        border: 2px solid #3498db;
+      }
+      
+      label {
+        display: block;
+        margin: 10px 0 5px 0;
+        font-weight: 600;
+        color: #34495e;
+        font-size: 1em;
+      }
+      
+      input[type="text"], input[type="tel"], input[type="email"], 
+      input[type="number"], select, textarea {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 1em;
+        border: 2px solid #e0e6ed;
+        border-radius: 6px;
+        background: #fff;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+        margin-top: 5px;
+      }
+      
+      input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        transform: translateY(-2px);
+      }
+      
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+        font-family: inherit;
+      }
+      
+      .daily-rhythm-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      }
+      
+      .daily-rhythm-table th {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+        padding: 12px 10px;
+        font-size: 1em;
+        font-weight: bold;
+        text-align: center;
+      }
+      
+      .daily-rhythm-table td {
+        padding: 10px;
+        border-bottom: 1px solid #e8f4f8;
+        text-align: center;
+        vertical-align: middle;
+      }
+      
+      .daily-rhythm-table td:first-child {
+        background: #f8f9fa;
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 0.9em;
+        width: 150px;
+      }
+      
+      .daily-rhythm-table input {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 0.9em;
+        border: 2px solid #e0e6ed;
+        border-radius: 6px;
+        background: #fff;
+        transition: all 0.3s ease;
+        margin: 0;
+      }
+      
+      .daily-rhythm-table input:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+      }
+      
+      .daily-rhythm-table tr:hover {
+        background: #f8f9fa;
+      }
+      
+      .note {
+        font-size: 0.9em;
+        color: #7f8c8d;
+        margin-top: 10px;
+        padding: 10px;
+        background: #ecf0f1;
+        border-radius: 6px;
+        border-left: 3px solid #95a5a6;
+      }
+      
+      .nav-buttons {
+        margin-top: 25px;
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+      }
+      
+      .nav-buttons button {
+        padding: 12px 25px;
+        font-size: 1em;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-width: 120px;
+      }
+      
+      .nav-buttons button:first-child {
+        background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+        color: white;
+      }
+      
+      .nav-buttons button:last-child {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+      }
+      
+      .nav-buttons button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      }
+      
+      .nav-buttons button:active {
+        transform: translateY(-1px);
+      }
+      
+      /* プログレスバーのスタイル */
+      .progress-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid #e0e0e0;
+        padding: 20px;
+        z-index: 1000;
+      }
+      
+      .progress-wrapper {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      
+      .progress-bar {
+        width: 100%;
+        height: 6px;
+        background: #f0f0f0;
+        border-radius: 3px;
+        overflow: hidden;
+        margin-bottom: 15px;
+      }
+      
+      .progress-fill {
+        height: 100%;
+        background: #003366;
+        border-radius: 3px;
+        transition: width 0.5s ease;
+        width: 20%;
+      }
+      
+      .progress-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.1em;
+        color: #333;
+        font-weight: 500;
+      }
+      
+      .progress-page {
+        color: #003366;
+        font-weight: 600;
+      }
+      
+      .progress-total {
+        color: #999;
+      }
+      
+      /* フォームの下部に余白を追加（プログレスバーの分） */
+      body {
+        padding-bottom: 100px;
+      }
+    }
+    
+    /* タブレット用の追加調整 */
+    @media screen and (max-width: 1024px) and (min-width: 768px) {
+      .daily-rhythm-table td:first-child {
+        width: 140px;
+      }
+      
+      .daily-rhythm-table input {
+        font-size: 0.85em;
+        padding: 6px 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+<h1>APOS-HC 調査票</h1>
+<form id="surveyForm">
+
+<div class="section" id="section-environment">
+  <h2>Ⅰ　住居環境と安全性</h2>
+  <fieldset>
+    <legend>① 住居</legend>
+    <label for="residence_type">住居の種類を選択してください</label>
+    <select id="residence_type" name="residence_type" onchange="toggleApartmentFloorInput()">
+      <option value="">選択してください</option>
+      <option value="house_1f">1.1戸建て1階</option>
+      <option value="house_2f">2.1戸建て2階</option>
+      <option value="apartment">3.2階以上の集合住宅</option>
+    </select>
+    <div id="apartment_floor_input" style="display:none; margin-top:8px;">
+      <label for="apartment_floor">集合住宅の場合は階数を入力してください：</label>
+      <input type="number" id="apartment_floor" name="apartment_floor" min="2" max="99" placeholder="例：3">
+    </div>
+  </fieldset>
+  <fieldset>
+    <legend>② エレベーター</legend>
+    <label for="elevator">エレベーターの有無を選択してください</label>
+    <select id="elevator" name="elevator">
+      <option value="">選択してください</option>
+      <option value="あり">0.あり・不要</option>
+      <option value="不要">1.必要で無</option>
+    </select>
+  </fieldset>
+  <fieldset>
+    <legend>③ 玄関から公道</legend>
+    <label for="entrance_to_road">車いすや杖歩行時に危険なく外出可能かを選択してください</label>
+    <select id="entrance_to_road" name="entrance_to_road">
+      <option value="">選択してください</option>
+      <option value="危険あり">0.危険なし</option>
+      <option value="問題なし">1.危険あり（バリアフリー化またはその代用用具が必要）</option>
+    </select>
+  </fieldset>
+
+  <fieldset>
+    <legend>使用している部屋の見取図・安全性チェック・ケア用品の保管場所</legend>
+    <div style="margin-bottom: 8px;">
+      <label>
+        下のエリアにマウスやタッチで部屋の見取図を描いてください。<br>
+        （例：ベッド、手すり、福祉用具、障害物、ペットの位置、照明・災害時の出口などを自由に記入）
+      </label>
+      <br>
+      <canvas id="roomMapCanvas" width="600" height="300" style="border:1px solid #888; background:#fff; touch-action: none;"></canvas>
+      <div style="margin-top: 6px;">
+        <button type="button" onclick="clearRoomMapCanvas()">クリア</button>
+        <button type="button" onclick="saveRoomMapCanvas()">画像として保存</button>
+      </div>
+      <input type="hidden" id="room_map_image" name="room_map_image">
+    </div>
+    <div style="margin-bottom: 8px;">
+      <label>
+        または、カメラで撮影/写真をアップロードして部屋や設備の写真を保存できます。
+      </label>
+      <div style="margin: 6px 0;">
+        <button type="button" id="openCameraBtn">カメラを起動</button>
+        <input type="file" id="fileInputPhoto" accept="image/*" style="display:inline-block;margin-left:12px;">
+      </div>
+      <video id="cameraPreview" width="320" height="240" autoplay style="display:none; border:1px solid #888;"></video>
+      <canvas id="cameraPhotoCanvas" width="320" height="240" style="display:none;"></canvas>
+      <div id="cameraButtons" style="margin: 6px 0; display:none;">
+        <button type="button" id="takePhotoBtn">撮影</button>
+        <button type="button" id="closeCameraBtn">カメラ停止</button>
+      </div>
+      <div id="photoPreviewArea" style="margin: 12px 0; min-height:120px;">
+        <img id="photoPreviewImage" src="" alt="写真プレビュー" style="max-width: 320px; display:none; border:1px solid #888; margin-top:6px;">
+      </div>
+      <input type="hidden" name="room_photo_image" id="room_photo_image">
+      <div id="photoSaveArea" style="margin: 4px 0; display:none;">
+        <button type="button" id="savePhotoBtn">写真を保存</button>
+      </div>
+    </div>
+    <label for="room_safety">補足事項や説明<br>（福祉用具・医療機器等の保管場所、必要な手すり、転倒等の障害物、ペット周りの不備、災害/照明不良など）</label>
+    <textarea id="room_safety" name="room_safety" rows="4" placeholder="例：福祉用具の保管場所、手すりの設置状況、障害物やペット、災害・照明の不備など"></textarea>
+  </fieldset>
+  <script>
+    // シンプルな手書きキャンバス
+    const canvas = document.getElementById('roomMapCanvas');
+    const ctx = canvas.getContext('2d');
+    let drawing = false;
+    let lastX = 0;
+    let lastY = 0;
+
+    function getPointerPos(e) {
+      if (e.touches) {
+        const rect = canvas.getBoundingClientRect();
+        return {
+          x: e.touches[0].clientX - rect.left,
+          y: e.touches[0].clientY - rect.top
+        };
+      } else {
+        return {
+          x: e.offsetX,
+          y: e.offsetY
+        };
+      }
+    }
+
+    function startDraw(e) {
+      drawing = true;
+      const pos = getPointerPos(e);
+      lastX = pos.x;
+      lastY = pos.y;
+    }
+
+    function draw(e) {
+      if (!drawing) return;
+      e.preventDefault();
+      const pos = getPointerPos(e);
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(pos.x, pos.y);
+      ctx.strokeStyle = "#222";
+      ctx.lineWidth = 2;
+      ctx.lineCap = "round";
+      ctx.stroke();
+      lastX = pos.x;
+      lastY = pos.y;
+    }
+
+    function endDraw() {
+      drawing = false;
+    }
+
+    // マウスイベント
+    canvas.addEventListener('mousedown', startDraw);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', endDraw);
+    canvas.addEventListener('mouseleave', endDraw);
+
+    // タッチイベント
+    canvas.addEventListener('touchstart', function(e) {
+      startDraw(e);
+    });
+    canvas.addEventListener('touchmove', function(e) {
+      draw(e);
+    });
+    canvas.addEventListener('touchend', endDraw);
+    canvas.addEventListener('touchcancel', endDraw);
+
+    // クリアボタン
+    function clearRoomMapCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      document.getElementById('room_map_image').value = '';
+    }
+
+    // 画像として保存
+    function saveRoomMapCanvas() {
+      const dataURL = canvas.toDataURL('image/png');
+      document.getElementById('room_map_image').value = dataURL;
+      alert('見取図が保存されました。');
+    }
+
+    // ---- カメラ・写真追加部分 ----
+    const openCameraBtn = document.getElementById('openCameraBtn');
+    const fileInputPhoto = document.getElementById('fileInputPhoto');
+    const cameraPreview = document.getElementById('cameraPreview');
+    const takePhotoBtn = document.getElementById('takePhotoBtn');
+    const closeCameraBtn = document.getElementById('closeCameraBtn');
+    const photoPreviewImage = document.getElementById('photoPreviewImage');
+    const photoSaveArea = document.getElementById('photoSaveArea');
+    const savePhotoBtn = document.getElementById('savePhotoBtn');
+    const cameraButtons = document.getElementById('cameraButtons');
+    const cameraPhotoCanvas = document.getElementById('cameraPhotoCanvas');
+    const roomPhotoInput = document.getElementById('room_photo_image');
+    let localStream = null;
+
+    // カメラ起動
+    openCameraBtn.addEventListener('click', async function() {
+      try {
+        if (!!navigator.mediaDevices && !!navigator.mediaDevices.getUserMedia) {
+          localStream = await navigator.mediaDevices.getUserMedia({ video: true });
+          cameraPreview.srcObject = localStream;
+          cameraPreview.style.display = '';
+          cameraButtons.style.display = '';
+          photoPreviewImage.style.display = 'none';
+          photoSaveArea.style.display = 'none';
+        } else {
+          alert('カメラ機能がサポートされていません。');
+        }
+      } catch (err) {
+        alert('カメラが使用できません: ' + err.message);
+      }
+    });
+
+    // 撮影ボタン
+    takePhotoBtn.addEventListener('click', function() {
+      // Video要素→Canvas→DataURL
+      cameraPhotoCanvas.getContext('2d').drawImage(cameraPreview, 0, 0, cameraPhotoCanvas.width, cameraPhotoCanvas.height);
+      const dataURL = cameraPhotoCanvas.toDataURL('image/png');
+      
+      // 既存の画像をクリア
+      photoPreviewArea.innerHTML = '';
+      
+      // 既存の保存データもクリア
+      roomPhotoInput.value = '';
+      
+      // 新しい画像要素を作成
+      const newImg = document.createElement('img');
+      newImg.src = dataURL;
+      newImg.alt = '写真プレビュー';
+      newImg.style.maxWidth = '320px';
+      newImg.style.border = '1px solid #888';
+      newImg.style.marginTop = '6px';
+      
+      photoPreviewArea.appendChild(newImg);
+      photoSaveArea.style.display = '';
+      cameraPhotoCanvas.style.display = '';
+    });
+
+
+    // カメラ停止ボタン
+    closeCameraBtn.addEventListener('click', function() {
+      stopCameraStream();
+      cameraPreview.style.display = 'none';
+      cameraButtons.style.display = 'none';
+    });
+
+    // ファイルアップロード
+    fileInputPhoto.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          // 既存の画像をクリア
+          photoPreviewArea.innerHTML = '';
+          
+          // 既存の保存データもクリア
+          roomPhotoInput.value = '';
+          
+          // 新しい画像要素を作成
+          const newImg = document.createElement('img');
+          newImg.src = evt.target.result;
+          newImg.alt = '写真プレビュー';
+          newImg.style.maxWidth = '320px';
+          newImg.style.border = '1px solid #888';
+          newImg.style.marginTop = '6px';
+          
+          photoPreviewArea.appendChild(newImg);
+          photoSaveArea.style.display = '';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // 画像保存ボタンとinput連動（重複防止）
+    let isSaving = false;
+    savePhotoBtn.addEventListener('click', function() {
+      if (isSaving) {
+        console.log('保存処理中です...');
+        return;
+      }
+      
+      isSaving = true;
+      const img = photoPreviewArea.querySelector('img');
+      if (img && img.src && img.src !== '') {
+        // 既存の値をクリアしてから新しい値を設定
+        roomPhotoInput.value = '';
+        roomPhotoInput.value = img.src;
+        alert('写真が保存されました。');
+        console.log('写真保存完了');
+      } else {
+        alert('写真データがありません');
+      }
+      
+      // 保存処理完了後、フラグをリセット
+      setTimeout(() => {
+        isSaving = false;
+      }, 1000);
+    });
+
+    function stopCameraStream() {
+      if (localStream) {
+        let tracks = localStream.getTracks();
+        tracks.forEach(track => track.stop());
+      }
+      localStream = null;
+    }
+  </script>
+</div>
+<script>
+  function toggleApartmentFloorInput() {
+    const residenceType = document.getElementById('residence_type').value;
+    const floorInput = document.getElementById('apartment_floor_input');
+    if (residenceType === 'apartment') {
+      floorInput.style.display = 'block';
+    } else {
+      floorInput.style.display = 'none';
+      document.getElementById('apartment_floor').value = '';
+    }
+  }
+</script>
+
+
+
+<div class="section" id="section-public-economic">
+  <h2>Ⅱ　居室の清潔（家事）・住居環境の状況</h2>
+
+  <fieldset>
+    <legend>居室の清潔</legend>
+    <label>在宅生活や療養室として適切ですか</label>
+      <select name="expensive_cost_usage" id="expensive_cost_usage" onchange="toggleExpensiveCostDetail()">
+        <option value="">選択してください</option>
+        <option value="0">0. 常に室内は一貫して清掃されており、ごみは適切に処分している</option>
+        <option value="1a">1. 本人が納得する清掃がされている、時々ごみ処分はできていない</option>
+        <option value="1b">2. 掃除はされず、ごみが散らかっている</option>
+        <option value="2a">3. 室内は汚く、ごみや排泄物で不衛生な状態</option>
+      </select>
+    </label>
+    
+  </fieldset>
+
+  <fieldset>
+    <legend>住居環境の状況</legend>
+    <label>住居の安全性・適切な広さ
+      <select name="public_medical_usage" id="public_medical_usage" onchange="togglePublicMedicalReason()">
+        <option value="">選択してください</option>
+        <option value="0">0. 住居は改修され機能的であり、家族人数に見合った広さである</option>
+        <option value="1">1. 住居が機能的・安全でない個所の改修を希望、家族人数には見合った広さである</option>
+        <option value="2">2. 住居が機能的でなく障害物状態だが改修-整理を希望しない、家族人数に見合った広さでない</option>
+      </select>
+    </label>
+   
+  </fieldset>
+</div>
+
+    <div class="section" id="section-reform-tools-equipment">
+      <h2>Ⅲ　住居環境の改修/介護用具利用の必要性</h2>
+
+      <!-- 1. 住居環境 -->
+      <fieldset>
+        <legend>1. 住居環境</legend>
+        <label>必要性
+          <select name="reform_need" id="reform_need">
+            <option value="">選択してください</option>
+            <option value="0">0. 必要無</option>
+            <option value="1">1. 必要有</option>
+          </select>
+        </label>
+        <label>改修内容
+            <select name="reform_place" id="reform_place">
+              <option value="">選択してください</option>
+              <option value="居室">1. 居室</option>
+              <option value="浴室">2. 浴室</option>
+              <option value="脱衣室">3. 脱衣室</option>
+              <option value="浴槽">4. 浴槽</option>
+              <option value="トイレ">5. トイレ</option>
+              <option value="便器">6. 便器</option>
+              <option value="廊下">7. 廊下</option>
+              <option value="玄関">8. 玄関</option>
+              <option value="庭">9. 庭</option>
+              <option value="階段">10. 階段</option>
+              <option value="その他">11. その他</option>
+            </select>
+          </label>
+      </fieldset>
+
+      <!-- 2. 介護用具 -->
+      <fieldset>
+        <legend>2. 介護用具</legend>
+        <label>必要性
+          <select name="care_tool_need" id="care_tool_need">
+            <option value="">選択してください</option>
+            <option value="0">0. 必要無</option>
+            <option value="1">1. 必要有</option>
+          </select>
+        </label>
+        <label>改修内容
+            <select name="care_tool_type" id="care_tool_type">
+              <option value="">選択してください</option>
+              <option value="移動用具">1. 移動用具</option>
+              <option value="生活用具">2. 生活用具</option>
+              <option value="介助用具">3. 介助用具</option>
+            </select>
+          </label>
+      </fieldset>
+
+      <!-- 3. 設備 -->
+      <fieldset>
+        <legend>3. 設備</legend>
+        <label>必要性
+          <select name="equipment_need" id="equipment_need">
+            <option value="">選択してください</option>
+            <option value="0">0. 必要無</option>
+            <option value="1">1. 必要有</option>
+          </select>
+        </label>
+        <label>改修内容
+            <select name="equipment_type" id="equipment_type">
+              <option value="">選択してください</option>
+              <option value="障害者用生活用具">1. 障害者用調理・食事等生活用具</option>
+              <option value="電気">2. 電気</option>
+              <option value="冷暖房機">3. 冷暖房機</option>
+              <option value="エレベータ">4. エレベータ</option>
+              <option value="その他">5. その他</option>
+            </select>
+          </label>
+      </fieldset>
+
+      <!-- Ⅳ　介護保険サービス利用の判断 -->
+      <div class="section" id="section-reform-tools-equipment">
+        <h2>Ⅳ　介護保険サービス利用の判断</h2>
+      <fieldset>
+        <legend>介護保険サービス利用の判断</legend>
+      <label for="social_service_usage">該当する内容を選択してください
+        <select name="social_service_usage" id="social_service_usage" onchange="toggleSocialServiceReason()">
+          <option value="">選択してください</option>
+          <option value="0">0. 介護保険サービスや自費のサービスの導入を積極的に判断し、介護に活用できている</option>
+          <option value="1">1. 社会的サービスの導入を検討しているが、利用の具体化に支援が必要</option>
+          <option value="2">2. 社会的サービスの制度や内容を知らない、導入の理解や判断には支援が必要</option>
+          <option value="3">3. 社会的サービスの制度や内容を知っていて使っていない、拒否している</option>
+        </select>
+      </label>
+      <div id="social_service_reason" style="display:none; margin-top:8px;">
+        <label for="social_service_reason_text">（回答が3または4の場合）その理由を記入してください</label>
+        <textarea name="social_service_reason_text" id="social_service_reason_text" rows="3" placeholder="理由を記入してください"></textarea>
+      </div>
+    </fieldset>
+    <script>
+      function toggleSocialServiceReason() {
+        const val = document.getElementById('social_service_usage').value;
+        const reasonDiv = document.getElementById('social_service_reason');
+        if (val === '3' || val === '4') {
+          reasonDiv.style.display = 'block';
+        } else {
+          reasonDiv.style.display = 'none';
+        }
+      }
+    </script>
+
+    <div class="nav-buttons">
+      <button type="button" onclick="location.href='form2.html'">← 戻る</button>
+      <button type="button" onclick="location.href='form4.html'">次へ →</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  // 高額費用の利用：理由欄表示
+  function toggleExpensiveCostDetail() {
+    const val = document.getElementById('expensive_cost_usage').value;
+    const reasonDiv = document.getElementById('expensive_cost_reason');
+    if (val === '2a' || val === '2b') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費医療の利用：理由欄表示
+  function togglePublicMedicalReason() {
+    const val = document.getElementById('public_medical_usage').value;
+    const reasonDiv = document.getElementById('public_medical_reason');
+    if (val === '2') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費医療の詳細：病名入力欄表示
+  function toggleMedicalDiseaseInput() {
+    const val = document.getElementById('public_medical_detail').value;
+    const inputDiv = document.getElementById('medical_disease_input');
+    if (val === '5' || val === '3') {
+      inputDiv.style.display = 'block';
+    } else {
+      inputDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費制度の利用：理由欄表示
+  function togglePublicSystemReason() {
+    const val = document.getElementById('public_system_usage').value;
+    const reasonDiv = document.getElementById('public_system_reason');
+    if (val === '2') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費制度の詳細：詳細入力欄表示
+  function toggleSystemDetailInput() {
+    const val = document.getElementById('public_system_detail').value;
+    const inputDiv = document.getElementById('system_detail_input');
+    if (val === '1' || val === '2') {
+      inputDiv.style.display = 'block';
+    } else {
+      inputDiv.style.display = 'none';
+    }
+  }
+
+  // フォームの自動保存機能
+  const form = document.getElementById('surveyForm');
+  form.addEventListener('input', () => {
+    const data = Object.fromEntries(new FormData(form));
+    localStorage.setItem('surveyData_form2', JSON.stringify(data));
+  });
+
+  // 保存されたデータの復元
+  window.addEventListener('load', () => {
+    const saved = localStorage.getItem('surveyData_form2');
+    if (saved) {
+      const data = JSON.parse(saved);
+      Object.keys(data).forEach(key => {
+        const el = form.elements[key];
+        if (el) {
+          el.value = data[key];
+        }
+      });
+    }
+  });
+</script>
+
+  <!-- プログレスバー -->
+  <div class="progress-container">
+    <div class="progress-wrapper">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-info">
+        <span class="progress-page" id="currentPage">4</span>
+        <span class="progress-total">/ 20</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // プログレスバーの更新
+    function updateProgress() {
+      const progressPercentage = (4 / 20) * 100;
+      const progressFill = document.getElementById('progressFill');
+      const currentPageElement = document.getElementById('currentPage');
+      
+      progressFill.style.width = progressPercentage + '%';
+      currentPageElement.textContent = '4';
+      progressFill.style.background = '#003366';
+    }
+    
+    // 初期プログレス更新
+    document.addEventListener('DOMContentLoaded', function() {
+      updateProgress();
+      
+      // フォームの自動保存機能
+      const form = document.getElementById('surveyForm');
+      const formNumber = 3;
+      
+      if (form) {
+        function collectFormData() {
+          const formData = new FormData(form);
+          const data = {};
+          for (let [key, value] of formData.entries()) {
+            if (data[key]) {
+              if (Array.isArray(data[key])) {
+                data[key].push(value);
+              } else {
+                data[key] = [data[key], value];
+              }
+            } else {
+              data[key] = value;
+            }
+          }
+          
+          // Canvas画像データを保存
+          const canvases = form.querySelectorAll('canvas');
+          canvases.forEach((canvas, index) => {
+            try {
+              const canvasId = canvas.id || `canvas_${index}`;
+              data[canvasId + '_image'] = canvas.toDataURL('image/png');
+              console.log(`Canvas画像を保存しました: ${canvasId}`);
+            } catch (e) {
+              console.error('Canvas保存エラー:', e);
+            }
+          });
+          
+          // 非表示項目も含めて全入力要素を確認
+          const allInputs = form.querySelectorAll('input, select, textarea');
+          allInputs.forEach(input => {
+            if (!input.name) return;
+            const isProcessed = data.hasOwnProperty(input.name);
+            if (input.type === 'checkbox') {
+              if (input.checked) {
+                if (!data[input.name]) {
+                  data[input.name] = [];
+                }
+                if (Array.isArray(data[input.name])) {
+                  if (!data[input.name].includes(input.value)) {
+                    data[input.name].push(input.value);
+                  }
+                } else {
+                  data[input.name] = [data[input.name], input.value];
+                }
+              }
+            } else if (input.type === 'radio') {
+              if (input.checked && !isProcessed) {
+                data[input.name] = input.value;
+              }
+            } else {
+              if (!isProcessed && input.value) {
+                data[input.name] = input.value;
+              }
+            }
+          });
+          
+          return data;
+        }
+        
+        form.addEventListener('input', function() {
+          const data = collectFormData();
+          localStorage.setItem(`surveyData_form${formNumber}`, JSON.stringify(data));
+          console.log(`Form ${formNumber} データを自動保存しました`);
+        });
+        
+        form.addEventListener('change', function() {
+          const data = collectFormData();
+          localStorage.setItem(`surveyData_form${formNumber}`, JSON.stringify(data));
+          console.log(`Form ${formNumber} データを自動保存しました`);
+        });
+        
+        const savedData = localStorage.getItem(`surveyData_form${formNumber}`);
+        if (savedData) {
+          const data = JSON.parse(savedData);
+          Object.keys(data).forEach(key => {
+            const elements = form.elements[key];
+            if (elements) {
+              if (elements.length > 1) {
+                Array.from(elements).forEach(el => {
+                  if (el.type === 'checkbox' || el.type === 'radio') {
+                    if (Array.isArray(data[key])) {
+                      el.checked = data[key].includes(el.value);
+                    } else {
+                      el.checked = el.value === data[key];
+                    }
+                  }
+                });
+              } else if (elements.length === 1) {
+                const el = elements[0];
+                if (el.type === 'checkbox' || el.type === 'radio') {
+                  if (Array.isArray(data[key])) {
+                    el.checked = data[key].includes(el.value);
+                  } else {
+                    el.checked = el.value === data[key];
+                  }
+                } else {
+                  el.value = data[key] || '';
+                }
+              } else {
+                if (elements.type === 'checkbox' || elements.type === 'radio') {
+                  if (Array.isArray(data[key])) {
+                    elements.checked = data[key].includes(elements.value);
+                  } else {
+                    elements.checked = elements.value === data[key];
+                  }
+                } else {
+                  elements.value = data[key] || '';
+                }
+              }
+            }
+          });
+          console.log(`Form ${formNumber} の保存データを復元しました`);
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,768 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>APOS-HC 調査票 - フォーム2</title>
+  <link rel="stylesheet" href="main.css">
+  <style>
+    /* セクション表示の修正 */
+    .section { 
+      display: block !important; 
+    }
+    
+    /* iPad用の追加スタイル */
+    @media screen and (min-width: 768px) {
+      body {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      
+      .container {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        padding: 25px;
+        margin: 15px 0;
+      }
+      
+      h1 {
+        font-size: 1.8em;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 15px;
+      }
+      
+      h2 {
+        font-size: 1.4em;
+        color: #34495e;
+        margin: 25px 0 15px 0;
+        padding: 10px 0;
+        border-left: 4px solid #3498db;
+        padding-left: 15px;
+        background: linear-gradient(90deg, #f8f9fa 0%, transparent 100%);
+      }
+      
+      fieldset {
+        border: 2px solid #e0e6ed;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        background: #fafbfc;
+        transition: all 0.3s ease;
+      }
+      
+      fieldset:hover {
+        border-color: #3498db;
+        box-shadow: 0 2px 10px rgba(52, 152, 219, 0.1);
+      }
+      
+      legend {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #2c3e50;
+        padding: 0 10px;
+        background: #fff;
+        border-radius: 6px;
+        border: 2px solid #3498db;
+      }
+      
+      label {
+        display: block;
+        margin: 10px 0 5px 0;
+        font-weight: 600;
+        color: #34495e;
+        font-size: 1em;
+      }
+      
+      input[type="text"], input[type="tel"], input[type="email"], 
+      input[type="number"], select, textarea {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 1em;
+        border: 2px solid #e0e6ed;
+        border-radius: 6px;
+        background: #fff;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+        margin-top: 5px;
+      }
+      
+      input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        transform: translateY(-2px);
+      }
+      
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+        font-family: inherit;
+      }
+      
+      .daily-rhythm-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      }
+      
+      .daily-rhythm-table th {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+        padding: 12px 10px;
+        font-size: 1em;
+        font-weight: bold;
+        text-align: center;
+      }
+      
+      .daily-rhythm-table td {
+        padding: 10px;
+        border-bottom: 1px solid #e8f4f8;
+        text-align: center;
+        vertical-align: middle;
+      }
+      
+      .daily-rhythm-table td:first-child {
+        background: #f8f9fa;
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 0.9em;
+        width: 150px;
+      }
+      
+      .daily-rhythm-table input {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 0.9em;
+        border: 2px solid #e0e6ed;
+        border-radius: 6px;
+        background: #fff;
+        transition: all 0.3s ease;
+        margin: 0;
+      }
+      
+      .daily-rhythm-table input:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+      }
+      
+      .daily-rhythm-table tr:hover {
+        background: #f8f9fa;
+      }
+      
+      .note {
+        font-size: 0.9em;
+        color: #7f8c8d;
+        margin-top: 10px;
+        padding: 10px;
+        background: #ecf0f1;
+        border-radius: 6px;
+        border-left: 3px solid #95a5a6;
+      }
+      
+      .nav-buttons {
+        margin-top: 25px;
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+      }
+      
+      .nav-buttons button {
+        padding: 12px 25px;
+        font-size: 1em;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-width: 120px;
+      }
+      
+      .nav-buttons button:first-child {
+        background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+        color: white;
+      }
+      
+      .nav-buttons button:last-child {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+      }
+      
+      .nav-buttons button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      }
+      
+      .nav-buttons button:active {
+        transform: translateY(-1px);
+      }
+      
+      /* プログレスバーのスタイル */
+      .progress-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid #e0e0e0;
+        padding: 20px;
+        z-index: 1000;
+      }
+      
+      .progress-wrapper {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      
+      .progress-bar {
+        width: 100%;
+        height: 6px;
+        background: #f0f0f0;
+        border-radius: 3px;
+        overflow: hidden;
+        margin-bottom: 15px;
+      }
+      
+      .progress-fill {
+        height: 100%;
+        background: #003366;
+        border-radius: 3px;
+        transition: width 0.5s ease;
+        width: 15%;
+      }
+      
+      .progress-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.1em;
+        color: #333;
+        font-weight: 500;
+      }
+      
+      .progress-page {
+        color: #003366;
+        font-weight: 600;
+      }
+      
+      .progress-total {
+        color: #999;
+      }
+      
+      /* フォームの下部に余白を追加（プログレスバーの分） */
+      body {
+        padding-bottom: 100px;
+      }
+    }
+    
+    /* タブレット用の追加調整 */
+    @media screen and (max-width: 1024px) and (min-width: 768px) {
+      .daily-rhythm-table td:first-child {
+        width: 140px;
+      }
+      
+      .daily-rhythm-table input {
+        font-size: 0.85em;
+        padding: 6px 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+<h1>APOS-HC 調査票</h1>
+<form id="surveyForm">
+
+<div class="section" id="section-life-education">
+  <h2>Ⅲ　これまでの生活歴や教育歴</h2>
+  <fieldset>
+    <legend>これまでの生活歴</legend>
+    <label for="life_history">これまでの生活歴についてご記入ください</label>
+    <textarea id="life_history" name="life_history" rows="4" placeholder="例：出生地、育った環境、転居歴、家族構成の変化など"></textarea>
+  </fieldset>
+  <fieldset>
+    <legend>教育歴</legend>
+    <label for="education_history">教育歴についてご記入ください</label>
+    <textarea id="education_history" name="education_history" rows="3" placeholder="例：最終学歴、学校名、特記事項など"></textarea>
+  </fieldset>
+</div>
+
+<div class="section" id="section-daily-rhythm">
+  <h2>Ⅳ　ご利用者さまの１日の生活のしかた/リズム</h2>
+  <fieldset>
+    <legend>1日の生活リズム</legend>
+    <table class="daily-rhythm-table">
+      <thead>
+        <tr>
+          <th>時間帯</th>
+          <th>活動内容</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>6:00〜8:00</td>
+          <td><input type="text" name="activity_6_8" placeholder="例：起床、朝食、身支度 など"></td>
+        </tr>
+        <tr>
+          <td>8:00〜10:00</td>
+          <td><input type="text" name="activity_8_10" placeholder="例：通院、散歩、家事 など"></td>
+        </tr>
+        <tr>
+          <td>10:00〜12:00</td>
+          <td><input type="text" name="activity_10_12" placeholder="例：趣味、休憩 など"></td>
+        </tr>
+        <tr>
+          <td>12:00〜14:00</td>
+          <td><input type="text" name="activity_12_14" placeholder="例：昼食、休憩 など"></td>
+        </tr>
+        <tr>
+          <td>14:00〜16:00</td>
+          <td><input type="text" name="activity_14_16" placeholder="例：リハビリ、訪問サービス など"></td>
+        </tr>
+        <tr>
+          <td>16:00〜18:00</td>
+          <td><input type="text" name="activity_16_18" placeholder="例：家族と過ごす、趣味 など"></td>
+        </tr>
+        <tr>
+          <td>18:00〜20:00</td>
+          <td><input type="text" name="activity_18_20" placeholder="例：夕食、入浴 など"></td>
+        </tr>
+        <tr>
+          <td>20:00〜22:00</td>
+          <td><input type="text" name="activity_20_22" placeholder="例：テレビ、就寝準備 など"></td>
+        </tr>
+        <tr>
+          <td>22:00〜翌6:00</td>
+          <td><input type="text" name="activity_22_6" placeholder="例：就寝 など"></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note">※訪問前三日間での活動をご記入ください。</div>
+  </fieldset>
+</div>
+
+<div class="section" id="section-public-economic">
+  <h2>Ⅴ 公費制度利用・経済的状況</h2>
+
+  <fieldset>
+    <legend>高額費用の利用</legend>
+    <label>高額費用の利用
+      <select name="expensive_cost_usage" id="expensive_cost_usage" onchange="toggleExpensiveCostDetail()">
+        <option value="">選択してください</option>
+        <option value="0">0. 必要なし</option>
+        <option value="1a">1. 必要で利用あり（a.介護制度）</option>
+        <option value="1b">1. 必要で利用あり（b.医療制度）</option>
+        <option value="2a">2. 必要で利用無し（a.介護制度）</option>
+        <option value="2b">2. 必要で利用無し（b.医療制度）</option>
+      </select>
+    </label>
+    <div id="expensive_cost_no_reason" style="display:none;">
+      <input type="text" name="expensive_cost_no_reason" placeholder="「なし」または「必要で利用無し」を選択した場合は理由を記入してください">
+    </div>
+    <script>
+      // なしまたは必要で利用無しを押した場合は理由記述入力欄を表示
+      function toggleExpensiveCostDetail() {
+        var sel = document.getElementById('expensive_cost_usage');
+        var noDiv = document.getElementById('expensive_cost_no_reason');
+        var otherDiv = document.getElementById('expensive_cost_reason');
+        // 「なし」もしくは「2a」「2b」を選択時
+        if (
+          sel.value === "0" ||
+          sel.value === "2a" ||
+          sel.value === "2b"
+        ) {
+          if (noDiv) noDiv.style.display = '';
+          if (otherDiv) otherDiv.style.display = 'none';
+        } else if (sel.value) {
+          if (noDiv) noDiv.style.display = 'none';
+          if (otherDiv) otherDiv.style.display = '';
+        } else {
+          if (noDiv) noDiv.style.display = 'none';
+          if (otherDiv) otherDiv.style.display = 'none';
+        }
+      }
+      // 初期化もしくは履歴値で自動状態合わせ
+      document.addEventListener('DOMContentLoaded', function() {
+        toggleExpensiveCostDetail();
+      });
+    </script>
+    <div id="expensive_cost_reason" style="display:none;">
+      <input type="text" name="expensive_cost_reason" placeholder="理由を記入してください">
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>公費医療の利用</legend>
+    <label>公費医療の利用
+      <select name="public_medical_usage" id="public_medical_usage" onchange="togglePublicMedicalReason()">
+        <option value="">選択してください</option>
+        <option value="0">0. なし</option>
+        <option value="1">1. 必要で利用あり</option>
+        <option value="2">2. 必要で利用無し</option>
+      </select>
+    </label>
+    <script>
+      function togglePublicMedicalReason() {
+        var sel = document.getElementById('public_medical_usage');
+        var reasonDiv = document.getElementById('public_medical_reason');
+        // 2（必要で利用無し）が選択された時のみ理由欄を表示
+        if (sel.value === "2") {
+          if (reasonDiv) reasonDiv.style.display = '';
+        } else {
+          if (reasonDiv) reasonDiv.style.display = 'none';
+        }
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        togglePublicMedicalReason();
+      });
+    </script>
+    <div id="public_medical_reason" style="display:none;">
+      <input type="text" name="public_medical_reason" placeholder="理由を記入してください">
+    </div>
+
+    <div>
+      <label>公費医療の詳細（複数選択可）</span><br>
+      <label><input type="checkbox" name="public_medical_detail[]" value="1a" onchange="toggleMedicalDiseaseInput()">①感染症（a.結核医療）</label><br>
+      <label><input type="checkbox" name="public_medical_detail[]" value="1b" onchange="toggleMedicalDiseaseInput()">①感染症（b.感染症医療費）</label><br>
+      <label><input type="checkbox" name="public_medical_detail[]" value="1c" onchange="toggleMedicalDiseaseInput()">①感染症（c.肝炎/HIV/エイズ医療）</label><br>
+      <label><input type="checkbox" name="public_medical_detail[]" value="1d" onchange="toggleMedicalDiseaseInput()">①感染症（d.その他）</label><br>
+      <label><input type="checkbox" name="public_medical_detail[]" value="2a" onchange="toggleMedicalDiseaseInput()">②自立支援（a.更生医療）</label><br>
+      <label><input type="checkbox" name="public_medical_detail[]" value="2b" onchange="toggleMedicalDiseaseInput()">②自立支援（b.精神通院医療）</label><br>
+      <label><input type="checkbox" name="public_medical_detail[]" value="2c" onchange="toggleMedicalDiseaseInput()">②自立支援（c.その他）</label><br>
+      <label><input type="checkbox" name="public_medical_detail[]" value="3" onchange="toggleMedicalDiseaseInput()">③特定疾患</label><br>
+      <label><input type="checkbox" name="public_medical_detail[]" value="4" onchange="toggleMedicalDiseaseInput()">④原子爆弾被爆者援護</label><br>
+      <label><input type="checkbox" name="public_medical_detail[]" value="5" onchange="toggleMedicalDiseaseInput()">⑤指定難病</label>
+    </div>
+      
+      <input type="text" name="public_medical_detail_other" placeholder="②自立支援（c.その他）の方　または　⑤指定難病の方(病名)" style="width: 40em;">
+
+    </label>
+    <div id="medical_disease_input" style="display:none;">
+      <input type="text" name="medical_disease_name" placeholder="病名を入力してください">
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>公費制度の利用</legend>
+    <label>公費制度の利用
+      <select name="public_system_usage" id="public_system_usage" onchange="togglePublicSystemReason()">
+        <option value="">選択してください</option>
+        <option value="0">0. なし</option>
+        <option value="1">1. 必要で利用あり</option>
+        <option value="2">2. 必要で利用無し</option>
+      </select>
+    </label>
+    <div id="public_system_reason" style="display:none;">
+      <input type="text" name="public_system_reason" placeholder="理由を記入してください">
+    </div>
+
+    <label>公費制度の詳細（証書・受給情報）
+      <select name="public_system_detail" id="public_system_detail" onchange="toggleSystemDetailInput()">
+        <option value="">選択してください</option>
+        <option value="1">①身体障害者手帳</option>
+        <option value="2">②療育手帳</option>
+        <option value="3">③精神障害者保健福祉手帳</option>
+        <option value="4">④障害福祉サービス受給者証</option>
+        <option value="5">⑤生活保護</option>
+        <option value="6">⑥障害者年金</option>
+      </select>
+      <input type="text" name="public_medical_detail_other" placeholder="❶身障手帳(　種　級)または ❷療育手帳(　程度)または❸精神障害者保健福祉手帳(　級)" style="width: 45em;">
+    </label>
+    <div id="system_detail_input" style="display:none;">
+      <input type="text" name="system_detail_info" placeholder="種・級・程度・その他詳細を入力してください">
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>経済的状況</legend>
+    <label>
+      <div style="margin-bottom: 0.5em;">
+        1.この１年で家計の支払い（税金，保険料・電気・ガス・通信，クレジットカードなど）に困ったことはありますか
+      </div>
+      <select name="economic_status_1">
+        <option value="">選択してください</option>
+        <option value="1">.0 なし</option>
+        <option value="2">1. 年1回ある</option>
+        <option value="3">2. 年2〜3回ある</option>
+        <option value="4">3. 年4〜5回ある</option>
+        <option value="5">4. 年6回以上ある</option>
+      </select>
+    </label>
+
+    <label>
+      <div style="margin-bottom: 0.5em;">
+        2.この１年間に、年金や給与の支払い日前に、暮らしに困ることはありましたか
+      </div>
+      <select name="economic_status_2">
+        <option value="">選択してください</option>
+        <option value="1">.0 なし</option>
+        <option value="2">1. 年1回ある</option>
+        <option value="3">2. 年2〜3回ある</option>
+        <option value="4">3. 年4〜5回ある</option>
+        <option value="5">4. 年6回以上ある</option>
+      </select>
+    </label>
+
+    <label>
+        <div style="margin-bottom: 0.5em;">
+            3.苦しい家計は何ですか(複数選択可)        </div>
+      <div style="margin-bottom: 0.5em;">
+      </div>
+      <div style="margin-bottom: 0.5em;">
+        <label><input type="checkbox" name="economic_status_3_difficulties" value="食料">1. 食料</label>
+        <label><input type="checkbox" name="economic_status_3_difficulties" value="医療">2. 医療</label>
+        <label><input type="checkbox" name="economic_status_3_difficulties" value="介護">3. 介護</label>
+        <label><input type="checkbox" name="economic_status_3_difficulties" value="交通･電話">4. 交通･電話</label>
+        <label><input type="checkbox" name="economic_status_3_difficulties" value="住宅">5. 住宅</label>
+        <label><input type="checkbox" name="economic_status_3_difficulties" value="光熱水">6. 光熱水</label>
+        <label><input type="checkbox" name="economic_status_3_difficulties" value="教養娯楽">7. 教養娯楽</label>
+        <label><input type="checkbox" name="economic_status_3_difficulties" value="その他">8. その他</label>
+        <input type="text" name="economic_status_3_difficulties_other" placeholder="その他の場合はご記入ください" style="margin-left:1em;">
+      </div>
+
+    </label>
+  </fieldset>
+</div>
+
+    <div class="nav-buttons">
+      <button type="button" onclick="location.href='form1.html'">← 戻る</button>
+      <button type="button" onclick="location.href='form3.html'">次へ →</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  // 高額費用の利用：理由欄表示
+  function toggleExpensiveCostDetail() {
+    const val = document.getElementById('expensive_cost_usage').value;
+    const reasonDiv = document.getElementById('expensive_cost_reason');
+    if (val === '2a' || val === '2b') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費医療の利用：理由欄表示
+  function togglePublicMedicalReason() {
+    const val = document.getElementById('public_medical_usage').value;
+    const reasonDiv = document.getElementById('public_medical_reason');
+    if (val === '2') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費医療の詳細：病名入力欄表示
+  function toggleMedicalDiseaseInput() {
+    const val = document.getElementById('public_medical_detail').value;
+    const inputDiv = document.getElementById('medical_disease_input');
+    if (val === '5' || val === '3') {
+      inputDiv.style.display = 'block';
+    } else {
+      inputDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費制度の利用：理由欄表示
+  function togglePublicSystemReason() {
+    const val = document.getElementById('public_system_usage').value;
+    const reasonDiv = document.getElementById('public_system_reason');
+    if (val === '2') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費制度の詳細：詳細入力欄表示
+  function toggleSystemDetailInput() {
+    const val = document.getElementById('public_system_detail').value;
+    const inputDiv = document.getElementById('system_detail_input');
+    if (val === '1' || val === '2') {
+      inputDiv.style.display = 'block';
+    } else {
+      inputDiv.style.display = 'none';
+    }
+  }
+
+  // フォームの自動保存機能は下のupdateProgress内で実装
+</script>
+
+  <!-- プログレスバー -->
+  <div class="progress-container">
+    <div class="progress-wrapper">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-info">
+        <span class="progress-page" id="currentPage">3</span>
+        <span class="progress-total">/ 20</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // プログレスバーの更新
+    function updateProgress() {
+      const progressPercentage = (3 / 20) * 100;
+      const progressFill = document.getElementById('progressFill');
+      const currentPageElement = document.getElementById('currentPage');
+      
+      progressFill.style.width = progressPercentage + '%';
+      currentPageElement.textContent = '3';
+      progressFill.style.background = '#003366';
+    }
+    
+    // 初期プログレス更新
+    document.addEventListener('DOMContentLoaded', function() {
+      updateProgress();
+      
+      // フォームの自動保存機能
+      const form = document.getElementById('surveyForm');
+      const formNumber = 2; // form2
+      
+      if (form) {
+        // フォームデータを収集する関数
+        function collectFormData() {
+          const formData = new FormData(form);
+          const data = {};
+          
+          // 通常のフィールド
+          for (let [key, value] of formData.entries()) {
+            if (data[key]) {
+              // 同じ名前の複数フィールド（チェックボックスなど）
+              if (Array.isArray(data[key])) {
+                data[key].push(value);
+              } else {
+                data[key] = [data[key], value];
+              }
+            } else {
+              data[key] = value;
+            }
+          }
+          
+          // Canvas画像データを保存
+          const canvases = form.querySelectorAll('canvas');
+          canvases.forEach((canvas, index) => {
+            try {
+              const canvasId = canvas.id || `canvas_${index}`;
+              data[canvasId + '_image'] = canvas.toDataURL('image/png');
+              console.log(`Canvas画像を保存しました: ${canvasId}`);
+            } catch (e) {
+              console.error('Canvas保存エラー:', e);
+            }
+          });
+          
+          // 非表示項目も含めて全入力要素を確認
+          const allInputs = form.querySelectorAll('input, select, textarea');
+          allInputs.forEach(input => {
+            if (!input.name) return;
+            
+            const isProcessed = data.hasOwnProperty(input.name);
+            
+            if (input.type === 'checkbox') {
+              if (input.checked) {
+                if (!data[input.name]) {
+                  data[input.name] = [];
+                }
+                if (Array.isArray(data[input.name])) {
+                  if (!data[input.name].includes(input.value)) {
+                    data[input.name].push(input.value);
+                  }
+                } else {
+                  data[input.name] = [data[input.name], input.value];
+                }
+              }
+            } else if (input.type === 'radio') {
+              if (input.checked && !isProcessed) {
+                data[input.name] = input.value;
+              }
+            } else {
+              if (!isProcessed && input.value) {
+                data[input.name] = input.value;
+              }
+            }
+          });
+          
+          return data;
+        }
+        
+        // 入力時に自動保存
+        form.addEventListener('input', function() {
+          const data = collectFormData();
+          localStorage.setItem(`surveyData_form${formNumber}`, JSON.stringify(data));
+          console.log(`Form ${formNumber} データを自動保存しました`);
+        });
+        
+        form.addEventListener('change', function() {
+          const data = collectFormData();
+          localStorage.setItem(`surveyData_form${formNumber}`, JSON.stringify(data));
+          console.log(`Form ${formNumber} データを自動保存しました`);
+        });
+        
+        // 保存されたデータの復元
+        const savedData = localStorage.getItem(`surveyData_form${formNumber}`);
+        if (savedData) {
+          const data = JSON.parse(savedData);
+          Object.keys(data).forEach(key => {
+            const elements = form.elements[key];
+            if (elements) {
+              if (elements.length > 1) {
+                // 複数要素（ラジオボタンやチェックボックス）
+                Array.from(elements).forEach(el => {
+                  if (el.type === 'checkbox' || el.type === 'radio') {
+                    if (Array.isArray(data[key])) {
+                      el.checked = data[key].includes(el.value);
+                    } else {
+                      el.checked = el.value === data[key];
+                    }
+                  }
+                });
+              } else if (elements.length === 1) {
+                // 単一要素（複数の同名要素の1つ）
+                const el = elements[0];
+                if (el.type === 'checkbox' || el.type === 'radio') {
+                  if (Array.isArray(data[key])) {
+                    el.checked = data[key].includes(el.value);
+                  } else {
+                    el.checked = el.value === data[key];
+                  }
+                } else {
+                  el.value = data[key] || '';
+                }
+              } else {
+                // 単一要素
+                if (elements.type === 'checkbox' || elements.type === 'radio') {
+                  if (Array.isArray(data[key])) {
+                    elements.checked = data[key].includes(elements.value);
+                  } else {
+                    elements.checked = elements.value === data[key];
+                  }
+                } else {
+                  elements.value = data[key] || '';
+                }
+              }
+            }
+          });
+          console.log(`Form ${formNumber} の保存データを復元しました`);
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

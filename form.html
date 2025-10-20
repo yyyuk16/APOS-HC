@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <title>APOS-HC 入力フォーム</title>
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(180deg, #f4f8fb 0%, #e9f6f0 100%);
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #333;
+    }
+    .container {
+      max-width: 700px;
+      background: #fff;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      text-align: center;
+    }
+    h1 {
+      color: #1f80c4;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+    .note {
+      background: #f0f9f3;
+      border-left: 6px solid #87d299;
+      padding: 15px 18px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      text-align: left;
+      margin-bottom: 35px;
+    }
+    .buttons { display: flex; flex-direction: column; align-items: center; gap: 15px; }
+    button {
+      font-size: 1.2rem;
+      padding: 18px 40px;
+      border: none;
+      border-radius: 12px;
+      background-color: #87d299;
+      color: #fff;
+      cursor: pointer;
+      width: 260px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      transition: 0.2s;
+    }
+    button:hover { background-color: #1f80c4; transform: scale(1.05); }
+    footer { text-align: center; font-size: 0.85rem; color: #666; margin-top: 25px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>APOS-HC 入力フォームについて</h1>
+
+    <div class="note">
+      <strong>ご使用上の注意</strong><br>
+      ・このアンケートは、全20ページあります。すべてのページに回答してください。<br>
+      ・全3回（2か月ごと）にわたって行います。<br>
+      ・途中で画面を閉じた場合は、次のアンケートに答える際はその途中から再開してください。<br>
+      ・入力が終わったら必ず「送信」ボタンを押してください。
+    </div>
+
+    <!-- 事業所番号と個人番号入力欄 -->
+    <div style="margin-bottom:25px; text-align:left;">
+      <label>事業所番号：<input id="officeId" type="text" style="width:100%; padding:8px;"></label><br><br>
+      <label>個人番号：<input id="personalId" type="text" style="width:100%; padding:8px;"></label>
+    </div>
+
+    <div class="buttons">
+      <button id="session1" onclick="startSession(1)">1回目をはじめる</button>
+      <button id="session2" onclick="startSession(2)">2回目をはじめる</button>
+      <button id="session3" onclick="startSession(3)">3回目をはじめる</button>
+    </div>
+
+  </div>
+
+  <script>
+    // 環境に応じてAPI URLを決定
+    const baseURL = window.location.hostname.includes("localhost") 
+      ? "http://localhost:8000" 
+      : "https://homecare-form.com";
+    const API_URL = `${baseURL}/api/check_progress`;
+
+    async function startSession(session) {
+      const officeId = document.getElementById('officeId').value.trim();
+      const personalId = document.getElementById('personalId').value.trim();
+      
+      if (!officeId || !personalId) {
+        alert("事業所番号と個人番号を入力してください。");
+        return;
+      }
+
+      // ユーザーID: 事業所番号_個人番号
+      const userId = `${officeId}_${personalId}`;
+      
+      // localStorageに保存
+      localStorage.setItem("user_id", userId);
+      localStorage.setItem("session", session);
+      localStorage.setItem("office_id", officeId);
+      localStorage.setItem("personal_id", personalId);
+
+      try {
+        // 回答済みチェック
+        const res = await fetch(`${API_URL}?user_id=${encodeURIComponent(userId)}&session=${session}`);
+        if (res.ok) {
+          const result = await res.json();
+          if (result.done) {
+            const confirmMsg = `このユーザー（${userId}）は ${session} 回目をすでに回答済みです。\n\n再度回答しますか？`;
+            if (!confirm(confirmMsg)) {
+              return;
+            }
+          }
+        }
+      } catch (error) {
+        console.error("進捗確認エラー:", error);
+        // エラーが発生しても続行
+      }
+
+      // フォーム0へ遷移
+      location.href = `form0.html`;
+    }
+
+    // ページ読み込み時に以前の入力を復元
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedOfficeId = localStorage.getItem('office_id');
+      const savedPersonalId = localStorage.getItem('personal_id');
+      
+      if (savedOfficeId) {
+        document.getElementById('officeId').value = savedOfficeId;
+      }
+      if (savedPersonalId) {
+        document.getElementById('personalId').value = savedPersonalId;
+      }
+    });
+  </script>
+</body>
+</html>

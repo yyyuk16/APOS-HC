@@ -1,0 +1,844 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>APOS-HC 調査票 - フォーム3</title>
+  <link rel="stylesheet" href="main.css">
+  <style>
+    /* セクション表示の修正 */
+    .section { 
+      display: block !important; 
+    }
+    
+    /* iPad用の追加スタイル */
+    @media screen and (min-width: 768px) {
+      body {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      
+      .container {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        padding: 25px;
+        margin: 15px 0;
+      }
+      
+      h1 {
+        font-size: 1.8em;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 15px;
+      }
+      
+      h2 {
+        font-size: 1.4em;
+        color: #34495e;
+        margin: 25px 0 15px 0;
+        padding: 10px 0;
+        border-left: 4px solid #3498db;
+        padding-left: 15px;
+        background: linear-gradient(90deg, #f8f9fa 0%, transparent 100%);
+      }
+      
+      fieldset {
+        border: 2px solid #e0e6ed;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        background: #fafbfc;
+        transition: all 0.3s ease;
+      }
+      
+      fieldset:hover {
+        border-color: #3498db;
+        box-shadow: 0 2px 10px rgba(52, 152, 219, 0.1);
+      }
+      
+      legend {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #2c3e50;
+        padding: 0 10px;
+        background: #fff;
+        border-radius: 6px;
+        border: 2px solid #3498db;
+      }
+      
+      label {
+        display: block;
+        margin: 10px 0 5px 0;
+        font-weight: 600;
+        color: #34495e;
+        font-size: 1em;
+      }
+      
+      input[type="text"], input[type="tel"], input[type="email"], 
+      input[type="number"], select, textarea {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 1em;
+        border: 2px solid #e0e6ed;
+        border-radius: 6px;
+        background: #fff;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+        margin-top: 5px;
+      }
+      
+      input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        transform: translateY(-2px);
+      }
+      
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+        font-family: inherit;
+      }
+      
+      .daily-rhythm-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      }
+      
+      .daily-rhythm-table th {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+        padding: 12px 10px;
+        font-size: 1em;
+        font-weight: bold;
+        text-align: center;
+      }
+      
+      .daily-rhythm-table td {
+        padding: 10px;
+        border-bottom: 1px solid #e8f4f8;
+        text-align: center;
+        vertical-align: middle;
+      }
+      
+      .daily-rhythm-table td:first-child {
+        background: #f8f9fa;
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 0.9em;
+        width: 150px;
+      }
+      
+      .daily-rhythm-table input {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 0.9em;
+        border: 2px solid #e0e6ed;
+        border-radius: 6px;
+        background: #fff;
+        transition: all 0.3s ease;
+        margin: 0;
+      }
+      
+      .daily-rhythm-table input:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+      }
+      
+      .daily-rhythm-table tr:hover {
+        background: #f8f9fa;
+      }
+      
+      .note {
+        font-size: 0.9em;
+        color: #7f8c8d;
+        margin-top: 10px;
+        padding: 10px;
+        background: #ecf0f1;
+        border-radius: 6px;
+        border-left: 3px solid #95a5a6;
+      }
+      
+      .nav-buttons {
+        margin-top: 25px;
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+      }
+      
+      .nav-buttons button {
+        padding: 12px 25px;
+        font-size: 1em;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-width: 120px;
+      }
+      
+      .nav-buttons button:first-child {
+        background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+        color: white;
+      }
+      
+      .nav-buttons button:last-child {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+      }
+      
+      .nav-buttons button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      }
+      
+      .nav-buttons button:active {
+        transform: translateY(-1px);
+      }
+      
+      /* プログレスバーのスタイル */
+      .progress-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid #e0e0e0;
+        padding: 20px;
+        z-index: 1000;
+      }
+      
+      .progress-wrapper {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      
+      .progress-bar {
+        width: 100%;
+        height: 6px;
+        background: #f0f0f0;
+        border-radius: 3px;
+        overflow: hidden;
+        margin-bottom: 15px;
+      }
+      
+      .progress-fill {
+        height: 100%;
+        background: #003366;
+        border-radius: 3px;
+        transition: width 0.5s ease;
+        width: 65%;
+      }
+      
+      .progress-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.1em;
+        color: #333;
+        font-weight: 500;
+      }
+      
+      .progress-page {
+        color: #003366;
+        font-weight: 600;
+      }
+      
+      .progress-total {
+        color: #999;
+      }
+      
+      /* フォームの下部に余白を追加（プログレスバーの分） */
+      body {
+        padding-bottom: 100px;
+      }
+    }
+    
+    /* タブレット用の追加調整 */
+    @media screen and (max-width: 1024px) and (min-width: 768px) {
+      .daily-rhythm-table td:first-child {
+        width: 140px;
+      }
+      
+      .daily-rhythm-table input {
+        font-size: 0.85em;
+        padding: 6px 8px;
+      }
+    }
+  </style>
+  <script src="survey-common.js"></script>
+</head>
+<body>
+
+<div class="container">
+<h1>APOS-HC 調査票</h1>
+<form id="surveyForm">
+<div class="section" id="section-lifestyle-habits">
+  <h2>Ⅰ　精神症状の状況(特異行動と重症度)</h2>
+  <fieldset>
+    <legend>１.　NPI-Q(BPSD：行動・心理障害評価)の項目</legend>
+    <div style="margin-bottom: 18px;">
+      <span style="font-weight:bold;">情報提供者：</span>
+      <label style="margin-right: 12px;">
+        <input type="radio" name="information_provider" value="1" required> 1. 配偶者
+   
+      <label style="margin-right: 12px;">
+        <input type="radio" name="information_provider" value="2"> 2. 子供
+      </label>
+      <label style="margin-right: 12px;">
+        <input type="radio" name="information_provider" value="3"> 3. 子供の配偶者
+      </label>
+      <label style="margin-right: 12px;">
+        <input type="radio" name="information_provider" value="4"> 4. 介護福祉士・ヘルパー
+      </label>
+      <label style="margin-right: 12px;">
+        <input type="radio" name="information_provider" value="5"> 5. 訪問看護師
+      </label>
+      <label style="margin-right: 12px;">
+        <input type="radio" name="information_provider" value="6" id="information_provider_6"> 6. その他
+      </label>
+      <input type="text" name="information_provider_other" id="information_provider_other" style="display:none; width:320px; margin-left:8px;" placeholder="その他の場合はご記入ください">
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var radios = document.getElementsByName('information_provider');
+        var otherInput = document.getElementById('information_provider_other');
+        function toggleOtherInput() {
+          if (document.getElementById('information_provider_6').checked) {
+            otherInput.style.display = 'inline-block';
+          } else {
+            otherInput.style.display = 'none';
+            otherInput.value = '';
+          }
+        }
+        for (var i = 0; i < radios.length; i++) {
+          radios[i].addEventListener('change', toggleOtherInput);
+        }
+      });
+    </script>
+
+    <div style="margin-bottom: 18px;">
+      <b>1．症状強度の重症度</b>
+      <ul style="margin: 8px 0 0 1.5em; padding: 0; font-size: 0.98em; list-style: none;">
+        <li>0： なし・心配無</li>
+        <li>1： 軽度（症状の出現は時々あるが不定期、時々きわめて軽い変化で気にならない）</li>
+        <li>2： 中等度（症状はほとんど毎日であるが、強度は強くない・少ない）</li>
+        <li>3： 重度（症状が重度であり、頻回に強い症状がある）</li>
+      </ul>
+    </div>
+    <table border="1" style="border-collapse:collapse; width:100%; font-size:1.05em; margin-bottom:10px;">
+      <thead>
+        <tr style="background:#e3f2fd;">
+          <th style="width:3%;">No</th>
+          <th style="width:12%;">項目</th>
+          <th style="width:40%;">内容の説明</th>
+          <th style="width:45%;">評価（0～3）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>①</td>
+          <td>妄想</td>
+          <td>誤った内容を信じ込む（被害妄想・関係妄想など）</td>
+          <td>
+            <select name="npiq_delusion" class="npiq-score" required>
+              <option value="">選択してください</option>
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>②</td>
+          <td>幻覚・幻視</td>
+          <td>他人にはないが本人には感じる（幻聴など）</td>
+          <td>
+            <select name="npiq_hallucination" class="npiq-score" required>
+              <option value="">選択してください</option>
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>③</td>
+          <td>興奮</td>
+          <td>介助を拒む、扱いにくい</td>
+          <td>
+            <select name="npiq_agitation" required>
+              <option value="">選択してください</option>
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>④</td>
+          <td>うつ</td>
+          <td>落ち込む、悲しそうに見える</td>
+          <td>
+            <select name="npiq_depression" required>
+              <option value="">選択してください</option>
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>⑤</td>
+          <td>不安</td>
+          <td>落ち着かない、息苦しさ、緊張</td>
+          <td>
+            <select name="npiq_anxiety" required>
+              <option value="">選択してください</option>
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>⑥</td>
+          <td>多幸</td>
+          <td>機嫌が良すぎる、幸せそう</td>
+          <td>
+            <select name="npiq_euphoria" required>
+              <option value="">選択してください</option>
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>⑦</td>
+          <td>無関心</td>
+          <td>生活や活動への関心が低下</td>
+          <td>
+            <select name="npiq_apathy" required>
+              <option value="">選択してください</option>
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>⑧</td>
+          <td>脱抑制</td>
+          <td>知らない人に話しかける、暴言</td>
+          <td>
+            <select name="npiq_disinhibition" required>
+              <option value="">選択してください</option>
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </td>
+    
+        </tr>
+        <tr>
+          <td>⑨</td>
+          <td>易刺激性</td>
+          <td>怒りっぽい、暴力行為</td>
+          <td>
+            <select name="npiq_irritability" required>
+              <option value="">選択してください</option>
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>⑩</td>
+          <td>異常行動</td>
+          <td>徘徊、同じ行為を繰り返す、不潔行為</td>
+          <td>
+            <select name="npiq_abnormal_behavior" required>
+              <option value="">選択してください</option>
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>⑪</td>
+          <td>夜間行動</td>
+          <td>夜間の徘徊、出歩き</td>
+          <td>
+            <select name="npiq_night_behavior" required>
+              <option value="">選択してください</option>
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>⑫</td>
+          <td>食の行動</td>
+          <td>過食・拒食・異食</td>
+          <td>
+            <select name="npiq_eating_behavior" required>
+              <option value="">選択してください</option>
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 精神症状の合計点数表示 -->
+    <div id="npiq_total_score_container" style="background:#b3f6fc; text-align:center; font-size:1.1em; font-weight:bold; margin:18px 0 8px 0; padding:4px 0; display:none;">
+      精神症状の合計点数　
+      <span id="npiq_total_score" style="margin-left:10px; font-weight:normal;">0点/36</span>
+    </div>
+    <!-- 総合的心理症状評価（NPI-Q合計点） -->
+    <div id="npiq_score_explanation" style="display:none; margin: 10px 0 20px 0; font-size:1em;">
+      <span style="font-weight:bold;">2．総合的心理症状評価</span><br>
+      <span style="white-space:pre-line;">
+0：なしの点
+1：軽度1～6点（本人の訴えに感じられるが、きつさのレベル本質ではない）
+2：中等度7～14（症状ははっきりと出ており、頻度変化はしない）
+3：高度15点以上（長く見受けられおり、頻度変化が顕著）
+      </span>
+      <div style="margin-top: 16px;">
+        <label for="npiq_score_note" style="font-weight:bold;">総特異行動の詳細/上記以外の特異行動：</label><br>
+        <textarea name="npiq_score_note" id="npiq_score_note" rows="3" style="width:98%; font-size:1em;" placeholder="補足や特記事項があればご記入ください"></textarea>
+      </div>
+    </div>
+    <script>
+      // NPI-Q合計点数の自動計算
+      function updateNpiqTotalScore() {
+        // 12項目すべてを合計に含める
+        const fields = [
+          'npiq_delusion',
+          'npiq_hallucination',
+          'npiq_agitation',
+          'npiq_depression',
+          'npiq_anxiety',
+          'npiq_euphoria',
+          'npiq_apathy',
+          'npiq_disinhibition',
+          'npiq_irritability',
+          'npiq_abnormal_behavior',
+          'npiq_night_behavior',
+          'npiq_eating_behavior'
+        ];
+        let total = 0;
+        let hasAnyInput = false;
+        
+        for (const name of fields) {
+          const sel = document.getElementsByName(name)[0];
+          if (sel && sel.value !== "") {
+            total += parseInt(sel.value, 10);
+            hasAnyInput = true;
+          }
+        }
+        
+        // 合計点数を更新
+        document.getElementById('npiq_total_score').textContent = total + "点/36";
+        
+        // 何かしら入力があれば合計点数を表示
+        if (hasAnyInput) {
+          document.getElementById('npiq_total_score_container').style.display = 'block';
+          // すべて入力済みなら説明も表示
+          const allFilled = fields.every(name => {
+            const sel = document.getElementsByName(name)[0];
+            return sel && sel.value !== "";
+          });
+          document.getElementById('npiq_score_explanation').style.display = allFilled ? 'block' : 'none';
+        } else {
+          document.getElementById('npiq_total_score_container').style.display = 'none';
+          document.getElementById('npiq_score_explanation').style.display = 'none';
+        }
+      }
+
+      // 各selectにイベントリスナーを追加
+      document.addEventListener('DOMContentLoaded', function() {
+        const fields = [
+          'npiq_delusion',
+          'npiq_hallucination',
+          'npiq_agitation',
+          'npiq_depression',
+          'npiq_anxiety',
+          'npiq_euphoria',
+          'npiq_apathy',
+          'npiq_disinhibition',
+          'npiq_irritability',
+          'npiq_abnormal_behavior',
+          'npiq_night_behavior',
+          'npiq_eating_behavior'
+        ];
+        for (const name of fields) {
+          const sel = document.getElementsByName(name)[0];
+          if (sel) {
+            sel.addEventListener('change', updateNpiqTotalScore);
+          }
+        }
+        updateNpiqTotalScore();
+      });
+    </script>
+
+
+
+  
+    <div class="nav-buttons">
+      <button type="button" onclick="location.href='form11.html'">← 戻る</button>
+      <button type="button" onclick="location.href='form13.html'">次へ →</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  // 高額費用の利用：理由欄表示
+  function toggleExpensiveCostDetail() {
+    const val = document.getElementById('expensive_cost_usage').value;
+    const reasonDiv = document.getElementById('expensive_cost_reason');
+    if (val === '2a' || val === '2b') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費医療の利用：理由欄表示
+  function togglePublicMedicalReason() {
+    const val = document.getElementById('public_medical_usage').value;
+    const reasonDiv = document.getElementById('public_medical_reason');
+    if (val === '2') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費医療の詳細：病名入力欄表示
+  function toggleMedicalDiseaseInput() {
+    const val = document.getElementById('public_medical_detail').value;
+    const inputDiv = document.getElementById('medical_disease_input');
+    if (val === '5' || val === '3') {
+      inputDiv.style.display = 'block';
+    } else {
+      inputDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費制度の利用：理由欄表示
+  function togglePublicSystemReason() {
+    const val = document.getElementById('public_system_usage').value;
+    const reasonDiv = document.getElementById('public_system_reason');
+    if (val === '2') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費制度の詳細：詳細入力欄表示
+  function toggleSystemDetailInput() {
+    const val = document.getElementById('public_system_detail').value;
+    const inputDiv = document.getElementById('system_detail_input');
+    if (val === '1' || val === '2') {
+      inputDiv.style.display = 'block';
+    } else {
+      inputDiv.style.display = 'none';
+    }
+  }
+
+  // フォームの自動保存機能
+  const form = document.getElementById('surveyForm');
+  form.addEventListener('input', () => {
+    const data = Object.fromEntries(new FormData(form));
+    localStorage.setItem('surveyData_form2', JSON.stringify(data));
+  });
+
+  // 保存されたデータの復元
+  window.addEventListener('load', () => {
+    const saved = localStorage.getItem('surveyData_form2');
+    if (saved) {
+      const data = JSON.parse(saved);
+      Object.keys(data).forEach(key => {
+        const el = form.elements[key];
+        if (el) {
+          el.value = data[key];
+        }
+      });
+    }
+  });
+</script>
+
+  <!-- プログレスバー -->
+  <div class="progress-container">
+    <div class="progress-wrapper">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-info">
+        <span class="progress-page" id="currentPage">13</span>
+        <span class="progress-total">/ 20</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // プログレスバーの更新
+    function updateProgress() {
+      const progressPercentage = (13 / 20) * 100;
+      const progressFill = document.getElementById('progressFill');
+      const currentPageElement = document.getElementById('currentPage');
+      
+      progressFill.style.width = progressPercentage + '%';
+      currentPageElement.textContent = '13';
+      progressFill.style.background = '#003366';
+    }
+    
+    // 初期プログレス更新
+    document.addEventListener('DOMContentLoaded', function() {
+      updateProgress();
+      
+      // フォームの自動保存機能
+      const form = document.getElementById('surveyForm');
+      const formNumber = 12;
+      
+      if (form) {
+        function collectFormData() {
+          const formData = new FormData(form);
+          const data = {};
+          for (let [key, value] of formData.entries()) {
+            if (data[key]) {
+              if (Array.isArray(data[key])) {
+                data[key].push(value);
+              } else {
+                data[key] = [data[key], value];
+              }
+            } else {
+              data[key] = value;
+            }
+          }
+          const canvases = form.querySelectorAll('canvas');
+          canvases.forEach((canvas, index) => {
+            try {
+              const canvasId = canvas.id || `canvas_${index}`;
+              data[canvasId + '_image'] = canvas.toDataURL('image/png');
+            } catch (e) {
+              console.error('Canvas保存エラー:', e);
+            }
+          });
+          const allInputs = form.querySelectorAll('input, select, textarea');
+          allInputs.forEach(input => {
+            if (!input.name) return;
+            const isProcessed = data.hasOwnProperty(input.name);
+            if (input.type === 'checkbox') {
+              if (input.checked) {
+                if (!data[input.name]) data[input.name] = [];
+                if (Array.isArray(data[input.name])) {
+                  if (!data[input.name].includes(input.value)) data[input.name].push(input.value);
+                } else {
+                  data[input.name] = [data[input.name], input.value];
+                }
+              }
+            } else if (input.type === 'radio') {
+              if (input.checked && !isProcessed) data[input.name] = input.value;
+            } else {
+              if (!isProcessed && input.value) data[input.name] = input.value;
+            }
+          });
+          return data;
+        }
+        
+        form.addEventListener('input', function() {
+          const data = collectFormData();
+          localStorage.setItem(getFormStorageKey(formNumber), JSON.stringify(data));
+          console.log(`Form ${formNumber} データを自動保存しました`);
+        });
+        
+        form.addEventListener('change', function() {
+          const data = collectFormData();
+          localStorage.setItem(getFormStorageKey(formNumber), JSON.stringify(data));
+          console.log(`Form ${formNumber} データを自動保存しました`);
+        });
+        
+        const savedData = localStorage.getItem(getFormStorageKey(formNumber));
+        if (savedData) {
+          const data = JSON.parse(savedData);
+          Object.keys(data).forEach(key => {
+            const elements = form.elements[key];
+            if (elements) {
+              if (elements.length > 1) {
+                Array.from(elements).forEach(el => {
+                  if (el.type === 'checkbox' || el.type === 'radio') {
+                    if (Array.isArray(data[key])) {
+                      el.checked = data[key].includes(el.value);
+                    } else {
+                      el.checked = el.value === data[key];
+                    }
+                  }
+                });
+              } else if (elements.length === 1) {
+                const el = elements[0];
+                if (el.type === 'checkbox' || el.type === 'radio') {
+                  if (Array.isArray(data[key])) {
+                    el.checked = data[key].includes(el.value);
+                  } else {
+                    el.checked = el.value === data[key];
+                  }
+                } else {
+                  el.value = data[key] || '';
+                }
+              } else {
+                if (elements.type === 'checkbox' || elements.type === 'radio') {
+                  if (Array.isArray(data[key])) {
+                    elements.checked = data[key].includes(elements.value);
+                  } else {
+                    elements.checked = elements.value === data[key];
+                  }
+                } else {
+                  elements.value = data[key] || '';
+                }
+              }
+            }
+          });
+          console.log(`Form ${formNumber} の保存データを復元しました`);
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
+
+
+

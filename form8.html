@@ -1,0 +1,645 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>APOS-HC 調査票 - フォーム3</title>
+  <link rel="stylesheet" href="main.css">
+  <style>
+    /* セクション表示の修正 */
+    .section { 
+      display: block !important; 
+    }
+    
+    /* iPad用の追加スタイル */
+    @media screen and (min-width: 768px) {
+      body {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      
+      .container {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        padding: 25px;
+        margin: 15px 0;
+      }
+      
+      h1 {
+        font-size: 1.8em;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 15px;
+      }
+      
+      h2 {
+        font-size: 1.4em;
+        color: #34495e;
+        margin: 25px 0 15px 0;
+        padding: 10px 0;
+        border-left: 4px solid #3498db;
+        padding-left: 15px;
+        background: linear-gradient(90deg, #f8f9fa 0%, transparent 100%);
+      }
+      
+      fieldset {
+        border: 2px solid #e0e6ed;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        background: #fafbfc;
+        transition: all 0.3s ease;
+      }
+      
+      fieldset:hover {
+        border-color: #3498db;
+        box-shadow: 0 2px 10px rgba(52, 152, 219, 0.1);
+      }
+      
+      legend {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #2c3e50;
+        padding: 0 10px;
+        background: #fff;
+        border-radius: 6px;
+        border: 2px solid #3498db;
+      }
+      
+      label {
+        display: block;
+        margin: 10px 0 5px 0;
+        font-weight: 600;
+        color: #34495e;
+        font-size: 1em;
+      }
+      
+      input[type="text"], input[type="tel"], input[type="email"], 
+      input[type="number"], select, textarea {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 1em;
+        border: 2px solid #e0e6ed;
+        border-radius: 6px;
+        background: #fff;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+        margin-top: 5px;
+      }
+      
+      input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        transform: translateY(-2px);
+      }
+      
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+        font-family: inherit;
+      }
+      
+      .daily-rhythm-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      }
+      
+      .daily-rhythm-table th {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+        padding: 12px 10px;
+        font-size: 1em;
+        font-weight: bold;
+        text-align: center;
+      }
+      
+      .daily-rhythm-table td {
+        padding: 10px;
+        border-bottom: 1px solid #e8f4f8;
+        text-align: center;
+        vertical-align: middle;
+      }
+      
+      .daily-rhythm-table td:first-child {
+        background: #f8f9fa;
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 0.9em;
+        width: 150px;
+      }
+      
+      .daily-rhythm-table input {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 0.9em;
+        border: 2px solid #e0e6ed;
+        border-radius: 6px;
+        background: #fff;
+        transition: all 0.3s ease;
+        margin: 0;
+      }
+      
+      .daily-rhythm-table input:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+      }
+      
+      .daily-rhythm-table tr:hover {
+        background: #f8f9fa;
+      }
+      
+      .note {
+        font-size: 0.9em;
+        color: #7f8c8d;
+        margin-top: 10px;
+        padding: 10px;
+        background: #ecf0f1;
+        border-radius: 6px;
+        border-left: 3px solid #95a5a6;
+      }
+      
+      .nav-buttons {
+        margin-top: 25px;
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+      }
+      
+      .nav-buttons button {
+        padding: 12px 25px;
+        font-size: 1em;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-width: 120px;
+      }
+      
+      .nav-buttons button:first-child {
+        background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+        color: white;
+      }
+      
+      .nav-buttons button:last-child {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+      }
+      
+      .nav-buttons button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      }
+      
+      .nav-buttons button:active {
+        transform: translateY(-1px);
+      }
+      
+      /* プログレスバーのスタイル */
+      .progress-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid #e0e0e0;
+        padding: 20px;
+        z-index: 1000;
+      }
+      
+      .progress-wrapper {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      
+      .progress-bar {
+        width: 100%;
+        height: 6px;
+        background: #f0f0f0;
+        border-radius: 3px;
+        overflow: hidden;
+        margin-bottom: 15px;
+      }
+      
+      .progress-fill {
+        height: 100%;
+        background: #003366;
+        border-radius: 3px;
+        transition: width 0.5s ease;
+        width: 30%;
+      }
+      
+      .progress-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.1em;
+        color: #333;
+        font-weight: 500;
+      }
+      
+      .progress-page {
+        color: #003366;
+        font-weight: 600;
+      }
+      
+      .progress-total {
+        color: #999;
+      }
+      
+      /* フォームの下部に余白を追加（プログレスバーの分） */
+      body {
+        padding-bottom: 100px;
+      }
+    }
+    
+    /* タブレット用の追加調整 */
+    @media screen and (max-width: 1024px) and (min-width: 768px) {
+      .daily-rhythm-table td:first-child {
+        width: 140px;
+      }
+      
+      .daily-rhythm-table input {
+        font-size: 0.85em;
+        padding: 6px 8px;
+      }
+    }
+  </style>
+  <script src="survey-common.js"></script>
+</head>
+<body>
+
+<div class="container">
+<h1>APOS-HC 調査票</h1>
+<form id="surveyForm">
+
+<div class="section" id="section-care-burden">
+  <h2>Ⅰ　介護負担の状況・介護生活への影響</h2>
+  <fieldset>
+    <fieldset>
+      <legend>1. 排尿（過去7日間）</legend>
+      <label for="urination_status">1. 尿の状態</label>
+      <select id="urination_status" name="urination_status" required>
+        <option value="">選択してください</option>
+        <option value="normal">問題なし</option>
+        <option value="abnormal">問題あり（血が混じっている・濁っている・フワフワ浮いているものがある・強い尿臭あり）</option>
+      </select>
+      <br>
+      <label for="urination">2. 尿意</label>
+      <select id="urination" name="urination" required>
+        <option value="">選択してください</option>
+        <option value="yes">尿意がある</option>
+        <option value="no">尿意がない</option>
+      </select>
+      <br>
+      <label for="urination_frequency">3. 尿の回数</label>
+      <select id="urination_frequency" name="urination_frequency" required>
+        <option value="">選択してください</option>
+        <option value="4-7">1日4〜7回</option>
+        <option value="1-2">1日1〜2回</option>
+        <option value="8plus_day">昼間8回以上・夜間3回以上</option>
+        <option value="none">排尿がない</option>
+      </select>
+      <br>
+      <label for="urination_control">4. 排尿のコントロール</label>
+      <select id="urination_control" name="urination_control" required>
+        <option value="">選択してください</option>
+        <option value="0">自分でコントロールでき、排尿するときに違和感はない</option>
+        <option value="1">くしゃみ・咳で漏れる、トイレに間に合わない、下腹部に違和感がある</option>
+        <option value="2">いつもお腹に力を入れないと出している、残尿感がある、尿意が乏しい</option>
+        <option value="3">昼夜を問わず失禁する、排尿痛がある、下腹部が痛い</option>
+      </select>
+    </fieldset>
+    <fieldset>
+      <legend>2.排便（過去7日間）</legend>
+      <label for="defecation_status">1. 便の状態</label>
+      <select id="defecation_status" name="defecation_status" required>
+        <option value="">選択してください</option>
+        <option value="normal">問題なし（軟らかいソーセージ状、軟らかいが形がはっきりした半固形状の便）</option>
+        <option value="abnormal">問題あり【a.コロコロ便】</option>
+        <option value="abnormal">問題あり【b.凸凹した硬い便】</option>
+        <option value="abnormal">問題あり【c.軟らかすぎていない状態】</option>
+        <option value="abnormal">問題あり【d.水様便】</option>
+        <option value="abnormal">問題あり【e.色がついている便（あざやかな赤色、白色、黒色、鉛色、黄色、赤褐色）】</option>
+    </select>
+      <br>
+      <label for="defecation_frequency">2. 排便の周期</label>
+      <select id="defecation_frequency" name="defecation_frequency" required>
+        <option value="">選択してください</option>
+        <option value="0">苦痛の無い排便周期で普通の排便がある</option>
+        <option value="1">排便周期がなく　お店がまでもよい</option>
+        <option value="2">決まった時間（食後）に排便訓練をしていないので便秘となっている</option>
+      </select>
+      <br>
+      <label for="defecation_control">3. 排便のコントロール</label>
+      <select id="defecation_control" name="defecation_control" required>
+        <option value="">選択してください</option>
+        <option value="0">自分でコントロールできる</option>
+        <option value="1">通常は便失禁しない（まれにある）</option>
+        <option value="2">月に何回か失禁するが毎週ではない</option>
+        <option value="3">週に1回以上失禁するが、若干コントロールが保たれている</option>
+        <option value="4">完全な失禁状態（コントロールできない）で汚れてしまう</option>
+      </select>
+      <br>
+      <label for="defecation_method">4. 排便の調整方法</label>
+      <select id="defecation_method" name="defecation_method" required>
+        <option value="">選択してください</option>
+        <option value="0">機能の多い食事（食物繊維と発酵食品）・水分、腸の刺激（運動・マッサージ）、排便訓練で調整できている</option>
+        <option value="1">食事や水分・腸の刺激、排便訓練など、時々の下剤で調整できている</option>
+        <option value="2">下剤、敵便、浣腸等で主に調整。食事、運動、排便訓練はたまに行う</option>
+        <option value="3">一貫して下剤・敵便・浣腸で調整。食事、水分、運動、排便訓練はほとんど行う</option>
+        <option value="4">多様の下剤使用、食事、水分、運動等の刺激・調整が全くない</option>
+      </select>
+    </fieldset>
+    <fieldset>
+      <legend>3.排泄の仕方</legend>
+      <label for="excretion_method">介助方法</label>
+      <div id="excretion_method_group" style="display: flex; flex-direction: column; gap: 4px;">
+        <label><input type="checkbox" name="excretion_method[]" value="A" required> A. 自力でトイレ</label>
+        <label><input type="checkbox" name="excretion_method[]" value="B"> B. 介助でトイレ</label>
+        <label><input type="checkbox" name="excretion_method[]" value="C"> C. ポータブルトイレ</label>
+        <label><input type="checkbox" name="excretion_method[]" value="D"> D. 夜のみおむつ（失禁パット・リハビリパンツ）</label>
+        <label><input type="checkbox" name="excretion_method[]" value="E"> E. 日中おむつ（失禁パット・リハビリパンツ）</label>
+        <label><input type="checkbox" name="excretion_method[]" value="F"> F. 差し込み便器・尿器</label>
+      </div>
+    </fieldset>
+
+
+
+    <div class="section" id="section-reform-tools-equipment">
+      <h2>Ⅱ　皮膚・爪のケア</h2>
+      <fieldset>
+        <legend>1. 清潔・整容</legend>
+        <label for="skin_nail_care">状況を選択してください</label>
+        <select name="skin_nail_care" id="skin_nail_care" required>
+          <option value="">選択してください</option>
+          <option value="0">0. 定期的に入浴（シャワー浴）・保清・シャンプー・髭剃・整髪・更衣ができ、清潔に保たれている</option>
+          <option value="1">1. 時折、入浴（シャワー浴）・保清・シャンプー・髭剃・整髪・更衣ができるが、肌に汚れが目立つ</option>
+          <option value="2">2. たまに、入浴（シャワー浴）・保清・シャンプー・髭剃・整髪・更衣ができるが、汚れが目立つ</option>
+          <option value="3">3. めったに、入浴（シャワー浴）・保清・シャンプー・髭剃・整髪・更衣をせず、汚れている</option>
+        </select>
+      </fieldset>
+
+      <fieldset>
+        <legend>2. 皮膚・爪の状態</legend>
+        <label for="bedsore_wound">状況を選択してください</label>
+        <select name="bedsore_wound" id="bedsore_wound" required>
+          <option value="">選択してください</option>
+          <option value="0">0. 全身の皮膚や爪の汚れ、発赤、湿疹、水疱、かゆみ、発汗、悪臭、ドライスキンなくきれいである</option>
+          <option value="1">1. 全身の皮膚や爪の汚れ、かゆみ、発汗、水疱、赤斑、悪臭、乾、ドライスキンなどがある</option>
+          <option value="2">2. 足の色の変化、冷感、足背動脈や後脛骨動脈の拍知、痛みや知覚障がいがある</option>
+          <option value="3">3. 爪白癬、まき爪、肥厚爪（肥厚爪甲）、脚趾、壊疽、外反母趾、内反小趾、</option>
+        </select>
+      </fieldset>
+
+      <fieldset>
+        <legend>3. 創傷</legend>
+        <label for="skin_condition">状態を選択してください</label>
+        <select name="skin_condition" id="skin_condition" required>
+          <option value="">選択してください</option>
+          <option value="0">0. 観察できる傷はない</option>
+          <option value="1">1. 傷が治るために盛り上がった肉のかたまりができている</option>
+          <option value="2">2. 盛り上がった新しい肉のかたまりができはじめたばかり</option>
+          <option value="3">3. 治療はしていない、放置状態である</option>
+        </select>
+      </fieldset>
+
+
+
+    <div class="nav-buttons">
+      <button type="button" onclick="location.href='form7.html'">← 戻る</button>
+      <button type="button" onclick="location.href='form9.html'">次へ →</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  // 高額費用の利用：理由欄表示
+  function toggleExpensiveCostDetail() {
+    const val = document.getElementById('expensive_cost_usage').value;
+    const reasonDiv = document.getElementById('expensive_cost_reason');
+    if (val === '2a' || val === '2b') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費医療の利用：理由欄表示
+  function togglePublicMedicalReason() {
+    const val = document.getElementById('public_medical_usage').value;
+    const reasonDiv = document.getElementById('public_medical_reason');
+    if (val === '2') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費医療の詳細：病名入力欄表示
+  function toggleMedicalDiseaseInput() {
+    const val = document.getElementById('public_medical_detail').value;
+    const inputDiv = document.getElementById('medical_disease_input');
+    if (val === '5' || val === '3') {
+      inputDiv.style.display = 'block';
+    } else {
+      inputDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費制度の利用：理由欄表示
+  function togglePublicSystemReason() {
+    const val = document.getElementById('public_system_usage').value;
+    const reasonDiv = document.getElementById('public_system_reason');
+    if (val === '2') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費制度の詳細：詳細入力欄表示
+  function toggleSystemDetailInput() {
+    const val = document.getElementById('public_system_detail').value;
+    const inputDiv = document.getElementById('system_detail_input');
+    if (val === '1' || val === '2') {
+      inputDiv.style.display = 'block';
+    } else {
+      inputDiv.style.display = 'none';
+    }
+  }
+
+  // フォームの自動保存機能
+  const form = document.getElementById('surveyForm');
+  form.addEventListener('input', () => {
+    const data = Object.fromEntries(new FormData(form));
+    localStorage.setItem('surveyData_form2', JSON.stringify(data));
+  });
+
+  // 保存されたデータの復元
+  window.addEventListener('load', () => {
+    const saved = localStorage.getItem('surveyData_form2');
+    if (saved) {
+      const data = JSON.parse(saved);
+      Object.keys(data).forEach(key => {
+        const el = form.elements[key];
+        if (el) {
+          el.value = data[key];
+        }
+      });
+    }
+  });
+</script>
+
+  <!-- プログレスバー -->
+  <div class="progress-container">
+    <div class="progress-wrapper">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-info">
+        <span class="progress-page" id="currentPage">6</span>
+        <span class="progress-total">/ 20</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // プログレスバーの更新
+    function updateProgress() {
+      const progressPercentage = (6 / 20) * 100;
+      const progressFill = document.getElementById('progressFill');
+      const currentPageElement = document.getElementById('currentPage');
+      
+      progressFill.style.width = progressPercentage + '%';
+      currentPageElement.textContent = '6';
+      progressFill.style.background = '#003366';
+    }
+    
+    // 初期プログレス更新
+    document.addEventListener('DOMContentLoaded', function() {
+      updateProgress();
+      
+      // フォームの自動保存機能
+      const form = document.getElementById('surveyForm');
+      const formNumber = 8;
+      
+      if (form) {
+        function collectFormData() {
+          const formData = new FormData(form);
+          const data = {};
+          for (let [key, value] of formData.entries()) {
+            if (data[key]) {
+              if (Array.isArray(data[key])) {
+                data[key].push(value);
+              } else {
+                data[key] = [data[key], value];
+              }
+            } else {
+              data[key] = value;
+            }
+          }
+          const canvases = form.querySelectorAll('canvas');
+          canvases.forEach((canvas, index) => {
+            try {
+              const canvasId = canvas.id || `canvas_${index}`;
+              data[canvasId + '_image'] = canvas.toDataURL('image/png');
+            } catch (e) {
+              console.error('Canvas保存エラー:', e);
+            }
+          });
+          const allInputs = form.querySelectorAll('input, select, textarea');
+          allInputs.forEach(input => {
+            if (!input.name) return;
+            const isProcessed = data.hasOwnProperty(input.name);
+            if (input.type === 'checkbox') {
+              if (input.checked) {
+                if (!data[input.name]) data[input.name] = [];
+                if (Array.isArray(data[input.name])) {
+                  if (!data[input.name].includes(input.value)) data[input.name].push(input.value);
+                } else {
+                  data[input.name] = [data[input.name], input.value];
+                }
+              }
+            } else if (input.type === 'radio') {
+              if (input.checked && !isProcessed) data[input.name] = input.value;
+            } else {
+              if (!isProcessed && input.value) data[input.name] = input.value;
+            }
+          });
+          return data;
+        }
+        
+        form.addEventListener('input', function() {
+          const data = collectFormData();
+          localStorage.setItem(getFormStorageKey(formNumber), JSON.stringify(data));
+          console.log(`Form ${formNumber} データを自動保存しました`);
+        });
+        
+        form.addEventListener('change', function() {
+          const data = collectFormData();
+          localStorage.setItem(getFormStorageKey(formNumber), JSON.stringify(data));
+          console.log(`Form ${formNumber} データを自動保存しました`);
+        });
+        
+        const savedData = localStorage.getItem(getFormStorageKey(formNumber));
+        if (savedData) {
+          const data = JSON.parse(savedData);
+          Object.keys(data).forEach(key => {
+            const elements = form.elements[key];
+            if (elements) {
+              if (elements.length > 1) {
+                Array.from(elements).forEach(el => {
+                  if (el.type === 'checkbox' || el.type === 'radio') {
+                    if (Array.isArray(data[key])) {
+                      el.checked = data[key].includes(el.value);
+                    } else {
+                      el.checked = el.value === data[key];
+                    }
+                  }
+                });
+              } else if (elements.length === 1) {
+                const el = elements[0];
+                if (el.type === 'checkbox' || el.type === 'radio') {
+                  if (Array.isArray(data[key])) {
+                    el.checked = data[key].includes(el.value);
+                  } else {
+                    el.checked = el.value === data[key];
+                  }
+                } else {
+                  el.value = data[key] || '';
+                }
+              } else {
+                if (elements.type === 'checkbox' || elements.type === 'radio') {
+                  if (Array.isArray(data[key])) {
+                    elements.checked = data[key].includes(elements.value);
+                  } else {
+                    elements.checked = elements.value === data[key];
+                  }
+                } else {
+                  elements.value = data[key] || '';
+                }
+              }
+            }
+          });
+          console.log(`Form ${formNumber} の保存データを復元しました`);
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,927 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>APOS-HC 調査票 - フォーム3</title>
+  <link rel="stylesheet" href="main.css">
+  <style>
+    /* セクション表示の修正 */
+    .section { 
+      display: block !important; 
+    }
+    
+    /* iPad用の追加スタイル */
+    @media screen and (min-width: 768px) {
+      body {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      
+      .container {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        padding: 25px;
+        margin: 15px 0;
+      }
+      
+      h1 {
+        font-size: 1.8em;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 15px;
+      }
+      
+      h2 {
+        font-size: 1.4em;
+        color: #34495e;
+        margin: 25px 0 15px 0;
+        padding: 10px 0;
+        border-left: 4px solid #3498db;
+        padding-left: 15px;
+        background: linear-gradient(90deg, #f8f9fa 0%, transparent 100%);
+      }
+      
+      fieldset {
+        border: 2px solid #e0e6ed;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        background: #fafbfc;
+        transition: all 0.3s ease;
+      }
+      
+      fieldset:hover {
+        border-color: #3498db;
+        box-shadow: 0 2px 10px rgba(52, 152, 219, 0.1);
+      }
+      
+      legend {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #2c3e50;
+        padding: 0 10px;
+        background: #fff;
+        border-radius: 6px;
+        border: 2px solid #3498db;
+      }
+      
+      label {
+        display: block;
+        margin: 10px 0 5px 0;
+        font-weight: 600;
+        color: #34495e;
+        font-size: 1em;
+      }
+      
+      input[type="text"], input[type="tel"], input[type="email"], 
+      input[type="number"], select, textarea {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 1em;
+        border: 2px solid #e0e6ed;
+        border-radius: 6px;
+        background: #fff;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+        margin-top: 5px;
+      }
+      
+      input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        transform: translateY(-2px);
+      }
+      
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+        font-family: inherit;
+      }
+      
+      .daily-rhythm-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      }
+      
+      .daily-rhythm-table th {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+        padding: 12px 10px;
+        font-size: 1em;
+        font-weight: bold;
+        text-align: center;
+      }
+      
+      .daily-rhythm-table td {
+        padding: 10px;
+        border-bottom: 1px solid #e8f4f8;
+        text-align: center;
+        vertical-align: middle;
+      }
+      
+      .daily-rhythm-table td:first-child {
+        background: #f8f9fa;
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 0.9em;
+        width: 150px;
+      }
+      
+      .daily-rhythm-table input {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 0.9em;
+        border: 2px solid #e0e6ed;
+        border-radius: 6px;
+        background: #fff;
+        transition: all 0.3s ease;
+        margin: 0;
+      }
+      
+      .daily-rhythm-table input:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+      }
+      
+      .daily-rhythm-table tr:hover {
+        background: #f8f9fa;
+      }
+      
+      .note {
+        font-size: 0.9em;
+        color: #7f8c8d;
+        margin-top: 10px;
+        padding: 10px;
+        background: #ecf0f1;
+        border-radius: 6px;
+        border-left: 3px solid #95a5a6;
+      }
+      
+      .nav-buttons {
+        margin-top: 25px;
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+      }
+      
+      .nav-buttons button {
+        padding: 12px 25px;
+        font-size: 1em;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-width: 120px;
+      }
+      
+      .nav-buttons button:first-child {
+        background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+        color: white;
+      }
+      
+      .nav-buttons button:last-child {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+      }
+      
+      .nav-buttons button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      }
+      
+      .nav-buttons button:active {
+        transform: translateY(-1px);
+      }
+      
+      /* プログレスバーのスタイル */
+      .progress-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid #e0e0e0;
+        padding: 20px;
+        z-index: 1000;
+      }
+      
+      .progress-wrapper {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      
+      .progress-bar {
+        width: 100%;
+        height: 6px;
+        background: #f0f0f0;
+        border-radius: 3px;
+        overflow: hidden;
+        margin-bottom: 15px;
+      }
+      
+      .progress-fill {
+        height: 100%;
+        background: #003366;
+        border-radius: 3px;
+        transition: width 0.5s ease;
+        width: 100%;
+      }
+      
+      .progress-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.1em;
+        color: #333;
+        font-weight: 500;
+      }
+      
+      .progress-page {
+        color: #003366;
+        font-weight: 600;
+      }
+      
+      .progress-total {
+        color: #999;
+      }
+      
+      /* フォームの下部に余白を追加（プログレスバーの分） */
+      body {
+        padding-bottom: 100px;
+      }
+    }
+    
+    /* タブレット用の追加調整 */
+    @media screen and (max-width: 1024px) and (min-width: 768px) {
+      .daily-rhythm-table td:first-child {
+        width: 140px;
+      }
+      
+      .daily-rhythm-table input {
+        font-size: 0.85em;
+        padding: 6px 8px;
+      }
+    }
+  </style>
+  <script src="survey-common.js"></script>
+</head>
+<body>
+
+<div class="container">
+<h1>APOS-HC 調査票</h1>
+<form id="surveyForm">
+<div class="section" id="section-lifestyle-habits">
+    <h2>ⅩⅢ. リスク管理</h2>
+      <div style="margin-bottom: 20px;">
+        <fieldset style="border: 2px solid #3498db; border-radius: 8px; padding: 20px; margin-bottom: 24px; background: #f8f9fa;">
+          <legend style="font-weight: bold; font-size: 1.2em; padding: 0 12px; color: #2c3e50; background: #3498db; color: white; border-radius: 4px;">ⅩⅢ リスク管理</legend>
+          <div style="margin-bottom: 15px;">
+            <span style="font-weight: bold; background: #e8f4f8; padding: 4px 12px; border-radius: 4px; color: #2c3e50;">リスク管理</span>
+        </div>
+
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 15px; background: white; border-radius: 6px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+            <!-- 項目1: 転倒・転落 -->
+            <tr>
+              <td style="width: 40px; vertical-align: top; border: 1px solid #ddd; padding: 12px; background: #f8f9fa; font-weight: bold; text-align: center;">1</td>
+              <td style="border: 1px solid #ddd; padding: 12px;">
+                <div style="font-weight: bold; margin-bottom: 8px; color: #2c3e50;">① 転倒・転落</div>
+                <div style="margin-bottom: 8px;">
+                  <label style="margin-right: 20px;"><input type="radio" name="fall" value="0" style="margin-right: 5px;"> 0. なし</label>
+                  <label><input type="radio" name="fall" value="1" style="margin-right: 5px;" onchange="toggleFallDetail()"> 1. あり（<span style="font-size:0.9em;">回・過去1年間</span>）</label>
+                </div>
+                <div id="fall_detail" style="display: none; margin-top: 8px; padding: 8px; background: #e8f4f8; border-radius: 4px;">
+                  <input type="number" name="fall_count" placeholder="回数" style="width: 60px; margin-right: 8px; padding: 4px; border: 1px solid #ccc; border-radius: 3px;">
+                  <span>回（過去1年間）</span>
+                </div>
+                <div style="margin-top: 8px;">
+                  <input type="text" name="fall_detail" placeholder="転倒日とその理由、場所" style="width: 95%; padding: 6px; border: 1px solid #ccc; border-radius: 3px;">
+                </div>
+                   </td>
+                 </tr>
+            
+            <!-- ②転倒の不安 -->
+            <tr>
+              <td style="vertical-align: top; border: 1px solid #ddd; padding: 12px; background: #f8f9fa;"></td>
+              <td style="border: 1px solid #ddd; padding: 12px;">
+                <div style="font-weight: bold; margin-bottom: 8px; color: #2c3e50;">② 転倒の不安</div>
+                <label style="margin-right: 20px;"><input type="radio" name="fall_anxiety" value="0" style="margin-right: 5px;"> 0. なし</label>
+                <label><input type="radio" name="fall_anxiety" value="1" style="margin-right: 5px;"> 1. あり</label>
+                <label>
+                  <input type="radio" name="fall_anxiety" value="2" style="margin-right: 5px;" onclick="document.getElementById('anxiety_reason_checkbox_group').style.display = 'block';">
+                  2. 不安ありで閉じこもっている
+                </label>
+                <div id="anxiety_reason_checkbox_group" style="display: none; margin-left: 16px; margin-top: 8px;">
+                  <label style="display:block; margin-bottom:4px;">
+                    <input type="checkbox" name="anxiety_reason[]" value="aging_muscle" style="margin-right: 5px;">
+                    内的要因:ａ.加齢による筋力・運動速度・反射・平行等機能の低下
+                  </label>
+                  <label style="display:block; margin-bottom:4px;">
+                    <input type="checkbox" name="anxiety_reason[]" value="disease" style="margin-right: 5px;">
+                    内的要因:ｂ.疾患の影響（パーキン・てんかん発作・小脳障害・脳卒中後遺症・骨折・脱臼・関節リュウマチ・白内障・緑内障、巻き爪、外反母趾、下肢切断等）
+                  </label>
+                  <label style="display:block; margin-bottom:4px;">
+                    <input type="checkbox" name="anxiety_reason[]" value="medicine" style="margin-right: 5px;">
+                    内的要因:ｃ.薬物（眠剤・向精神薬）
+                  </label>
+                  <label style="display:block; margin-bottom:4px;">
+                    <input type="checkbox" name="anxiety_reason[]" value="internal_other" style="margin-right: 5px;" id="internal_other_checkbox">
+                    内的要因:ｄ.その他
+                    <input type="text" id="internal_other_text" name="internal_other_text" placeholder="具体的にご記入ください" style="display:none; margin-left:10px; padding:4px; border:1px solid #ccc; border-radius:3px;">
+                  </label>
+                  <label style="display:block; margin-bottom:4px;">
+                    <input type="checkbox" name="anxiety_reason[]" value="environment_external" style="margin-right: 5px;">
+                    外的要因：ｂ.段差、滑りやすい床、履物、敷物、コード類、照明、踏み台等
+                  </label>
+                </div>
+                <script>
+                  // "内的要因:ｄ.その他" 押したら記述欄を表示
+                  document.getElementById('internal_other_checkbox').addEventListener('change', function() {
+                    document.getElementById('internal_other_text').style.display = this.checked ? 'inline-block' : 'none';
+                    if (!this.checked) {
+                      document.getElementById('internal_other_text').value = '';
+                    }
+                  });
+                  // 「2.不安ありで閉じこもっている」以外が選ばれたらチェックボックスグループ非表示・リセット
+                  (function() {
+                    var radios = document.getElementsByName('fall_anxiety');
+                    for (var i = 0; i < radios.length; i++) {
+                      radios[i].addEventListener('change', function() {
+                        var group = document.getElementById('anxiety_reason_checkbox_group');
+                        if (this.value !== '2') {
+                          group.style.display = 'none';
+                          // チェックボックスすべて外す
+                          var checkboxes = group.querySelectorAll('input[type="checkbox"]');
+                          for (var j = 0; j < checkboxes.length; j++) {
+                            checkboxes[j].checked = false;
+                          }
+                          document.getElementById('internal_other_text').style.display = 'none';
+                          document.getElementById('internal_other_text').value = '';
+                        }
+                      });
+                    }
+                  })();
+                </script>
+            
+
+            <!-- 項目2: 骨折・その可能性 -->
+            <tr>
+              <td style="vertical-align: top; border: 1px solid #ddd; padding: 12px; background: #f8f9fa; font-weight: bold; text-align: center;">2</td>
+              <td style="border: 1px solid #ddd; padding: 12px;">
+                <div style="font-weight: bold; margin-bottom: 8px; color: #2c3e50;">骨折・その可能性</div>
+                <div style="margin-bottom: 8px;">
+                  <label style="margin-right: 20px;"><input type="radio" name="fracture" value="0" style="margin-right: 5px;"> 0. なし</label>
+                  <label><input type="radio" name="fracture" value="1" style="margin-right: 5px;" onchange="toggleFractureDetail()"> 1. あり</label>
+           </div>
+                <div id="fracture_detail" style="display: none; margin-top: 8px; padding: 8px; background: #e8f4f8; border-radius: 4px;">
+                  <div style="margin-bottom: 8px;">
+                    <label style="margin-right: 15px;"><input type="radio" name="fracture_cause" value="fall" style="margin-right: 5px;"> ①転倒による</label>
+                    <label><input type="radio" name="fracture_cause" value="other" style="margin-right: 5px;"> ②非転倒性</label>
+           </div>
+         </div>
+
+         
+                <!-- 骨折の可能性に関する詳細 -->
+                <div style="margin-top: 12px; padding: 12px; background: #f0f8ff; border-radius: 4px; border-left: 3px solid #3498db;">
+                  <div style="font-weight: bold; margin-bottom: 8px; color: #2c3e50;"></div>
+                  <div style="margin-bottom: 6px;">
+                    <input type="checkbox" name="back_curved" style="margin-right: 8px;">
+                    <span style="font-weight: 600;">a. 40歳以降の過去の骨折回数</span>
+                    <input type="number" name="fracture_count" min="0" style="width: 60px; margin: 0 5px; padding: 4px; border: 1px solid #ccc; border-radius: 3px;"> 回
+                    <span style="margin-left: 8px;">（部位:</span>
+                    <input type="text" name="fracture_location" placeholder="部位を入力" style="width: 120px; margin: 0 5px; padding: 4px; border: 1px solid #ccc; border-radius: 3px;">
+                    <span>)</span>
+                   </div>
+                  <div style="margin-bottom: 6px;">
+                    <input type="checkbox" name="back_curved" style="margin-right: 8px;">
+                    <span style="font-weight: 600;">b. 25歳以降の身長に比べ低くなったか</span>
+                    <span style="margin: 0 5px;">（マイナス</span>
+                    <input type="number" name="height_decrease" min="0" style="width: 60px; padding: 4px; border: 1px solid #ccc; border-radius: 3px;">
+                    <span style="margin-left: 5px;">cm）</span>
+               </div>
+                  <div style="margin-bottom: 4px;">
+                    <label style="display: flex; align-items: center;">
+                      <input type="checkbox" name="back_curved" style="margin-right: 8px;">
+                      <span style="font-weight: 600; color: #000;">c. 背中や腰が曲がってきた</span>
+                 </label>
+               </div>
+                  <div>
+                    <label style="display: flex; align-items: center;">
+                      <input type="checkbox" name="back_pain" style="margin-right: 8px;">
+                      <span style="font-weight: 600; color: #000;">d. 背中や腰に痛みを感じる</span>
+                 </label>
+               </div>
+                   </div>
+              </td>
+            </tr>
+            
+            <!-- 項目3: 薬物乱用/向精神薬過剰服用・投与 -->
+            <tr>
+              <td style="vertical-align: top; border: 1px solid #ddd; padding: 12px; background: #f8f9fa; font-weight: bold; text-align: center;">3</td>
+              <td style="border: 1px solid #ddd; padding: 12px;">
+                <div style="font-weight: bold; margin-bottom: 8px; color: #2c3e50;">薬物乱用/向精神薬過剰服用</div>
+                <div style="margin-bottom: 8px;">
+                  <label style="margin-right: 20px;"><input type="radio" name="drug_abuse" value="0" style="margin-right: 5px;"> 0. なし</label>
+                  <label><input type="radio" name="drug_abuse" value="1" style="margin-right: 5px;" onchange="toggleDrugAbuseDetail()"> 1. あり</label>
+               </div>
+                <div id="drug_abuse_detail" style="display: none; margin-top: 8px; padding: 8px; background: #e8f4f8; border-radius: 4px;">
+                  <label style="margin-right: 15px;"><input type="radio" name="drug_abuse_type" value="a" style="margin-right: 5px;"> a.過去にあり</label>
+                  <label style="margin-right: 15px;"><input type="radio" name="drug_abuse_type" value="b" style="margin-right: 5px;"> ｂ.現在兆候あり</label>
+                  <label><input type="radio" name="drug_abuse_type" value="c" style="margin-right: 5px;"> ｃ.緊急対応状態</label>
+                   </div>
+              </td>
+            </tr>
+            
+            <!-- 項目4: 食事丸呑み・窒息 -->
+            <tr>
+              <td style="vertical-align: top; border: 1px solid #ddd; padding: 12px; background: #f8f9fa; font-weight: bold; text-align: center;">4</td>
+              <td style="border: 1px solid #ddd; padding: 12px;">
+                <div style="font-weight: bold; margin-bottom: 8px; color: #2c3e50;">体温調節機能（温度）･皮膚感覚の低下</div>
+                <div style="margin-bottom: 8px;">
+                  <label style="margin-right: 20px;"><input type="radio" name="choking_risk" value="0" style="margin-right: 5px;"> 0. なし</label>
+                  <label><input type="radio" name="choking_risk" value="1" style="margin-right: 5px;" onchange="toggleChokingDetail()"> 1. あり</label>
+               </div>
+                <div id="choking_detail" style="display: none; margin-top: 8px; padding: 8px; background: #e8f4f8; border-radius: 4px;">
+                    <label style="margin-right: 15px;"><input type="radio" name="drug_abuse_type" value="a" style="margin-right: 5px;"> a.過去にあり</label>
+                    <label style="margin-right: 15px;"><input type="radio" name="drug_abuse_type" value="b" style="margin-right: 5px;"> ｂ.現在兆候あり</label>
+                    <label><input type="radio" name="drug_abuse_type" value="c" style="margin-right: 5px;"> ｃ.緊急対応状態</label>
+                   </div>
+                </td>
+            </tr>
+            
+            <!-- 項目5: 虐待総合評価 -->
+            <tr>
+              <td style="vertical-align: top; border: 1px solid #ddd; padding: 12px; background: #f8f9fa; font-weight: bold; text-align: center;">5</td>
+              <td style="border: 1px solid #ddd; padding: 12px;">
+                <div style="font-weight: bold; margin-bottom: 8px; color: #2c3e50;">虐待総合評価</div>
+                <div style="margin-bottom: 8px;">
+                  <label style="margin-right: 20px;"><input type="radio" name="abuse_evaluation" value="0" style="margin-right: 5px;"> 0. なし</label>
+                  <label><input type="radio" name="abuse_evaluation" value="1" style="margin-right: 5px;"> 1. あり</label>
+               </div>
+                <div id="abuse_detail" style="display: none; margin-top: 8px; padding: 8px; background: #e8f4f8; border-radius: 4px;">
+                    <label style="margin-right: 15px;"><input type="radio" name="abuse_detail_type" value="a" style="margin-right: 5px;"> a.過去にあり</label>
+                    <label style="margin-right: 15px;"><input type="radio" name="abuse_detail_type" value="b" style="margin-right: 5px;"> ｂ.現在兆候あり</label>
+                    <label><input type="radio" name="abuse_detail_type" value="c" style="margin-right: 5px;"> ｃ.緊急対応状態</label>
+                   </div>
+                </td>
+            </tr>
+
+                <!-- 項目6: 孤独死 -->
+                <tr>
+                    <td style="vertical-align: top; border: 1px solid #ddd; padding: 12px; background: #f8f9fa; font-weight: bold; text-align: center;">6</td>
+                    <td style="border: 1px solid #ddd; padding: 12px;">
+                      <div style="font-weight: bold; margin-bottom: 8px; color: #2c3e50;">孤独死</div>
+                      <div style="margin-bottom: 8px;">
+                        <label style="margin-right: 20px;"><input type="radio" name="kodokushi_feeling" value="0" style="margin-right: 5px;"> 0. 全く感じない</label>
+                        <label style="margin-right: 20px;"><input type="radio" name="kodokushi_feeling" value="1" style="margin-right: 5px;"> 1. あまり感じない</label>
+                        <label style="margin-right: 20px;"><input type="radio" name="kodokushi_feeling" value="2" style="margin-right: 5px;"> 2. 感じる</label>
+                        <label><input type="radio" name="kodokushi_feeling" value="3" style="margin-right: 5px;"> 3. とても感じる</label>
+                      </div>
+                    </td>
+                </tr>
+
+                <!-- 項目7: 火や水道の不始末 -->
+            <tr>
+                <td style="vertical-align: top; border: 1px solid #ddd; padding: 12px; background: #f8f9fa; font-weight: bold; text-align: center;">7</td>
+                <td style="border: 1px solid #ddd; padding: 12px;">
+                  <div style="font-weight: bold; margin-bottom: 8px; color: #2c3e50;">火や水道の不始末</div>
+                  <div style="margin-bottom: 8px;">
+                    <label style="margin-right: 20px;"><input type="radio" name="fire_water_negligence" value="0" style="margin-right: 5px;"> 0. なし</label>
+                    <label>
+                      <input type="radio" name="fire_water_negligence" value="1" style="margin-right: 5px;"> 1. あり
+                    </label>
+                  </div>
+                  <div id="fire_water_detail" style="display: none; margin-top: 8px; padding: 8px; background: #e8f4f8; border-radius: 4px;">
+                    <label style="margin-right: 15px;"><input type="radio" name="fire_water_detail_type" value="a" style="margin-right: 5px;"> a.過去にあり</label>
+                    <label style="margin-right: 15px;"><input type="radio" name="fire_water_detail_type" value="b" style="margin-right: 5px;"> ｂ.現在兆候あり</label>
+                    <label><input type="radio" name="fire_water_detail_type" value="c" style="margin-right: 5px;"> ｃ.緊急対応状態</label>
+                  </div>
+                  </td>
+              </tr>
+
+          </table>
+        </fieldset>
+
+    </table>
+</fieldset>
+      <div class="nav-buttons">
+        <button type="button" onclick="location.href='form18.html'">← 戻る</button>
+        <button type="button" onclick="location.href='form20.html'">次へ →</button>
+      </div>
+    </form>
+  </div>
+  
+  <script>
+  // 転倒・転落の詳細表示
+  function toggleFallDetail() {
+    var radios = document.querySelectorAll('input[name="fall"]');
+    var detail = document.getElementById('fall_detail');
+    var isChecked = false;
+    radios.forEach(function(radio) {
+      if (radio.checked && radio.value === "1") {
+        isChecked = true;
+      }
+    });
+    detail.style.display = isChecked ? "block" : "none";
+  }
+
+  // 骨折・その可能性の詳細表示
+  function toggleFractureDetail() {
+    var radios = document.querySelectorAll('input[name="fracture"]');
+    var detail = document.getElementById('fracture_detail');
+    var isChecked = false;
+    radios.forEach(function(radio) {
+      if (radio.checked && radio.value === "1") {
+        isChecked = true;
+      }
+    });
+    detail.style.display = isChecked ? "block" : "none";
+  }
+
+  // 薬物乱用の詳細表示
+  function toggleDrugAbuseDetail() {
+    var radios = document.querySelectorAll('input[name="drug_abuse"]');
+    var detail = document.getElementById('drug_abuse_detail');
+    var isChecked = false;
+    radios.forEach(function(radio) {
+      if (radio.checked && radio.value === "1") {
+        isChecked = true;
+      }
+    });
+    detail.style.display = isChecked ? "block" : "none";
+  }
+
+  // 食事丸呑み・窒息の詳細表示
+  function toggleChokingDetail() {
+    var radios = document.querySelectorAll('input[name="choking_risk"]');
+    var detail = document.getElementById('choking_detail');
+    var isChecked = false;
+    radios.forEach(function(radio) {
+      if (radio.checked && radio.value === "1") {
+        isChecked = true;
+      }
+    });
+    detail.style.display = isChecked ? "block" : "none";
+  }
+
+  // 火や水道の不始末の詳細表示
+  function toggleFireWaterDetail() {
+    var radios = document.querySelectorAll('input[name="fire_water_negligence"]');
+    var detail = document.getElementById('fire_water_detail');
+    var isChecked = false;
+    radios.forEach(function(radio) {
+      if (radio.checked && radio.value === "1") {
+        isChecked = true;
+      }
+    });
+    detail.style.display = isChecked ? "block" : "none";
+  }
+
+  // パワハラの詳細表示
+  function togglePowerHarassmentDetail() {
+    var radios = document.querySelectorAll('input[name="power_harassment"]');
+    var detail = document.getElementById('power_harassment_detail');
+    var isChecked = false;
+    radios.forEach(function(radio) {
+      if (radio.checked && radio.value === "1") {
+        isChecked = true;
+      }
+    });
+    detail.style.display = isChecked ? "block" : "none";
+  }
+
+  // セクハラの詳細表示
+  function toggleSexualHarassmentDetail() {
+    var radios = document.querySelectorAll('input[name="sexual_harassment"]');
+    var detail = document.getElementById('sexual_harassment_detail');
+    var isChecked = false;
+    radios.forEach(function(radio) {
+      if (radio.checked && radio.value === "1") {
+        isChecked = true;
+      }
+    });
+    detail.style.display = isChecked ? "block" : "none";
+  }
+
+  // 暴力の詳細表示
+  function toggleViolenceDetail() {
+    var radios = document.querySelectorAll('input[name="violence"]');
+    var detail = document.getElementById('violence_detail');
+    var isChecked = false;
+    radios.forEach(function(radio) {
+      if (radio.checked && radio.value === "1") {
+        isChecked = true;
+      }
+    });
+    detail.style.display = isChecked ? "block" : "none";
+  }
+
+  // ページ読み込み時にイベントリスナーを設定
+  document.addEventListener('DOMContentLoaded', function() {
+    // 転倒・転落
+    var fallRadios = document.querySelectorAll('input[name="fall"]');
+    fallRadios.forEach(function(radio) {
+      radio.addEventListener('change', toggleFallDetail);
+    });
+
+    // 骨折・その可能性
+    var fractureRadios = document.querySelectorAll('input[name="fracture"]');
+    fractureRadios.forEach(function(radio) {
+      radio.addEventListener('change', toggleFractureDetail);
+    });
+
+    // 薬物乱用
+    var drugAbuseRadios = document.querySelectorAll('input[name="drug_abuse"]');
+    drugAbuseRadios.forEach(function(radio) {
+      radio.addEventListener('change', toggleDrugAbuseDetail);
+    });
+
+    // 食事丸呑み・窒息
+    var chokingRadios = document.querySelectorAll('input[name="choking_risk"]');
+    chokingRadios.forEach(function(radio) {
+      radio.addEventListener('change', toggleChokingDetail);
+    });
+
+    // 火や水道の不始末
+    var fireWaterRadios = document.querySelectorAll('input[name="fire_water_negligence"]');
+    fireWaterRadios.forEach(function(radio) {
+      radio.addEventListener('change', toggleFireWaterDetail);
+    });
+
+    // パワハラ
+    var powerHarassmentRadios = document.querySelectorAll('input[name="power_harassment"]');
+    powerHarassmentRadios.forEach(function(radio) {
+      radio.addEventListener('change', togglePowerHarassmentDetail);
+    });
+
+    // セクハラ
+    var sexualHarassmentRadios = document.querySelectorAll('input[name="sexual_harassment"]');
+    sexualHarassmentRadios.forEach(function(radio) {
+      radio.addEventListener('change', toggleSexualHarassmentDetail);
+    });
+
+    // 暴力
+    var violenceRadios = document.querySelectorAll('input[name="violence"]');
+    violenceRadios.forEach(function(radio) {
+      radio.addEventListener('change', toggleViolenceDetail);
+    });
+
+    // 虐待総合評価
+    var abuseRadios = document.querySelectorAll('input[name="abuse_evaluation"]');
+    abuseRadios.forEach(function(radio) {
+      radio.addEventListener('change', function() {
+        var detail = document.getElementById('abuse_detail');
+        if (this.value === '1' && this.checked) {
+          detail.style.display = 'block';
+        } else if (this.value === '0' && this.checked) {
+          detail.style.display = 'none';
+        }
+      });
+    });
+
+    // 火や水道の不始末
+    var fireWaterRadios = document.querySelectorAll('input[name="fire_water_negligence"]');
+    fireWaterRadios.forEach(function(radio) {
+      radio.addEventListener('change', function() {
+        var detail = document.getElementById('fire_water_detail');
+        if (this.value === '1' && this.checked) {
+          detail.style.display = 'block';
+        } else if (this.value === '0' && this.checked) {
+          detail.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // 高額費用の利用：理由欄表示
+  function toggleExpensiveCostDetail() {
+    const val = document.getElementById('expensive_cost_usage').value;
+    const reasonDiv = document.getElementById('expensive_cost_reason');
+    if (val === '2a' || val === '2b') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費医療の利用：理由欄表示
+  function togglePublicMedicalReason() {
+    const val = document.getElementById('public_medical_usage').value;
+    const reasonDiv = document.getElementById('public_medical_reason');
+    if (val === '2') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費医療の詳細：病名入力欄表示
+  function toggleMedicalDiseaseInput() {
+    const val = document.getElementById('public_medical_detail').value;
+    const inputDiv = document.getElementById('medical_disease_input');
+    if (val === '5' || val === '3') {
+      inputDiv.style.display = 'block';
+    } else {
+      inputDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費制度の利用：理由欄表示
+  function togglePublicSystemReason() {
+    const val = document.getElementById('public_system_usage').value;
+    const reasonDiv = document.getElementById('public_system_reason');
+    if (val === '2') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費制度の詳細：詳細入力欄表示
+  function toggleSystemDetailInput() {
+    const val = document.getElementById('public_system_detail').value;
+    const inputDiv = document.getElementById('system_detail_input');
+    if (val === '1' || val === '2') {
+      inputDiv.style.display = 'block';
+    } else {
+      inputDiv.style.display = 'none';
+    }
+  }
+
+  // フォームの自動保存機能
+  const form = document.ventListener('input', () => {
+    const data = Object.fromEntries(new FormData(form));
+    localStorage.setItem('surveyData_form2', JSON.stringify(data));
+  });
+
+  // 保存されたデータの復元
+  window.addEventListener('load', () => {
+    const saved = localStorage.getItem('surveyData_form2');
+    if (saved) {
+      const data = JSON.parse(saved);
+      Object.keys(data).forEach(key => {
+        const el = form.elements[key];
+        if (el) {
+          el.value = data[key];
+        }
+      });
+    }
+  });
+</script>
+
+  <!-- プログレスバー -->
+  <div class="progress-container">
+    <div class="progress-wrapper">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-info">
+        <span class="progress-page" id="currentPage">20</span>
+        <span class="progress-total">/ 20</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // プログレスバーの更新
+    function updateProgress() {
+      const progressPercentage = (20 / 20) * 100;
+      const progressFill = document.getElementById('progressFill');
+      const currentPageElement = document.getElementById('currentPage');
+      
+      progressFill.style.width = progressPercentage + '%';
+      currentPageElement.textContent = '20';
+      progressFill.style.background = '#003366';
+    }
+    
+    // 初期プログレス更新
+    document.addEventListener('DOMContentLoaded', function() {
+      updateProgress();
+      
+      // フォームの自動保存機能
+      const form = document.getElementById('surveyForm');
+      const formNumber = 19;
+      
+      if (form) {
+        function collectFormData() {
+          const formData = new FormData(form);
+          const data = {};
+          for (let [key, value] of formData.entries()) {
+            if (data[key]) {
+              if (Array.isArray(data[key])) {
+                data[key].push(value);
+              } else {
+                data[key] = [data[key], value];
+              }
+            } else {
+              data[key] = value;
+            }
+          }
+          const canvases = form.querySelectorAll('canvas');
+          canvases.forEach((canvas, index) => {
+            try {
+              const canvasId = canvas.id || `canvas_${index}`;
+              data[canvasId + '_image'] = canvas.toDataURL('image/png');
+            } catch (e) {
+              console.error('Canvas保存エラー:', e);
+            }
+          });
+          const allInputs = form.querySelectorAll('input, select, textarea');
+          allInputs.forEach(input => {
+            if (!input.name) return;
+            const isProcessed = data.hasOwnProperty(input.name);
+            if (input.type === 'checkbox') {
+              if (input.checked) {
+                if (!data[input.name]) data[input.name] = [];
+                if (Array.isArray(data[input.name])) {
+                  if (!data[input.name].includes(input.value)) data[input.name].push(input.value);
+                } else {
+                  data[input.name] = [data[input.name], input.value];
+                }
+              }
+            } else if (input.type === 'radio') {
+              if (input.checked && !isProcessed) data[input.name] = input.value;
+            } else {
+              if (!isProcessed && input.value) data[input.name] = input.value;
+            }
+          });
+          return data;
+        }
+        
+        form.addEventListener('input', function() {
+          const data = collectFormData();
+          localStorage.setItem(getFormStorageKey(formNumber), JSON.stringify(data));
+          console.log(`Form ${formNumber} データを自動保存しました`);
+        });
+        
+        form.addEventListener('change', function() {
+          const data = collectFormData();
+          localStorage.setItem(getFormStorageKey(formNumber), JSON.stringify(data));
+          console.log(`Form ${formNumber} データを自動保存しました`);
+        });
+        
+        const savedData = localStorage.getItem(getFormStorageKey(formNumber));
+        if (savedData) {
+          const data = JSON.parse(savedData);
+          Object.keys(data).forEach(key => {
+            const elements = form.elements[key];
+            if (elements) {
+              if (elements.length > 1) {
+                Array.from(elements).forEach(el => {
+                  if (el.type === 'checkbox' || el.type === 'radio') {
+                    if (Array.isArray(data[key])) {
+                      el.checked = data[key].includes(el.value);
+                    } else {
+                      el.checked = el.value === data[key];
+                    }
+                  }
+                });
+              } else if (elements.length === 1) {
+                const el = elements[0];
+                if (el.type === 'checkbox' || el.type === 'radio') {
+                  if (Array.isArray(data[key])) {
+                    el.checked = data[key].includes(el.value);
+                  } else {
+                    el.checked = el.value === data[key];
+                  }
+                } else {
+                  el.value = data[key] || '';
+                }
+              } else {
+                if (elements.type === 'checkbox' || elements.type === 'radio') {
+                  if (Array.isArray(data[key])) {
+                    elements.checked = data[key].includes(elements.value);
+                  } else {
+                    elements.checked = elements.value === data[key];
+                  }
+                } else {
+                  elements.value = data[key] || '';
+                }
+              }
+            }
+          });
+          console.log(`Form ${formNumber} の保存データを復元しました`);
+        }
+      }
+  });
+</script>
+
+</body>
+</html>
+
+
+

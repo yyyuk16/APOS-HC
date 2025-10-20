@@ -1,0 +1,990 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>APOS-HC 調査票 - フォーム3</title>
+  <link rel="stylesheet" href="main.css">
+  <style>
+    /* セクション表示の修正 */
+    .section { 
+      display: block !important; 
+    }
+    
+    /* iPad用の追加スタイル */
+    @media screen and (min-width: 768px) {
+      body {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      
+      .container {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        padding: 25px;
+        margin: 15px 0;
+      }
+      
+      h1 {
+        font-size: 1.8em;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 15px;
+      }
+      
+      h2 {
+        font-size: 1.4em;
+        color: #34495e;
+        margin: 25px 0 15px 0;
+        padding: 10px 0;
+        border-left: 4px solid #3498db;
+        padding-left: 15px;
+        background: linear-gradient(90deg, #f8f9fa 0%, transparent 100%);
+      }
+      
+      fieldset {
+        border: 2px solid #e0e6ed;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        background: #fafbfc;
+        transition: all 0.3s ease;
+      }
+      
+      fieldset:hover {
+        border-color: #3498db;
+        box-shadow: 0 2px 10px rgba(52, 152, 219, 0.1);
+      }
+      
+      legend {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #2c3e50;
+        padding: 0 10px;
+        background: #fff;
+        border-radius: 6px;
+        border: 2px solid #3498db;
+      }
+      
+      label {
+        display: block;
+        margin: 10px 0 5px 0;
+        font-weight: 600;
+        color: #34495e;
+        font-size: 1em;
+      }
+      
+      input[type="text"], input[type="tel"], input[type="email"], 
+      input[type="number"], select, textarea {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 1em;
+        border: 2px solid #e0e6ed;
+        border-radius: 6px;
+        background: #fff;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+        margin-top: 5px;
+      }
+      
+      input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        transform: translateY(-2px);
+      }
+      
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+        font-family: inherit;
+      }
+      
+      .daily-rhythm-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      }
+      
+      .daily-rhythm-table th {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+        padding: 12px 10px;
+        font-size: 1em;
+        font-weight: bold;
+        text-align: center;
+      }
+      
+      .daily-rhythm-table td {
+        padding: 10px;
+        border-bottom: 1px solid #e8f4f8;
+        text-align: center;
+        vertical-align: middle;
+      }
+      
+      .daily-rhythm-table td:first-child {
+        background: #f8f9fa;
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 0.9em;
+        width: 150px;
+      }
+      
+      .daily-rhythm-table input {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 0.9em;
+        border: 2px solid #e0e6ed;
+        border-radius: 6px;
+        background: #fff;
+        transition: all 0.3s ease;
+        margin: 0;
+      }
+      
+      .daily-rhythm-table input:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+      }
+      
+      .daily-rhythm-table tr:hover {
+        background: #f8f9fa;
+      }
+      
+      .note {
+        font-size: 0.9em;
+        color: #7f8c8d;
+        margin-top: 10px;
+        padding: 10px;
+        background: #ecf0f1;
+        border-radius: 6px;
+        border-left: 3px solid #95a5a6;
+      }
+      
+      .nav-buttons {
+        margin-top: 25px;
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+      }
+      
+      .nav-buttons button {
+        padding: 12px 25px;
+        font-size: 1em;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-width: 120px;
+      }
+      
+      .nav-buttons button:first-child {
+        background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+        color: white;
+      }
+      
+      .nav-buttons button:last-child {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+      }
+      
+      .nav-buttons button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      }
+      
+      .nav-buttons button:active {
+        transform: translateY(-1px);
+      }
+      
+      /* プログレスバーのスタイル */
+      .progress-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid #e0e0e0;
+        padding: 20px;
+        z-index: 1000;
+      }
+      
+      .progress-wrapper {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      
+      .progress-bar {
+        width: 100%;
+        height: 6px;
+        background: #f0f0f0;
+        border-radius: 3px;
+        overflow: hidden;
+        margin-bottom: 15px;
+      }
+      
+      .progress-fill {
+        height: 100%;
+        background: #003366;
+        border-radius: 3px;
+        transition: width 0.5s ease;
+        width: 95%;
+      }
+      
+      .progress-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.1em;
+        color: #333;
+        font-weight: 500;
+      }
+      
+      .progress-page {
+        color: #003366;
+        font-weight: 600;
+      }
+      
+      .progress-total {
+        color: #999;
+      }
+      
+      /* フォームの下部に余白を追加（プログレスバーの分） */
+      body {
+        padding-bottom: 100px;
+      }
+    }
+    
+    /* タブレット用の追加調整 */
+    @media screen and (max-width: 1024px) and (min-width: 768px) {
+      .daily-rhythm-table td:first-child {
+        width: 140px;
+      }
+      
+      .daily-rhythm-table input {
+        font-size: 0.85em;
+        padding: 6px 8px;
+      }
+    }
+  </style>
+  <script src="survey-common.js"></script>
+</head>
+<body>
+
+<div class="container">
+<h1>APOS-HC 調査票</h1>
+<form id="surveyForm">
+<div class="section" id="section-lifestyle-habits">
+    <h2>Ⅻ. エンドオブライフ/終末期の過ごし方・ACP</h2>
+      <div style="margin-bottom: 20px;">
+        <label style="display: block; margin-bottom: 10px;">
+          1. 医師が余命６ケ月以内またはエンドオブライフ期と判断されましたか
+        </label>
+        <select id="induction_consultation_select" name="induction_consultation" style="width: 200px; margin-bottom: 15px;" onchange="toggleInductionDetail()">
+          <option value="">選択してください</option>
+          <option value="0">0. いいえ</option>
+          <option value="1">1. はい</option>
+        </select>
+        
+        <div id="induction_detail" style="display: none; margin-top: 15px;">
+          <!-- 「はい」を選択した場合に表示される全内容 -->
+          <div style="background: #e0f7fa; padding: 12px; border-radius: 6px; margin-bottom: 10px;">
+            <label style="display:block; margin-bottom:8px;">
+              2. 主治医との話し合いや説明・意見（病状や予後の理解・治療方針についてお話を受けていますか）
+              <textarea name="induction_detail_discussion" rows="2" style="width:98%; margin-top:4px;"></textarea>
+            </label>
+            <label style="display:block; margin-bottom:8px;">
+              3. ご自分やご家族が現在受けておられる話題・質問はどのようなことですか。療養の支援体制をどのように希望しますか
+              <textarea name="induction_detail_support" rows="2" style="width:98%; margin-top:4px;"></textarea>
+            </label>
+            <label style="display:block;">
+              4. ご自分の大切なこと／支え／価値観／目標になっていることなどがあったらご記入ください
+              <textarea name="induction_detail_values" rows="2" style="width:98%; margin-top:4px;"></textarea>
+            </label>
+          </div>
+
+          <!-- 症状評価表 -->
+          <div class="section" id="section-symptom-assessment" style="margin-top: 36px;">
+            <fieldset style="border:2px solid #b0d6e6; border-radius:10px; padding:24px 20px 20px 20px; background:linear-gradient(90deg,#f3fafe 0%,#e2f5fc 100%); margin-bottom: 0;">
+              <legend style="font-size:1.18em; font-weight:700; padding:0 10px; color:#2476a8;">5. 訪問日前1週間の最も強い症状でお答えください</legend>
+              <div style="margin-top: 20px;">
+                <p style="font-size:0.96em; color:#6493a1; margin-bottom:15px;">
+                  <span style="font-size:1.15em; vertical-align:-2px;">&#9432;</span>
+                  <span>該当する番号を選んでください</span>
+                </p>
+                
+                <div style="overflow-x:auto;">
+              <table style="width:100%; border-collapse:collapse; background:#eaf6fb; margin-bottom:20px; border:1px solid #b0d6e6;">
+                <thead>
+                  <tr>
+                    <th rowspan="2" style="border:1px solid #b0d6e6; padding:8px; background:#b0d6e6; text-align:center; width:120px;">症状項目</th>
+                    <th colspan="11" style="border:1px solid #b0d6e6; padding:8px; background:#b0d6e6; text-align:center;">該当する番号を選んでください</th>
+                    <th rowspan="2" style="border:1px solid #b0d6e6; padding:8px; background:#b0d6e6; text-align:center; width:200px;">説明</th>
+                  </tr>
+                  <tr>
+                    <th style="border:1px solid #b0d6e6; padding:6px; text-align:center; width:40px;">0</th>
+                    <th style="border:1px solid #b0d6e6; padding:6px; text-align:center; width:40px;">1</th>
+                    <th style="border:1px solid #b0d6e6; padding:6px; text-align:center; width:40px;">2</th>
+                    <th style="border:1px solid #b0d6e6; padding:6px; text-align:center; width:40px;">3</th>
+                    <th style="border:1px solid #b0d6e6; padding:6px; text-align:center; width:40px;">4</th>
+                    <th style="border:1px solid #b0d6e6; padding:6px; text-align:center; width:40px;">5</th>
+                    <th style="border:1px solid #b0d6e6; padding:6px; text-align:center; width:40px;">6</th>
+                    <th style="border:1px solid #b0d6e6; padding:6px; text-align:center; width:40px;">7</th>
+                    <th style="border:1px solid #b0d6e6; padding:6px; text-align:center; width:40px;">8</th>
+                    <th style="border:1px solid #b0d6e6; padding:6px; text-align:center; width:40px;">9</th>
+                    <th style="border:1px solid #b0d6e6; padding:6px; text-align:center; width:40px;">10</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="border:1px solid #b0d6e6; padding:8px; background:#f8f9fa; text-align:center;">
+                      <strong>①身体活動</strong>
+                    </td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="physical_activity" value="0"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="physical_activity" value="1"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="physical_activity" value="2"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="physical_activity" value="3"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="physical_activity" value="4"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="physical_activity" value="5"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="physical_activity" value="6"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="physical_activity" value="7"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="physical_activity" value="8"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="physical_activity" value="9"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="physical_activity" value="10"></td>
+                    <td style="border:1px solid #b0d6e6; padding:8px; background:#f8f9fa; font-size:0.9em;">
+                      0: 問題なく活動<br>
+                      10: これ以上耐えられない
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="border:1px solid #b0d6e6; padding:8px; background:#f8f9fa; text-align:center;">
+                      <strong>②痛み</strong>
+                    </td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="pain" value="0"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="pain" value="1"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="pain" value="2"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="pain" value="3"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="pain" value="4"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="pain" value="5"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="pain" value="6"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="pain" value="7"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="pain" value="8"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="pain" value="9"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="pain" value="10"></td>
+                    <td style="border:1px solid #b0d6e6; padding:8px; background:#f8f9fa; font-size:0.9em;">
+                      0: 全くない<br>
+                      10: これ以上耐えられない
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="border:1px solid #b0d6e6; padding:8px; background:#f8f9fa; text-align:center;">
+                      <strong>③しびれ</strong>
+                    </td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="numbness" value="0"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="numbness" value="1"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="numbness" value="2"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="numbness" value="3"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="numbness" value="4"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="numbness" value="5"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="numbness" value="6"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="numbness" value="7"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="numbness" value="8"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="numbness" value="9"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="numbness" value="10"></td>
+                    <td style="border:1px solid #b0d6e6; padding:8px; background:#f8f9fa; font-size:0.9em;">
+                      0: 全くない<br>
+                      10: これ以上耐えられない
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="border:1px solid #b0d6e6; padding:8px; background:#f8f9fa; text-align:center;">
+                      <strong>④眠け</strong><br>
+                      <span style="font-size:0.8em; color:#666;">（うとうとした感じ）</span>
+                    </td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="drowsiness" value="0"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="drowsiness" value="1"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="drowsiness" value="2"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="drowsiness" value="3"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="drowsiness" value="4"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="drowsiness" value="5"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="drowsiness" value="6"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="drowsiness" value="7"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="drowsiness" value="8"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="drowsiness" value="9"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="drowsiness" value="10"></td>
+                    <td style="border:1px solid #b0d6e6; padding:8px; background:#f8f9fa; font-size:0.9em;">
+                      0: 全くない<br>
+                      10: これ以上耐えられない
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="border:1px solid #b0d6e6; padding:8px; background:#f8f9fa; text-align:center;">
+                      <strong>⑤だるさ</strong><br>
+                      <span style="font-size:0.8em; color:#666;">（つかれ）</span>
+                    </td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="fatigue" value="0"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="fatigue" value="1"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="fatigue" value="2"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="fatigue" value="3"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="fatigue" value="4"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="fatigue" value="5"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="fatigue" value="6"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="fatigue" value="7"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="fatigue" value="8"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="fatigue" value="9"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="fatigue" value="10"></td>
+                    <td style="border:1px solid #b0d6e6; padding:8px; background:#f8f9fa; font-size:0.9em;">
+                      0: 全くない<br>
+                      10: これ以上耐えられない
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="border:1px solid #b0d6e6; padding:8px; background:#f8f9fa; text-align:center;">
+                      <strong>⑥息切れ</strong><br>
+                      <span style="font-size:0.8em; color:#666;">（息苦しさ）</span>
+                    </td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="shortness_of_breath" value="0"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="shortness_of_breath" value="1"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="shortness_of_breath" value="2"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="shortness_of_breath" value="3"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="shortness_of_breath" value="4"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="shortness_of_breath" value="5"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="shortness_of_breath" value="6"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="shortness_of_breath" value="7"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="shortness_of_breath" value="8"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="shortness_of_breath" value="9"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="shortness_of_breath" value="10"></td>
+                    <td style="border:1px solid #b0d6e6; padding:8px; background:#f8f9fa; font-size:0.9em;">
+                      0: 全くない<br>
+                      10: これ以上耐えられない
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="border:1px solid #b0d6e6; padding:8px; background:#f8f9fa; text-align:center;">
+                      <strong>⑦食欲不振</strong>
+                    </td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="loss_of_appetite" value="0"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="loss_of_appetite" value="1"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="loss_of_appetite" value="2"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="loss_of_appetite" value="3"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="loss_of_appetite" value="4"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="loss_of_appetite" value="5"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="loss_of_appetite" value="6"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="loss_of_appetite" value="7"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="loss_of_appetite" value="8"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="loss_of_appetite" value="9"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="loss_of_appetite" value="10"></td>
+                    <td style="border:1px solid #b0d6e6; padding:8px; background:#f8f9fa; font-size:0.9em;">
+                      0: 全くない<br>
+                      10: これ以上耐えられない
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="border:1px solid #b0d6e6; padding:8px; background:#f8f9fa; text-align:center;">
+                      <strong>⑧吐き気</strong>
+                    </td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="nausea" value="0"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="nausea" value="1"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="nausea" value="2"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="nausea" value="3"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="nausea" value="4"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="nausea" value="5"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="nausea" value="6"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="nausea" value="7"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="nausea" value="8"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="nausea" value="9"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="nausea" value="10"></td>
+                    <td style="border:1px solid #b0d6e6; padding:8px; background:#f8f9fa; font-size:0.9em;">
+                      0: 全くない<br>
+                      10: これ以上耐えられない
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="border:1px solid #b0d6e6; padding:8px; background:#f8f9fa; text-align:center;">
+                      <strong>⑨睡眠</strong>
+                    </td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="sleep" value="0"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="sleep" value="1"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="sleep" value="2"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="sleep" value="3"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="sleep" value="4"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="sleep" value="5"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="sleep" value="6"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="sleep" value="7"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="sleep" value="8"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="sleep" value="9"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="sleep" value="10"></td>
+                    <td style="border:1px solid #b0d6e6; padding:8px; background:#f8f9fa; font-size:0.9em;">
+                      0: よく眠れる<br>
+                      10: 眠れない
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="border:1px solid #b0d6e6; padding:8px; background:#f8f9fa; text-align:center;">
+                      <strong>⑩気持ちのつらさ</strong>
+                    </td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="emotional_distress" value="0"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="emotional_distress" value="1"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="emotional_distress" value="2"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="emotional_distress" value="3"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="emotional_distress" value="4"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="emotional_distress" value="5"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="emotional_distress" value="6"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="emotional_distress" value="7"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="emotional_distress" value="8"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="emotional_distress" value="9"></td>
+                    <td style="text-align:center; border:1px solid #b0d6e6; padding:4px;"><input type="radio" name="emotional_distress" value="10"></td>
+                    <td style="border:1px solid #b0d6e6; padding:8px; background:#f8f9fa; font-size:0.9em;">
+                      0: つらくない<br>
+                      10: 最高につらい
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <!-- 質問6: 救急搬送希望 -->
+          <div class="section" id="section-emergency-transport" style="margin-top: 36px;">
+            <fieldset style="border:2px solid #b0d6e6; border-radius:10px; padding:24px 20px 20px 20px; background:linear-gradient(90deg,#f3fafe 68%,#e2f5fc 100%); margin-bottom: 0;">
+              <legend style="font-size:1.18em; font-weight:700; padding:0 10px; color:#2476a8;">6. 最期を迎えるときに救急搬送を希望しますか</legend>
+              <div style="margin-top: 20px;">
+                <label for="emergency_transport_wish" style="display: block; font-size: 1.08em; font-weight: 700; color: #214064; margin-bottom: 18px; letter-spacing:0.02em;">
+                  最期を迎えるときに<strong style="background: #fffdc3; border-radius:4px; padding:1px 7px;">救急搬送を希望</strong>しますか？
+                </label>
+                <div style="max-width:690px; margin:0 auto;">
+                  <select name="emergency_transport_wish" id="emergency_transport_wish"
+                    style="
+                      width: 100%;
+                      padding: 12px 14px;
+                      font-size: 1.08em;
+                      border: 2px solid #fff;
+                      border-radius: 8px;
+                      background: #fff;
+                      transition: border-color .2s, box-shadow .2s;
+                      outline: none;
+                      box-sizing: border-box;
+                      margin-bottom:9px;
+                      box-shadow: 0 2px 8px rgba(110,179,218,.09);
+                    ">
+                    <option value="" disabled selected style="color:#adc; background:#f9feff;">選択してください</option>
+                    <option value="a">a. 自宅を最初から選択しているので、このまま自宅で過ごしたい（救急搬送なし）</option>
+                    <option value="b">b. 施設で充分頑張ったので、最後は自宅で過ごしたい（救急搬送なし）</option>
+                    <option value="c">c. ホスピス・緩和ケア病棟に搬送してほしい</option>
+                    <option value="d">d. 老人ホーム(有料)・看護小規模多機能型居宅介護に搬送</option>
+                    <option value="e">e. 病院に搬送して欲しい</option>
+                    <option value="f">f. まだ決まっていない</option>
+                  </select>
+                </div>
+                <div style="font-size:0.96em; color:#6493a1; margin-top:7px; max-width:680px; margin-left:auto; margin-right:auto;">
+                  <span style="font-size:1.15em; vertical-align:-2px;">&#9432;</span>
+                  <span>「希望がない」「まだ決めていない」場合は、その旨もご選択ください。</span>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <!-- 質問7: 最期を迎えるときの意思決定方針の合意づくり -->
+          <div class="section" id="section-end-of-life-decision" style="margin-top: 36px;">
+            <fieldset style="border:2px solid #b0d6e6; border-radius:10px; padding:24px 20px 20px 20px; background:linear-gradient(90deg,#f3fafe 0%,#e2f5fc 100%); margin-bottom: 0;">
+              <legend style="font-size:1.18em; font-weight:700; padding:0 10px; color:#2476a8;">7. 最期を迎えるときの本人・家族と関係者で意思決定方針の合意づくり</legend>
+              <div style="margin-top: 20px;">
+
+                <div class="subsection" style="margin-top: 20px;">
+                  <h3 style="font-size:1.08em; font-weight:700; color:#214064; margin-bottom:18px;">1) 望む治療・望まない治療:</h3>
+              <div style="margin-top: 15px;">
+                <div style="margin-bottom: 15px; padding: 10px; border: 1px solid #e0e6ed; border-radius: 6px; background: #f8f9fa;">
+                  <label style="display: flex; align-items: center; flex-wrap: wrap;">
+                    <span style="min-width: 200px; font-weight: 600;">1. 人工呼吸器</span>
+                    <div style="margin-left: 20px;">
+                      <input type="radio" name="treatment_respirator" value="0" style="margin-right: 5px;"> 0. 不要
+                      <input type="radio" name="treatment_respirator" value="1" style="margin-left: 15px; margin-right: 5px;"> 1. 使用したい
+                    </div>
+                  </label>
+                </div>
+                <div style="margin-bottom: 15px; padding: 10px; border: 1px solid #e0e6ed; border-radius: 6px; background: #f8f9fa;">
+                  <label style="display: flex; align-items: center; flex-wrap: wrap;">
+                    <span style="min-width: 200px; font-weight: 600;">2. 中心静脈栄養</span>
+                    <div style="margin-left: 20px;">
+                      <input type="radio" name="treatment_central_venous_nutrition" value="0" style="margin-right: 5px;"> 0. 不要
+                      <input type="radio" name="treatment_central_venous_nutrition" value="1" style="margin-left: 15px; margin-right: 5px;"> 1. 使用したい
+                    </div>
+                  </label>
+                </div>
+                <div style="margin-bottom: 15px; padding: 10px; border: 1px solid #e0e6ed; border-radius: 6px; background: #f8f9fa;">
+                  <label style="display: flex; align-items: center; flex-wrap: wrap;">
+                    <span style="min-width: 200px; font-weight: 600;">3. 輸液:水分補給</span>
+                    <div style="margin-left: 20px;">
+                      <input type="radio" name="treatment_infusion_hydration" value="0" style="margin-right: 5px;"> 0. 不要
+                      <input type="radio" name="treatment_infusion_hydration" value="1" style="margin-left: 15px; margin-right: 5px;"> 1. 使用したい
+                    </div>
+                  </label>
+                </div>
+                <div style="margin-bottom: 15px; padding: 10px; border: 1px solid #e0e6ed; border-radius: 6px; background: #f8f9fa;">
+                  <label style="display: flex; align-items: center; flex-wrap: wrap;">
+                    <span style="min-width: 200px; font-weight: 600;">4. 化学療法</span>
+                    <div style="margin-left: 20px;">
+                      <input type="radio" name="treatment_chemotherapy" value="0" style="margin-right: 5px;"> 0. 不要
+                      <input type="radio" name="treatment_chemotherapy" value="1" style="margin-left: 15px; margin-right: 5px;"> 1. 使用したい
+                    </div>
+                  </label>
+                </div>
+                <div style="margin-bottom: 15px; padding: 10px; border: 1px solid #e0e6ed; border-radius: 6px; background: #f8f9fa;">
+                  <label style="display: flex; align-items: center; flex-wrap: wrap;">
+                    <span style="min-width: 200px; font-weight: 600;">5. 経管栄養</span>
+                    <div style="margin-left: 20px;">
+                      <input type="radio" name="treatment_tube_feeding" value="0" style="margin-right: 5px;"> 0. 不要
+                      <input type="radio" name="treatment_tube_feeding" value="1" style="margin-left: 15px; margin-right: 5px;"> 1. 使用したい
+                    </div>
+                  </label>
+                </div>
+                <div style="margin-bottom: 15px; padding: 10px; border: 1px solid #e0e6ed; border-radius: 6px; background: #f8f9fa;">
+                  <label style="display: flex; align-items: center; flex-wrap: wrap;">
+                    <span style="min-width: 200px; font-weight: 600;">6. 薬物療法</span>
+                    <div style="margin-left: 20px;">
+                      <input type="radio" name="treatment_drug_therapy" value="0" style="margin-right: 5px;"> 0. 不要
+                      <input type="radio" name="treatment_drug_therapy" value="1" style="margin-left: 15px; margin-right: 5px;"> 1. 使用したい
+                    </div>
+                  </label>
+                </div>
+                <div style="margin-bottom: 15px; padding: 10px; border: 1px solid #e0e6ed; border-radius: 6px; background: #f8f9fa;">
+                  <label style="display: flex; align-items: center; flex-wrap: wrap;">
+                    <span style="min-width: 200px; font-weight: 600;">7. 人工透析</span>
+                    <div style="margin-left: 20px;">
+                      <input type="radio" name="treatment_dialysis" value="0" style="margin-right: 5px;"> 0. 不要
+                      <input type="radio" name="treatment_dialysis" value="1" style="margin-left: 15px; margin-right: 5px;"> 1. 使用したい
+                    </div>
+                  </label>
+                </div>
+                <div style="margin-bottom: 15px; padding: 10px; border: 1px solid #e0e6ed; border-radius: 6px; background: #f8f9fa;">
+                  <label style="display: flex; align-items: center; flex-wrap: wrap;">
+                    <span style="min-width: 200px; font-weight: 600;">8. 輸血</span>
+                    <div style="margin-left: 20px;">
+                      <input type="radio" name="treatment_blood_transfusion" value="0" style="margin-right: 5px;"> 0. 不要
+                      <input type="radio" name="treatment_blood_transfusion" value="1" style="margin-left: 15px; margin-right: 5px;"> 1. 使用したい
+                    </div>
+                  </label>
+                </div>
+                <div style="margin-bottom: 15px; padding: 10px; border: 1px solid #e0e6ed; border-radius: 6px; background: #f8f9fa;">
+                  <label style="display: flex; align-items: center; flex-wrap: wrap;">
+                    <span style="min-width: 200px; font-weight: 600;">9. 心臓マッサージ</span>
+                    <div style="margin-left: 20px;">
+                      <input type="radio" name="treatment_cardiac_massage" value="0" style="margin-right: 5px;"> 0. 不要
+                      <input type="radio" name="treatment_cardiac_massage" value="1" style="margin-left: 15px; margin-right: 5px;"> 1. 使用したい
+                    </div>
+                  </label>
+                </div>
+                <div style="margin-bottom: 15px; padding: 10px; border: 1px solid #e0e6ed; border-radius: 6px; background: #f8f9fa;">
+                  <label style="display: flex; align-items: center; flex-wrap: wrap;">
+                    <span style="min-width: 200px; font-weight: 600;">10. その他</span>
+                    <div style="margin-left: 20px;">
+                      <input type="radio" name="treatment_other" value="0" style="margin-right: 5px;"> 0. 不要
+                      <input type="radio" name="treatment_other" value="1" style="margin-left: 15px; margin-right: 5px;"> 1. 使用したい
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+                <div class="subsection" style="margin-top: 30px;">
+                  <h3 style="font-size:1.08em; font-weight:700; color:#214064; margin-bottom:18px;">2) 延命について</h3>
+                  <div style="margin-top: 15px; padding: 15px; background: #f8f9fa; border-radius: 6px; border-left: 4px solid #3498db;">
+                    <label for="life_prolongation_select" style="font-weight: bold; display: block; margin-bottom: 10px;">延命についてのご希望を選択してください</label>
+                    <select id="life_prolongation_select" name="life_prolongation" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #b0d6e6;">
+                      <option value="" disabled selected>選択してください</option>
+                      <option value="no_prolongation">私の病が今の医学では治らない状態で、死が迫っていると診断された場合には、単に死期を引き延ばすための延命措置は望みません</option>
+                      <option value="palliative_care">ただし、私の苦痛を和らげるために、麻薬などの適切な使用により十分な緩和医療を行ってください</option>
+                      <option value="withdraw_life_support">私が回復不能な持続的植物状態に陥った時は、生命維持措置を取りやめてください</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <!-- 質問8: 受入れ -->
+          <div class="section" id="section-acceptance" style="margin-top: 36px;">
+            <fieldset style="border:2px solid #b0d6e6; border-radius:10px; padding:24px 20px 20px 20px; background:linear-gradient(90deg,#f3fafe 0%,#e2f5fc 100%); margin-bottom: 0;">
+              <legend style="font-size:1.18em; font-weight:700; padding:0 10px; color:#2476a8;">8. 受入れ</legend>
+              <div style="margin-top: 20px;">
+                <div style="margin-bottom: 20px; padding: 15px; border: 1px solid #e0e6ed; border-radius: 6px; background: #f8f9fa;">
+                  <label style="display: flex; align-items: center; flex-wrap: wrap;">
+                    <span style="min-width: 300px; font-weight: 600;">①本人:終末期の受入れ</span>
+                    <select name="acceptance_individual" style="margin-left: 20px; padding: 8px; border-radius: 4px; border: 1px solid #b0d6e6; min-width: 120px;">
+                      <option value="" disabled selected>選択してください</option>
+                      <option value="0">0 あり</option>
+                      <option value="1">1 なし</option>
+                    </select>
+                  </label>
+                </div>
+                <div style="margin-bottom: 20px; padding: 15px; border: 1px solid #e0e6ed; border-radius: 6px; background: #f8f9fa;">
+                  <label style="display: flex; align-items: center; flex-wrap: wrap;">
+                    <span style="min-width: 300px; font-weight: 600;">②家族:終末期の受入れ/家族間調整</span>
+                    <select name="acceptance_family" style="margin-left: 20px; padding: 8px; border-radius: 4px; border: 1px solid #b0d6e6; min-width: 120px;">
+                      <option value="" disabled selected>選択してください</option>
+                      <option value="0">0 あり</option>
+                      <option value="1">1 なし</option>
+                    </select>
+                  </label>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+
+        <script>
+          function toggleInductionDetail() {
+            var select = document.getElementById('induction_consultation_select');
+            var detail = document.getElementById('induction_detail');
+            if (select.value === "1") {
+              detail.style.display = "block";
+            } else {
+              detail.style.display = "none";
+            }
+          }
+        </script>
+      </label>
+      </select>
+
+
+    </table>
+</fieldset>
+      <div class="nav-buttons">
+        <button type="button" onclick="location.href='form17.html'">← 戻る</button>
+        <button type="button" onclick="location.href='form19.html'">次へ →</button>
+      </div>
+    </form>
+  </div>
+  
+  <script>
+  // 高額費用の利用：理由欄表示
+  function toggleExpensiveCostDetail() {
+    const val = document.getElementById('expensive_cost_usage').value;
+    const reasonDiv = document.getElementById('expensive_cost_reason');
+    if (val === '2a' || val === '2b') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費医療の利用：理由欄表示
+  function togglePublicMedicalReason() {
+    const val = document.getElementById('public_medical_usage').value;
+    const reasonDiv = document.getElementById('public_medical_reason');
+    if (val === '2') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費医療の詳細：病名入力欄表示
+  function toggleMedicalDiseaseInput() {
+    const val = document.getElementById('public_medical_detail').value;
+    const inputDiv = document.getElementById('medical_disease_input');
+    if (val === '5' || val === '3') {
+      inputDiv.style.display = 'block';
+    } else {
+      inputDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費制度の利用：理由欄表示
+  function togglePublicSystemReason() {
+    const val = document.getElementById('public_system_usage').value;
+    const reasonDiv = document.getElementById('public_system_reason');
+    if (val === '2') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費制度の詳細：詳細入力欄表示
+  function toggleSystemDetailInput() {
+    const val = document.getElementById('public_system_detail').value;
+    const inputDiv = document.getElementById('system_detail_input');
+    if (val === '1' || val === '2') {
+      inputDiv.style.display = 'block';
+    } else {
+      inputDiv.style.display = 'none';
+    }
+  }
+
+  // フォームの自動保存機能
+  const form = document.ventListener('input', () => {
+    const data = Object.fromEntries(new FormData(form));
+    localStorage.setItem('surveyData_form2', JSON.stringify(data));
+  });
+
+  // 保存されたデータの復元
+  window.addEventListener('load', () => {
+    const saved = localStorage.getItem('surveyData_form2');
+    if (saved) {
+      const data = JSON.parse(saved);
+      Object.keys(data).forEach(key => {
+        const el = form.elements[key];
+        if (el) {
+          el.value = data[key];
+        }
+      });
+    }
+  });
+</script>
+
+  <!-- プログレスバー -->
+  <div class="progress-container">
+    <div class="progress-wrapper">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-info">
+        <span class="progress-page" id="currentPage">19</span>
+        <span class="progress-total">/ 20</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // プログレスバーの更新
+    function updateProgress() {
+      const progressPercentage = (19 / 20) * 100;
+      const progressFill = document.getElementById('progressFill');
+      const currentPageElement = document.getElementById('currentPage');
+      
+      progressFill.style.width = progressPercentage + '%';
+      currentPageElement.textContent = '19';
+      progressFill.style.background = '#003366';
+    }
+    
+    // 初期プログレス更新
+    document.addEventListener('DOMContentLoaded', function() {
+      updateProgress();
+      
+      // フォームの自動保存機能
+      const form = document.getElementById('surveyForm');
+      const formNumber = 18;
+      
+      if (form) {
+        function collectFormData() {
+          const formData = new FormData(form);
+          const data = {};
+          for (let [key, value] of formData.entries()) {
+            if (data[key]) {
+              if (Array.isArray(data[key])) {
+                data[key].push(value);
+              } else {
+                data[key] = [data[key], value];
+              }
+            } else {
+              data[key] = value;
+            }
+          }
+          const canvases = form.querySelectorAll('canvas');
+          canvases.forEach((canvas, index) => {
+            try {
+              const canvasId = canvas.id || `canvas_${index}`;
+              data[canvasId + '_image'] = canvas.toDataURL('image/png');
+            } catch (e) {
+              console.error('Canvas保存エラー:', e);
+            }
+          });
+          const allInputs = form.querySelectorAll('input, select, textarea');
+          allInputs.forEach(input => {
+            if (!input.name) return;
+            const isProcessed = data.hasOwnProperty(input.name);
+            if (input.type === 'checkbox') {
+              if (input.checked) {
+                if (!data[input.name]) data[input.name] = [];
+                if (Array.isArray(data[input.name])) {
+                  if (!data[input.name].includes(input.value)) data[input.name].push(input.value);
+                } else {
+                  data[input.name] = [data[input.name], input.value];
+                }
+              }
+            } else if (input.type === 'radio') {
+              if (input.checked && !isProcessed) data[input.name] = input.value;
+            } else {
+              if (!isProcessed && input.value) data[input.name] = input.value;
+            }
+          });
+          return data;
+        }
+        
+        form.addEventListener('input', function() {
+          const data = collectFormData();
+          localStorage.setItem(getFormStorageKey(formNumber), JSON.stringify(data));
+          console.log(`Form ${formNumber} データを自動保存しました`);
+        });
+        
+        form.addEventListener('change', function() {
+          const data = collectFormData();
+          localStorage.setItem(getFormStorageKey(formNumber), JSON.stringify(data));
+          console.log(`Form ${formNumber} データを自動保存しました`);
+        });
+        
+        const savedData = localStorage.getItem(getFormStorageKey(formNumber));
+        if (savedData) {
+          const data = JSON.parse(savedData);
+          Object.keys(data).forEach(key => {
+            const elements = form.elements[key];
+            if (elements) {
+              if (elements.length > 1) {
+                Array.from(elements).forEach(el => {
+                  if (el.type === 'checkbox' || el.type === 'radio') {
+                    if (Array.isArray(data[key])) {
+                      el.checked = data[key].includes(el.value);
+                    } else {
+                      el.checked = el.value === data[key];
+                    }
+                  }
+                });
+              } else if (elements.length === 1) {
+                const el = elements[0];
+                if (el.type === 'checkbox' || el.type === 'radio') {
+                  if (Array.isArray(data[key])) {
+                    el.checked = data[key].includes(el.value);
+                  } else {
+                    el.checked = el.value === data[key];
+                  }
+                } else {
+                  el.value = data[key] || '';
+                }
+              } else {
+                if (elements.type === 'checkbox' || elements.type === 'radio') {
+                  if (Array.isArray(data[key])) {
+                    elements.checked = data[key].includes(elements.value);
+                  } else {
+                    elements.checked = elements.value === data[key];
+                  }
+                } else {
+                  elements.value = data[key] || '';
+                }
+              }
+            }
+          });
+          console.log(`Form ${formNumber} の保存データを復元しました`);
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
+
+
+

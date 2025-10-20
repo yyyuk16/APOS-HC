@@ -1,0 +1,770 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>APOS-HC 調査票 - フォーム3</title>
+  <link rel="stylesheet" href="main.css">
+  <style>
+    /* セクション表示の修正 */
+    .section { 
+      display: block !important; 
+    }
+    
+    /* iPad用の追加スタイル */
+    @media screen and (min-width: 768px) {
+      body {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      
+      .container {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        padding: 25px;
+        margin: 15px 0;
+      }
+      
+      h1 {
+        font-size: 1.8em;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 15px;
+      }
+      
+      h2 {
+        font-size: 1.4em;
+        color: #34495e;
+        margin: 25px 0 15px 0;
+        padding: 10px 0;
+        border-left: 4px solid #3498db;
+        padding-left: 15px;
+        background: linear-gradient(90deg, #f8f9fa 0%, transparent 100%);
+      }
+      
+      fieldset {
+        border: 2px solid #e0e6ed;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        background: #fafbfc;
+        transition: all 0.3s ease;
+      }
+      
+      fieldset:hover {
+        border-color: #3498db;
+        box-shadow: 0 2px 10px rgba(52, 152, 219, 0.1);
+      }
+      
+      legend {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #2c3e50;
+        padding: 0 10px;
+        background: #fff;
+        border-radius: 6px;
+        border: 2px solid #3498db;
+      }
+      
+      label {
+        display: block;
+        margin: 10px 0 5px 0;
+        font-weight: 600;
+        color: #34495e;
+        font-size: 1em;
+      }
+      
+      input[type="text"], input[type="tel"], input[type="email"], 
+      input[type="number"], select, textarea {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 1em;
+        border: 2px solid #e0e6ed;
+        border-radius: 6px;
+        background: #fff;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+        margin-top: 5px;
+      }
+      
+      input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        transform: translateY(-2px);
+      }
+      
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+        font-family: inherit;
+      }
+      
+      .daily-rhythm-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      }
+      
+      .daily-rhythm-table th {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+        padding: 12px 10px;
+        font-size: 1em;
+        font-weight: bold;
+        text-align: center;
+      }
+      
+      .daily-rhythm-table td {
+        padding: 10px;
+        border-bottom: 1px solid #e8f4f8;
+        text-align: center;
+        vertical-align: middle;
+      }
+      
+      .daily-rhythm-table td:first-child {
+        background: #f8f9fa;
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 0.9em;
+        width: 150px;
+      }
+      
+      .daily-rhythm-table input {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 0.9em;
+        border: 2px solid #e0e6ed;
+        border-radius: 6px;
+        background: #fff;
+        transition: all 0.3s ease;
+        margin: 0;
+      }
+      
+      .daily-rhythm-table input:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+      }
+      
+      .daily-rhythm-table tr:hover {
+        background: #f8f9fa;
+      }
+      
+      .note {
+        font-size: 0.9em;
+        color: #7f8c8d;
+        margin-top: 10px;
+        padding: 10px;
+        background: #ecf0f1;
+        border-radius: 6px;
+        border-left: 3px solid #95a5a6;
+      }
+      
+      .nav-buttons {
+        margin-top: 25px;
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+      }
+      
+      .nav-buttons button {
+        padding: 12px 25px;
+        font-size: 1em;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-width: 120px;
+      }
+      
+      .nav-buttons button:first-child {
+        background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+        color: white;
+      }
+      
+      .nav-buttons button:last-child {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+      }
+      
+      .nav-buttons button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      }
+      
+      .nav-buttons button:active {
+        transform: translateY(-1px);
+      }
+      
+      /* プログレスバーのスタイル */
+      .progress-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid #e0e0e0;
+        padding: 20px;
+        z-index: 1000;
+      }
+      
+      .progress-wrapper {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      
+      .progress-bar {
+        width: 100%;
+        height: 6px;
+        background: #f0f0f0;
+        border-radius: 3px;
+        overflow: hidden;
+        margin-bottom: 15px;
+      }
+      
+      .progress-fill {
+        height: 100%;
+        background: #003366;
+        border-radius: 3px;
+        transition: width 0.5s ease;
+        width: 85%;
+      }
+      
+      .progress-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.1em;
+        color: #333;
+        font-weight: 500;
+      }
+      
+      .progress-page {
+        color: #003366;
+        font-weight: 600;
+      }
+      
+      .progress-total {
+        color: #999;
+      }
+      
+      /* フォームの下部に余白を追加（プログレスバーの分） */
+      body {
+        padding-bottom: 100px;
+      }
+    }
+    
+    /* タブレット用の追加調整 */
+    @media screen and (max-width: 1024px) and (min-width: 768px) {
+      .daily-rhythm-table td:first-child {
+        width: 140px;
+      }
+      
+      .daily-rhythm-table input {
+        font-size: 0.85em;
+        padding: 6px 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+<h1>APOS-HC 調査票</h1>
+<form id="surveyForm">
+<div class="section" id="section-lifestyle-habits">
+  <h2>Ⅰ　褥瘡</h2>
+  <table style="width:100%; border-collapse:collapse; margin-bottom:1.5em;">
+    <tr>
+      <td style="width:8%; border:1px solid #b0d6e6; text-align:center; vertical-align:middle;">①深さ</td>
+      <td style="border:1px solid #b0d6e6;">
+        <select name="wound_depth" id="wound_depth" style="width:98%; font-size:1em;" onchange="calculateWoundScore()">
+          <option value="">選択</option>
+          <option value="d0">d0：皮膚損傷・発赤なし</option>
+          <option value="d1">d1：損傷する危険</option>
+          <option value="D3">d2：真皮までの損傷</option>
+          <option value="D3">d3：皮下組織までの損傷</option>
+          <option value="D4">d4：皮下組織を超える損傷</option>
+          <option value="D5">d5：関節腔、体腔に至る損傷</option>
+          <option value="DDTI">DTI：深部損傷褥瘡(DTI)疑い</option>
+          <option value="DU">DU：壊死組織で覆われ深さの判定が不能</option>
+        </select>
+        <div style="margin-top:0.3em;"></div>
+        ＊　創内の一番深い部分で評価、改善に伴い創底が浅くなった場合、これと相応の深さとして評価する<br>
+        ＊　深さ（d/D）DTI・Uは点数に加えない<br>
+        ＊　深部損傷褥瘡（DTI）疑いは、視診・触診・補助データ（発生経緯・血液検査・画像診断等から判断する）
+    </div>  
+      </td>
+    </tr>
+
+    <tr>
+      <td style="width:8%; border:1px solid #b0d6e6; text-align:center; vertical-align:middle;">②滲出液</td>
+      <td style="border:1px solid #b0d6e6;">
+        <select name="wound_exudate" id="wound_exudate" style="width:98%; font-size:1em;" onchange="calculateWoundScore()">
+          <option value="">選択</option>
+          <option value="e0">e0：なし</option>
+          <option value="e1">e1：少量・毎日のドレッシング交換をしない</option>
+          <option value="e3">e3：中等量・1日1回のドレッシング交換を必要とする</option>
+          <option value="e5">E6：多量・1日2回以上のドレッシング交換を必要とする</option>
+        </select>
+    </td>
+    </tr>
+
+<tr>
+  <td style="width:8%; border:1px solid #b0d6e6; text-align:center; vertical-align:middle;">③大きさ</td>
+  <td style="border:1px solid #b0d6e6;">
+    <select name="wound_size" id="wound_size" style="width:98%; font-size:1em;" onchange="calculateWoundScore()">
+      <option value="">選択</option>
+      <option value="s0">s0：皮膚損傷なし</option>
+      <option value="s3">s3：4未満(長径cm×短径（長径と直行する最⻑径）cm)</option>
+      <option value="s6">s6：4以上16未満</option>
+      <option value="s8">s8：16以上36未満</option>
+      <option value="s9">s9：36以上64未満</option>
+      <option value="s12">s12：64以上100未満</option>
+      <option value="s15">S15：100以上</option>
+    </select>
+    <div style="margin-top:0.3em;">
+        ＊　皮膚損傷範囲を測定、【長径cm×短径cm】<br>
+        ＊　短径とは、長径と直交する最大径である<br>
+        ＊　持続する発赤の場合も皮膚損傷に準じて評価する
+          </div>
+  </td>
+</tr>
+
+<tr>
+  <td style="width:8%; border:1px solid #b0d6e6; text-align:center; vertical-align:middle;">④炎症<br>感染</td>
+  <td style="border:1px solid #b0d6e6;">
+    <select name="wound_infection" id="wound_infection" style="width:98%; font-size:1em;" onchange="calculateWoundScore()">
+      <option value="">選択</option>
+      <option value="i0">i0：局所の炎症兆候なし</option>
+      <option value="i1">i1：局所の炎症兆候あり（創周囲の発赤・腫脹・熱感・疼痛）</option>
+      <option value="i3">I3：臨床的定着疑い（創面にぬめりがあり、浸出液が多い。肉芽があれば、浮腫性で脆弱など）＊5</option>
+      <option value="i9">I3C：局所の明らかな感染徴候あり（炎症兆候、膿、悪臭など）＊5</option>
+      <option value="i9">I9：全身的影響あり</option>
+    </select>
+      <div style="margin-top:0.3em;">
+        ＊　「３C」あるいは「3」いずれかを記載する。いずれの場合も点数は３点とする　      </div>
+    </div>
+  </td>
+</tr>
+
+<tr>
+  <td style="width:8%; border:1px solid #b0d6e6; text-align:center; vertical-align:middle;">⑤肉芽組織　</td>
+  <td style="border:1px solid #b0d6e6;">
+    <select name="wound_redness_area" id="wound_redness_area" style="width:98%; font-size:1em;" onchange="calculateWoundScore()">
+      <option value="">選択</option>
+      <option value="r0">g0：創が治癒した場合、創の浅い場合、深部損傷褥瘡(DTI)疑いの場合）</option>
+      <option value="r1">g1：良性肉芽が創面の90％以上を占める</option>
+      <option value="r3">g3：良性肉芽が創面の50％以上90％未満を占める</option>
+      <option value="g4">G4：良性肉芽が創面の10％以上50％未満を占める</option>
+      <option value="g5">G5：良性肉芽が創面の10％未満を占める</option>
+      <option value="g6">G6：良性肉芽が全く形成されていない</option>
+    </select>
+
+    </div>
+  </td>
+</tr>
+<tr>
+  <td style="width:8%; border:1px solid #b0d6e6; text-align:center; vertical-align:middle;">⑥壊死組織</td>
+  <td style="border:1px solid #b0d6e6;">
+    <select name="wound_necrosis" id="wound_necrosis" style="width:98%; font-size:1em;" onchange="calculateWoundScore()">
+      <option value="">選択</option>
+      <option value="n0">n0：壊死組織なし</option>
+      <option value="n3">N3：柔らかい壊死組織あり</option>
+      <option value="n6">N6：硬く厚い密着した壊死組織あり</option>
+    </select>
+    <div style="margin-top:0.3em;">
+        ＊　混在している場合は全体的多い病態で評価<br>
+      </div>
+    </div>
+  </td>
+</tr>
+
+<tr>
+  <td style="width:8%; border:1px solid #b0d6e6; text-align:center; vertical-align:middle;">⑦ポケット</td>
+  <td style="border:1px solid #b0d6e6;">
+    <select name="wound_pocket" id="wound_pocket" style="width:98%; font-size:1em;" onchange="calculateWoundScore()">
+      <option value="">選択</option>
+      <option value="p0">p0：ポケットなし</option>
+      <option value="p6">p6：4未満</option>
+      <option value="p6_4to16">p6：4以上16未満</option>
+      <option value="p12">p12：16以上36未満</option>
+      <option value="p24">p24：36以上</option>
+    </select>
+    <div style="margin-top:0.3em;">
+        ＊ 毎回同じ体位で、ポケット全周(潰瘍面も含め)［長径cm×短径cm］から潰瘍の大きさを差し引いたもの
+      </div>
+    </div>
+  </td>
+</tr>
+
+<tr>
+  <td colspan="2" style="text-align:center; padding: 1.7em 0; background: #f8fafd">
+    <span style="font-weight:bold; color:#003366;">合計点：</span>
+    <span id="wound-total-score" style="font-weight:bold; color:#1a5577; font-size:1.3em;">0</span>
+    <span style="font-weight:bold;">点</span>
+  </td>
+</tr>
+
+<script>
+function getNumScore(val) {
+  // d3 など : アルファベット＋数字 or 完全大文字もある
+  // アルファベットのみ → 0点
+  // d1, s6 など → 1, 6 など
+  if (!val) return 0;
+  // 完全にアルファベットだけ（数字無）、または選択肢なし
+  let match = val.match(/\d+/);
+  if (match) {
+    return parseInt(match[0], 10);
+  }
+  return 0;
+}
+
+function calculateWoundScore() {
+  // 褥瘡項目のみ。項目IDは固定
+  const ids = [
+    'wound_depth',
+    'wound_exudate',
+    'wound_size',
+    'wound_infection',
+    'wound_redness_area',
+    'wound_necrosis',
+    'wound_pocket'
+  ];
+  // DTI/DUについては特例: wound_depthでDTI,DU選択時は0点
+  let total = 0;
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    let val = el ? el.value : "";
+    // wound_depthだけ特別扱い
+    if (id === "wound_depth" && (val === "DDTI" || val === "DU")) {
+      total += 0;
+    }
+    else {
+      total += getNumScore(val);
+    }
+  });
+  document.getElementById("wound-total-score").textContent = total;
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  calculateWoundScore(); // 初期化にも反映
+  // 念のため全部にイベント追加（万一JS追加DOM読み込み時もカバー）
+  [
+    'wound_depth',
+    'wound_exudate',
+    'wound_size',
+    'wound_infection',
+    'wound_redness_area',
+    'wound_necrosis',
+    'wound_pocket'
+  ].forEach(id => {
+    let el = document.getElementById(id);
+    if (el)
+      el.addEventListener('change', calculateWoundScore);
+  });
+});
+</script>
+
+
+</table>
+</fieldset>
+</div>
+
+
+
+
+
+
+<div class="section" id="section-lifestyle-habits">
+    <h2>Ⅱ　痛み</h2>
+    <table style="width:100%; border-collapse:collapse; margin-bottom:1.5em;">
+<tr>
+  <td style="border:1px solid #b0d6e6;">
+    <div style="margin: 0.5em 0;">
+      <iframe src="formpre.html" style="width:100%; min-height:1300px; border:none; border-radius:10px; background:#fafbfc; overflow:hidden;" scrolling="no"></iframe>
+    </div>
+  </td>
+</tr>
+
+</table>
+</fieldset>
+</div>
+
+
+<div class="section" id="section-lifestyle-habits">
+    <h2>Ⅲ　麻痺</h2>
+    <table style="width:100%; border-collapse:collapse; margin-bottom:1.5em;">
+<tr>
+  <td style="border:1px solid #b0d6e6;">
+    <div style="margin: 0.5em 0;">
+        <iframe src="formmahi.html" style="width:100%; min-height:1300px; border:none; border-radius:10px; background:#fafbfc; overflow:hidden;" scrolling="no"></iframe>
+    </div>
+ 
+      </ul>
+    </div>
+  </td>
+</tr>
+</table>
+</fieldset>
+</div>
+
+
+<div class="section" id="section-lifestyle-habits">
+    <h2>Ⅱ　関節拘縮</h2>
+    <table style="width:100%; border-collapse:collapse; margin-bottom:1.5em;">
+<tr>
+  <td style="border:1px solid #b0d6e6;">
+    <div style="margin: 0.5em 0;">
+      <iframe src="formkannsetu.html" style="width:100%; min-height:1300px; border:none; border-radius:10px; background:#fafbfc; overflow:hidden;" scrolling="no"></iframe>
+    </div>
+  </td>
+</tr>
+</table>
+</fieldset>
+</div>
+
+
+</table>
+    </fieldset>
+  
+  
+      <div class="nav-buttons">
+        <button type="button" onclick="location.href='form15.html'">← 戻る</button>
+        <button type="button" onclick="location.href='form17.html'">次へ →</button>
+      </div>
+    </form>
+  </div>
+  
+  <script>
+  // 高額費用の利用：理由欄表示
+  function toggleExpensiveCostDetail() {
+    const val = document.getElementById('expensive_cost_usage').value;
+    const reasonDiv = document.getElementById('expensive_cost_reason');
+    if (val === '2a' || val === '2b') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費医療の利用：理由欄表示
+  function togglePublicMedicalReason() {
+    const val = document.getElementById('public_medical_usage').value;
+    const reasonDiv = document.getElementById('public_medical_reason');
+    if (val === '2') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費医療の詳細：病名入力欄表示
+  function toggleMedicalDiseaseInput() {
+    const val = document.getElementById('public_medical_detail').value;
+    const inputDiv = document.getElementById('medical_disease_input');
+    if (val === '5' || val === '3') {
+      inputDiv.style.display = 'block';
+    } else {
+      inputDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費制度の利用：理由欄表示
+  function togglePublicSystemReason() {
+    const val = document.getElementById('public_system_usage').value;
+    const reasonDiv = document.getElementById('public_system_reason');
+    if (val === '2') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費制度の詳細：詳細入力欄表示
+  function toggleSystemDetailInput() {
+    const val = document.getElementById('public_system_detail').value;
+    const inputDiv = document.getElementById('system_detail_input');
+    if (val === '1' || val === '2') {
+      inputDiv.style.display = 'block';
+    } else {
+      inputDiv.style.display = 'none';
+    }
+  }
+
+  // フォームの自動保存機能
+  const form = document.getElementById('surveyForm');
+  form.addEventListener('input', () => {
+    const data = Object.fromEntries(new FormData(form));
+    localStorage.setItem('surveyData_form2', JSON.stringify(data));
+  });
+
+  // 保存されたデータの復元
+  window.addEventListener('load', () => {
+    const saved = localStorage.getItem('surveyData_form2');
+    if (saved) {
+      const data = JSON.parse(saved);
+      Object.keys(data).forEach(key => {
+        const el = form.elements[key];
+        if (el) {
+          el.value = data[key];
+        }
+      });
+    }
+  });
+</script>
+
+  <!-- プログレスバー -->
+  <div class="progress-container">
+    <div class="progress-wrapper">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-info">
+        <span class="progress-page" id="currentPage">17</span>
+        <span class="progress-total">/ 20</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // プログレスバーの更新
+    function updateProgress() {
+      const progressPercentage = (17 / 20) * 100;
+      const progressFill = document.getElementById('progressFill');
+      const currentPageElement = document.getElementById('currentPage');
+      
+      progressFill.style.width = progressPercentage + '%';
+      currentPageElement.textContent = '17';
+      progressFill.style.background = '#003366';
+    }
+    
+    // 初期プログレス更新
+    document.addEventListener('DOMContentLoaded', function() {
+      updateProgress();
+      
+      // フォームの自動保存機能
+      const form = document.getElementById('surveyForm');
+      const formNumber = 16;
+      
+      if (form) {
+        function collectFormData() {
+          const formData = new FormData(form);
+          const data = {};
+          for (let [key, value] of formData.entries()) {
+            if (data[key]) {
+              if (Array.isArray(data[key])) {
+                data[key].push(value);
+              } else {
+                data[key] = [data[key], value];
+              }
+            } else {
+              data[key] = value;
+            }
+          }
+          const canvases = form.querySelectorAll('canvas');
+          canvases.forEach((canvas, index) => {
+            try {
+              const canvasId = canvas.id || `canvas_${index}`;
+              data[canvasId + '_image'] = canvas.toDataURL('image/png');
+            } catch (e) {
+              console.error('Canvas保存エラー:', e);
+            }
+          });
+          const allInputs = form.querySelectorAll('input, select, textarea');
+          allInputs.forEach(input => {
+            if (!input.name) return;
+            const isProcessed = data.hasOwnProperty(input.name);
+            if (input.type === 'checkbox') {
+              if (input.checked) {
+                if (!data[input.name]) data[input.name] = [];
+                if (Array.isArray(data[input.name])) {
+                  if (!data[input.name].includes(input.value)) data[input.name].push(input.value);
+                } else {
+                  data[input.name] = [data[input.name], input.value];
+                }
+              }
+            } else if (input.type === 'radio') {
+              if (input.checked && !isProcessed) data[input.name] = input.value;
+            } else {
+              if (!isProcessed && input.value) data[input.name] = input.value;
+            }
+          });
+          return data;
+        }
+        
+        form.addEventListener('input', function() {
+          const data = collectFormData();
+          localStorage.setItem(`surveyData_form${formNumber}`, JSON.stringify(data));
+          console.log(`Form ${formNumber} データを自動保存しました`);
+        });
+        
+        form.addEventListener('change', function() {
+          const data = collectFormData();
+          localStorage.setItem(`surveyData_form${formNumber}`, JSON.stringify(data));
+          console.log(`Form ${formNumber} データを自動保存しました`);
+        });
+        
+        const savedData = localStorage.getItem(`surveyData_form${formNumber}`);
+        if (savedData) {
+          const data = JSON.parse(savedData);
+          Object.keys(data).forEach(key => {
+            const elements = form.elements[key];
+            if (elements) {
+              if (elements.length > 1) {
+                Array.from(elements).forEach(el => {
+                  if (el.type === 'checkbox' || el.type === 'radio') {
+                    if (Array.isArray(data[key])) {
+                      el.checked = data[key].includes(el.value);
+                    } else {
+                      el.checked = el.value === data[key];
+                    }
+                  }
+                });
+              } else if (elements.length === 1) {
+                const el = elements[0];
+                if (el.type === 'checkbox' || el.type === 'radio') {
+                  if (Array.isArray(data[key])) {
+                    el.checked = data[key].includes(el.value);
+                  } else {
+                    el.checked = el.value === data[key];
+                  }
+                } else {
+                  el.value = data[key] || '';
+                }
+              } else {
+                if (elements.type === 'checkbox' || elements.type === 'radio') {
+                  if (Array.isArray(data[key])) {
+                    elements.checked = data[key].includes(elements.value);
+                  } else {
+                    elements.checked = elements.value === data[key];
+                  }
+                } else {
+                  elements.value = data[key] || '';
+                }
+              }
+            }
+          });
+          console.log(`Form ${formNumber} の保存データを復元しました`);
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
+
+
+

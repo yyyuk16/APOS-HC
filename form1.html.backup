@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>APOS-HC 入力フォーム - フォーム1</title>
+  <link rel="stylesheet" href="main.css">
+  <style>
+    /* セクション表示の修正 */
+    .section { 
+      display: block !important; 
+    }
+    
+    /* iPad用の追加スタイル */
+    @media screen and (min-width: 768px) {
+      body {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      
+      .container {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        padding: 25px;
+        margin: 15px 0;
+      }
+      
+      h1 {
+        font-size: 1.8em;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 15px;
+      }
+      
+      h2 {
+        font-size: 1.4em;
+        color: #34495e;
+        margin: 25px 0 15px 0;
+        padding: 10px 0;
+        border-left: 4px solid #3498db;
+        padding-left: 15px;
+        background: linear-gradient(90deg, #f8f9fa 0%, transparent 100%);
+      }
+      
+      fieldset {
+        border: 2px solid #e0e6ed;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        background: #fafbfc;
+        transition: all 0.3s ease;
+      }
+      
+      fieldset:hover {
+        border-color: #3498db;
+        box-shadow: 0 2px 10px rgba(52, 152, 219, 0.1);
+      }
+      
+      legend {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #2c3e50;
+        padding: 0 10px;
+        background: #fff;
+        border-radius: 6px;
+        border: 2px solid #3498db;
+      }
+      
+      label {
+        display: block;
+        margin: 10px 0 5px 0;
+        font-weight: 600;
+        color: #34495e;
+        font-size: 1em;
+      }
+      
+      input[type="text"], input[type="tel"], input[type="email"], 
+      input[type="number"], input[type="date"], select, textarea {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 1em;
+        border: 2px solid #e0e6ed;
+        border-radius: 6px;
+        background: #fff;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+        margin-top: 5px;
+      }
+      
+      input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        transform: translateY(-2px);
+      }
+      
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+        font-family: inherit;
+      }
+      
+      .family-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+      }
+      
+      .family-table th {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+        padding: 20px 15px;
+        font-size: 1.2em;
+        font-weight: bold;
+        text-align: center;
+      }
+      
+      .family-table td {
+        padding: 18px 15px;
+        border-bottom: 1px solid #e8f4f8;
+        text-align: center;
+        vertical-align: middle;
+      }
+      
+      .family-table td:first-child {
+        background: #f8f9fa;
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 1.1em;
+      }
+      
+      .family-table input {
+        width: 100%;
+        padding: 12px 15px;
+        font-size: 1.05em;
+        border: 2px solid #e0e6ed;
+        border-radius: 8px;
+        background: #fff;
+        transition: all 0.3s ease;
+        margin: 0;
+      }
+      
+      .family-table input:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+      }
+      
+      .family-table tr:hover {
+        background: #f8f9fa;
+      }
+      
+      .note {
+        font-size: 1em;
+        color: #7f8c8d;
+        margin-top: 15px;
+        padding: 15px;
+        background: #ecf0f1;
+        border-radius: 8px;
+        border-left: 4px solid #95a5a6;
+      }
+      
+      .nav-buttons {
+        margin-top: 25px;
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+      }
+      
+      .nav-buttons button {
+        padding: 12px 25px;
+        font-size: 1em;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-width: 120px;
+      }
+      
+      .nav-buttons button:first-child {
+        background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+        color: white;
+      }
+      
+      .nav-buttons button:last-child {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+      }
+      
+      .nav-buttons button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      }
+      
+      .nav-buttons button:active {
+        transform: translateY(-1px);
+      }
+      
+      .family-block {
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 2px solid #e0e6ed;
+        border-radius: 8px;
+        background: #f8f9fa;
+      }
+      
+      canvas {
+        border: 2px solid #e0e6ed;
+        border-radius: 8px;
+        background: #fff;
+      }
+      
+      .toggle {
+        appearance: none;
+        width: 60px;
+        height: 30px;
+        background: #ccc;
+        border-radius: 15px;
+        position: relative;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      
+      .toggle:checked {
+        background: #4CAF50;
+      }
+      
+      .toggle:before {
+        content: "";
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 24px;
+        height: 24px;
+        background: white;
+        border-radius: 50%;
+        transition: 0.3s ease;
+      }
+      
+      .toggle:checked:before {
+        transform: translateX(30px);
+      }
+      
+      /* プログレスバーのスタイル */
+      .progress-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid #e0e0e0;
+        padding: 20px;
+        z-index: 1000;
+      }
+      
+      .progress-wrapper {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      
+      .progress-bar {
+        width: 100%;
+        height: 6px;
+        background: #f0f0f0;
+        border-radius: 3px;
+        overflow: hidden;
+        margin-bottom: 15px;
+      }
+      
+      .progress-fill {
+        height: 100%;
+        background: #003366;
+        border-radius: 3px;
+        transition: width 0.5s ease;
+        width: 10%;
+      }
+      
+      .progress-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.1em;
+        color: #333;
+        font-weight: 500;
+      }
+      
+      .progress-page {
+        color: #003366;
+        font-weight: 600;
+      }
+      
+      .progress-total {
+        color: #999;
+      }
+      
+      /* フォームの下部に余白を追加（プログレスバーの分） */
+      body {
+        padding-bottom: 100px;
+      }
+    }
+    
+    /* タブレット用の追加調整 */
+    @media screen and (max-width: 1024px) and (min-width: 768px) {
+      .family-table input {
+        font-size: 1em;
+        padding: 10px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>APOS-HC 調査票</h1>
+  <form id="surveyForm">
+
+  <!-- Ⅰ 基本情報 の続き -->
+
+  <div class="section active" id="section-1">
+    <h2>Ⅰ 本人等の連絡先・保険・公費制度</h2>
+
+    <!-- 1. 現住所 -->
+    <fieldset>
+      <legend>1 現住所</legend>
+      <label>郵便番号 <input type="text" name="zipcode" maxlength="8" placeholder="例: 123-4567"></label>
+      <label>住所 <input type="text" name="address" placeholder="例: ○○市○○町1-2-3 マンション名 部屋番号等"></label>
+      <label>携帯番号 <input type="tel" name="mobile"></label>
+      <label>電話番号 <input type="tel" name="tel"></label>
+      <label>メールアドレス <input type="email" name="email"></label>
+    </fieldset>
+
+    <!-- 3. 本人住宅 -->
+    <fieldset>
+      <legend>2 本人住宅</legend>
+      <label>住宅種類
+        <select name="housing_type">
+          <option value="">選択してください</option>
+          <option value="自宅">1. 自宅</option>
+          <option value="アパート">2. アパート</option>
+          <option value="一般マンション">3. 一般マンション</option>
+          <option value="高齢者マンション">4. 高齢者マンション</option>
+          <option value="グループホーム">5. グループホーム</option>
+          <option value="自宿舎">6. 借間</option>
+          <option value="福祉施設">7. 福祉施設</option>
+          <option value="老健施設">8. 生活訓練施設</option>
+          <option value="入所療養施設">9. 入所授産施設</option>
+          <option value="その他">10. その他</option>
+        </select>
+        <input type="text" name="housing_type_other" id="housing_type_other" style="width: 60%; margin-top:0.5em; display:none;" placeholder="その他の場合は階数をご記入ください">
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            const select = document.querySelector('select[name="housing_type"]');
+            const otherInput = document.getElementById('housing_type_other');
+            if (select && otherInput) {
+              function toggleOtherInput() {
+                if (select.value === "その他") {
+                  otherInput.style.display = "block";
+                } else {
+                  otherInput.style.display = "none";
+                  otherInput.value = "";
+                }
+              }
+              select.addEventListener('change', toggleOtherInput);
+              // 初期表示
+              toggleOtherInput();
+            }
+          });
+        </script>
+      </label>
+    </fieldset>
+
+    <!-- 4. 緊急連絡者 -->
+    <fieldset>
+      <legend>3. 緊急連絡者</legend>
+      <label>氏名 <input type="text" name="emergency_contact_name"></label>
+      <label>続柄 <input type="text" name="emergency_contact_relation"></label>
+      <label>メールアドレス <input type="email" name="emergency_contact_email"></label>
+      <label>携帯番号 <input type="tel" name="emergency_contact_mobile"></label>
+      <label>電話番号 <input type="tel" name="emergency_contact_tel"></label>
+    </fieldset>
+
+    <!-- 5. 主な相談者 -->
+    <fieldset>
+      <legend>4. 本人の主な相談者</legend>
+      <label>氏名 <input type="text" name="main_consultant_name"></label>
+      <label>本人との間柄 <input type="text" name="main_consultant_relation"></label>
+      <label>住所 <input type="text" name="main_consultant_address"></label>
+      <label>電話番号 <input type="tel" name="main_consultant_tel"></label>
+      <label>携帯番号 <input type="tel" name="main_consultant_mobile"></label>
+    </fieldset>
+
+
+
+
+    <!-- 保険情報と介護保険情報 -->
+    <div style="margin-bottom: 20px;">
+      <!-- 介護保険の給付情報 -->
+      <div>
+    <fieldset>
+          <legend>5. 介護保険の給付情報</legend>
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="border: 1px solid #000; padding: px; background: #f5f5f5; width: 30%;">保険者名</td>
+              <td style="border: 1px solid #000; padding: 8px;">
+                <input type="text" name="insurer_name" style="width: 100%;" placeholder="保険者名を入力してください">
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #000; padding: 8px; background: #f5f5f5; width: 30%;">利用者負担割合</td>
+              <td style="border: 1px solid #000; padding: 8px;">
+                <select name="user_burden_ratio" style="width: 100%;">
+          <option value="">選択してください</option>
+                  <option value="1割">1. 1割</option>
+                  <option value="2割">2. 2割</option>
+                  <option value="3割">3. 3割</option>
+        </select>
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #000; padding: 8px; background: #f5f5f5;">①要介護認定日</td>
+              <td style="border: 1px solid #000; padding: 8px;">
+                <input type="number" name="certification_year" min="1900" max="2100" style="width: 6em;" placeholder="年">年<br>
+                <input type="number" name="certification_month" min="1" max="12" style="width: 3em;" placeholder="月">月
+                <input type="number" name="certification_day" min="1" max="31" style="width: 3em;" placeholder="日">日<br>
+                <label> 未(見込み)</label>
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #000; padding: 8px; background: #f5f5f5;">②有効期間</td>
+              <td style="border: 1px solid #000; padding: 8px;">
+                <input type="number" name="valid_start_year" min="1900" max="2100" style="width: 4em;" placeholder="年">年
+                <input type="number" name="valid_start_month" min="1" max="12" style="width: 3em;" placeholder="月">月
+                <input type="number" name="valid_start_day" min="1" max="31" style="width: 3em;" placeholder="日">日
+                〜
+                <input type="number" name="valid_end_year" min="1900" max="2100" style="width: 4em;" placeholder="年">年
+                <input type="number" name="valid_end_month" min="1" max="12" style="width: 3em;" placeholder="月">月
+                <input type="number" name="valid_end_day" min="1" max="31" style="width: 3em;" placeholder="日">日
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #000; padding: 8px; background: #f5f5f5;">③要介護状態区分</td>
+              <td style="border: 1px solid #000; padding: 8px;">
+                <label><input type="radio" name="care_status" value="要支援"> 要支援(1. 2)</label>
+                <label><input type="radio" name="care_status" value="要介護"> 要介護(1. 2. 3. 4. 5)</label>
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #000; padding: 8px; background: #f5f5f5;">④支給限度額</td>
+              <td style="border: 1px solid #000; padding: 8px;">
+                <input type="number" name="benefit_limit" min="0" style="width: 8em;" placeholder="単位数"> 単位
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #000; padding: 8px; background: #f5f5f5;">⑤認知症の自立度</td>
+              <td style="border: 1px solid #000; padding: 8px;">
+                <select name="dementia_level" style="width: 100%;">
+          <option value="">選択してください</option>
+          <option value="自立">自立</option>
+                  <option value="Ⅰ">Ⅰ</option>
+          <option value="Ⅱa">Ⅱa</option>
+          <option value="Ⅱb">Ⅱb</option>
+          <option value="Ⅲa">Ⅲa</option>
+          <option value="Ⅲb">Ⅲb</option>
+          <option value="Ⅳ">Ⅳ</option>
+          <option value="M">M</option>
+        </select>
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #000; padding: 8px; background: #f5f5f5;">⑥高齢者の自立度</td>
+              <td style="border: 1px solid #000; padding: 8px;">
+                <select name="elderly_independence_level" style="width: 100%;">
+          <option value="">選択してください</option>
+          <option value="自立">自立</option>
+          <option value="J1">J1</option>
+          <option value="J2">J2</option>
+          <option value="A1">A1</option>
+          <option value="A2">A2</option>
+          <option value="B1">B1</option>
+          <option value="B2">B2</option>
+          <option value="C1">C1</option>
+          <option value="C2">C2</option>
+        </select>
+              </td>
+            </tr>
+          </table>
+        </fieldset>
+      </div>
+
+      <!-- 医療保険情報 -->
+      <div style="margin-top: 20px;">
+        <fieldset>
+          <legend>6. 医療保険情報</legend>
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="border: 1px solid #000; padding: 8px; background: #f5f5f5; width: 30%;">医療保険者名</td>
+              <td style="border: 1px solid #000; padding: 8px;">
+                <input type="text" name="insurer_name" style="width: 100%;" placeholder="保険者名を入力">
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #000; padding: 8px; background: #f5f5f5;">区分</td>
+              <td style="border: 1px solid #000; padding: 8px;">
+                <label><input type="radio" name="insurance_type" value="本人"> a.本人</label>
+                <label><input type="radio" name="insurance_type" value="家族"> b.家族</label>
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #000; padding: 8px; background: #f5f5f5;">保険種別</td>
+              <td style="border: 1px solid #000; padding: 8px;">
+                <label><input type="radio" name="insurance_category" value="国保"> ①国保</label>
+                <label><input type="radio" name="insurance_category" value="社保"> ②社保(健保)</label>
+                <label><input type="radio" name="insurance_category" value="共済"> ③共済</label>
+                <label><input type="radio" name="insurance_category" value="労災"> ④労災</label>
+                <label>
+                  <input type="radio" name="insurance_category" value="後期高齢者医療" id="kouki_kourei_radio">
+                  ⑤後期高齢者医療(75歳以上)
+      </label>
+                <span id="kouki_kourei_burden_wrapper" style="display:none; margin-left:1em;">
+                  <select name="kouki_kourei_burden" id="kouki_kourei_burden" style="width:auto;">
+                    <option value="">負担割合を選択</option>
+                    <option value="1割">1割負担</option>
+                    <option value="2割">2割負担</option>
+                    <option value="3割">3割負担</option>
+                  </select>
+                </span>
+                <script>
+                  document.addEventListener('DOMContentLoaded', function() {
+                    const koukiRadio = document.getElementById('kouki_kourei_radio');
+                    const burdenWrapper = document.getElementById('kouki_kourei_burden_wrapper');
+                    const radios = document.getElementsByName('insurance_category');
+                    function toggleBurden() {
+                      if (koukiRadio.checked) {
+                        burdenWrapper.style.display = '';
+                      } else {
+                        burdenWrapper.style.display = 'none';
+                        document.getElementById('kouki_kourei_burden').value = '';
+                      }
+                    }
+                    radios.forEach(r => {
+                      r.addEventListener('change', toggleBurden);
+                    });
+                    toggleBurden();
+                  });
+                </script>
+                 <label>
+                   <input type="radio" name="insurance_category" value="その他" id="insurance_other_radio"> ⑥その他
+                 </label>
+                 <span id="insurance_other_input_wrapper" style="display:none; margin-left:1em;">
+                   <input type="text" name="insurance_other_detail" style="width: 60%;" placeholder="その他の詳細を入力">
+                 </span>
+                 <script>
+                   document.addEventListener('DOMContentLoaded', function() {
+                     const otherRadio = document.getElementById('insurance_other_radio');
+                     const otherInputWrapper = document.getElementById('insurance_other_input_wrapper');
+                     const radios = document.getElementsByName('insurance_category');
+                     function toggleOtherInput() {
+                       if (otherRadio.checked) {
+                         otherInputWrapper.style.display = '';
+                       } else {
+                         otherInputWrapper.style.display = 'none';
+                         const input = otherInputWrapper.querySelector('input[name="insurance_other_detail"]');
+                         if (input) input.value = '';
+                       }
+                     }
+                     radios.forEach(r => {
+                       r.addEventListener('change', toggleOtherInput);
+                     });
+                     toggleOtherInput();
+                   });
+                 </script>
+
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #000; padding: 8px; background: #f5f5f5;">マイナンバーカード</td>
+              <td style="border: 1px solid #000; padding: 8px;">
+                <label><input type="radio" name="my_number_card" value="あり"> 0. あり</label>
+                <label><input type="radio" name="my_number_card" value="なし"> 1. なし</label>
+              </td>
+            </tr>
+            <tr>
+              <td style="border: 1px solid #000; padding: 8px; background: #f5f5f5;">審査委員会の意見/主治医の意見</td>
+              <td style="border: 1px solid #000; padding: 8px;">
+                <textarea name="doctor_opinion" rows="6" style="width: 100%;" placeholder="審査委員会の意見や主治医の意見を記入してください"></textarea>
+              </td>
+            </tr>
+          </table>
+    </fieldset>
+      </div>
+    </div>
+
+
+    <h2>Ⅱ 家族（別居含む）等支援者の状況</h2>
+    <!-- 家族（別居含む）等支援者の状況 -->
+    <fieldset>
+      <legend>親族のいない独居者はジェノグラムのみ記入</legend>
+
+        <!-- 家族・支援者情報テーブル -->
+        <table class="family-table" style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+          <thead>
+            <tr style="background: #f5f5f5;">
+              <th style="border: 1px solid #000; padding: 8px; width: 20%;">1 氏名・協力者 ※1</th>
+              <th style="border: 1px solid #000; padding: 8px; width: 20%;">2 介護家事支援内容 ※2</th>
+              <th style="border: 1px solid #000; padding: 8px; width: 15%;">3 同居/別居 ※3</th>
+              <th style="border: 1px solid #000; padding: 8px; width: 15%;">4 介護負担:就労/就学等</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="border: 1px solid #000; padding: 8px; vertical-align: top;">
+                <input type="text" name="family_name_1" placeholder="1.氏名" style="width: 100%; margin-bottom: 5px;"><br>
+                <input type="text" name="family_contact_1" placeholder="連絡先" style="width: 100%;">
+              </td>
+              <td style="border: 1px solid #000; padding: 8px; vertical-align: top;">
+                <label style="display: block;"><input type="radio" name="support_type_1" value="キーパーソン"> ①キーパーソン</label>
+                <label style="display: block;"><input type="radio" name="support_type_1" value="主介護者"> ②主介護者</label>
+              </td>
+              <td style="border: 1px solid #000; padding: 8px; vertical-align: top;">
+                <label style="display: block;"><input type="radio" name="living_status_1" value="同居"> 1.同居</label>
+                <label style="display: block;"><input type="radio" name="living_status_1" value="同居日中不在"> 2.同居日中不在</label>
+                <label style="display: block;"><input type="radio" name="living_status_1" value="別居"> 3.別居</label>
+              </td>
+              <td style="border: 1px solid #000; padding: 8px; vertical-align: top;">
+                <select name="care_burden_4" style="width: 100%;">
+                  <option value="">選択</option>
+                  <option value="1">1.就労中</option>
+                  <option value="2">2.就学中</option>
+                  <option value="3">3.高齢</option>
+                  <option value="4">4.要介護状態・病弱・認知症・身体障碍等</option>
+                  <option value="5">5.妊娠・育児中</option>
+                </select>
+              </td>
+       
+            </tr>
+            <tr>
+              <td style="border: 1px solid #000; padding: 8px; vertical-align: top;">
+                <input type="text" name="family_name_2" placeholder="2.氏名" style="width: 100%; margin-bottom: 5px;"><br>
+                <input type="text" name="family_contact_2" placeholder="連絡先" style="width: 100%;">
+              </td>
+              <td style="border: 1px solid #000; padding: 8px; vertical-align: top;">
+                <label style="display: block;"><input type="radio" name="support_type_2" value="キーパーソン"> ①キーパーソン</label>
+                <label style="display: block;"><input type="radio" name="support_type_2" value="主介護者"> ②主介護者</label>
+              </td>
+              <td style="border: 1px solid #000; padding: 8px; vertical-align: top;">
+                <label style="display: block;"><input type="radio" name="living_status_2" value="同居"> 1.同居</label>
+                <label style="display: block;"><input type="radio" name="living_status_2" value="同居日中不在"> 2.同居日中不在</label>
+                <label style="display: block;"><input type="radio" name="living_status_2" value="別居"> 3.別居</label>
+              </td>
+              <td style="border: 1px solid #000; padding: 8px; vertical-align: top;">
+                <select name="care_burden_4" style="width: 100%;">
+                  <option value="">選択</option>
+                  <option value="1">1.就労中</option>
+                  <option value="2">2.就学中</option>
+                  <option value="3">3.高齢</option>
+                  <option value="4">4.要介護状態・病弱・認知症・身体障碍等</option>
+                  <option value="5">5.妊娠・育児中</option>
+                </select>
+              </td>
+        
+            </tr>
+            <tr>
+              <td style="border: 1px solid #000; padding: 8px; vertical-align: top;">
+                <input type="text" name="family_name_3" placeholder="3.氏名" style="width: 100%; margin-bottom: 5px;"><br>
+                <input type="text" name="family_contact_3" placeholder="連絡先" style="width: 100%;">
+              </td>
+              <td style="border: 1px solid #000; padding: 8px; vertical-align: top; height: 120px;">
+                <input type="text" name="care_sharing_3" placeholder="介護・家事の分担内容" style="width: 100%; height: 90px;">
+              </td>
+              <td style="border: 1px solid #000; padding: 8px; vertical-align: top;">
+                <label style="display: block;"><input type="radio" name="living_status_3" value="同居"> 1.同居</label>
+                <label style="display: block;"><input type="radio" name="living_status_3" value="同居日中不在"> 2.同居日中不在</label>
+                <label style="display: block;"><input type="radio" name="living_status_3" value="別居"> 3.別居</label>
+              </td>
+              <td style="border: 1px solid #000; padding: 8px; vertical-align: top;">
+                <select name="care_burden_3" style="width: 100%;">
+                  <option value="">選択</option>
+                  <option value="1">1.就労中</option>
+                  <option value="2">2.就学中</option>
+                  <option value="3">3.高齢</option>
+                  <option value="4">4.要介護状態・病弱・認知症・身体障碍等</option>
+                  <option value="5">5.妊娠・育児中</option>
+                </select>
+              </td>
+            
+            </tr>
+            <tr>
+              <td style="border: 1px solid #000; padding: 8px; vertical-align: top;">
+                <input type="text" name="family_name_4" placeholder="4.氏名" style="width: 100%; margin-bottom: 5px;"><br>
+                <input type="text" name="family_contact_4" placeholder="連絡先" style="width: 100%;">
+              </td>
+              <td style="border: 1px solid #000; padding: 8px; vertical-align: top; height: 120px;">
+                <input type="text" name="care_sharing_3" placeholder="介護・家事の分担内容" style="width: 100%; height: 90px;">
+              </td>
+              <td style="border: 1px solid #000; padding: 8px; vertical-align: top;">
+                <label style="display: block;"><input type="radio" name="living_status_4" value="同居"> 1.同居</label>
+                <label style="display: block;"><input type="radio" name="living_status_4" value="同居日中不在"> 2.同居日中不在</label>
+                <label style="display: block;"><input type="radio" name="living_status_4" value="別居"> 3.別居</label>
+              </td>
+              <td style="border: 1px solid #000; padding: 8px; vertical-align: top;">
+                <select name="care_burden_4" style="width: 100%;">
+                  <option value="">選択</option>
+                  <option value="1">1.就労中</option>
+                  <option value="2">2.就学中</option>
+                  <option value="3">3.高齢</option>
+                  <option value="4">4.要介護状態・病弱・認知症・身体障碍等</option>
+                  <option value="5">5.妊娠・育児中</option>
+                </select>
+
+            </tr>
+          </tbody>
+        </table>
+    
+      
+        </div>
+        <script>
+        // iPad対応ジェノグラム機能
+        let genogramData = [];
+        let isDrawing = false;
+        let selectedTool = 'select';
+        
+        // Canvas初期化
+        function initGenogram() {
+          const canvas = document.getElementById('genogramCanvas');
+          const ctx = canvas.getContext('2d');
+          
+          // タッチイベント対応
+          canvas.addEventListener('touchstart', handleTouch, {passive: false});
+          canvas.addEventListener('touchmove', handleTouch, {passive: false});
+          canvas.addEventListener('touchend', handleTouch, {passive: false});
+          
+          // マウスイベント対応
+          canvas.addEventListener('mousedown', handleMouse);
+          canvas.addEventListener('mousemove', handleMouse);
+          canvas.addEventListener('mouseup', handleMouse);
+          
+          redrawGenogram();
+        }
+        
+        // タッチイベント処理
+        function handleTouch(e) {
+          e.preventDefault();
+          
+          // タッチが存在するかチェック
+          if (!e.touches || e.touches.length === 0) {
+            return;
+          }
+          
+          const touch = e.touches[0];
+          const rect = e.target.getBoundingClientRect();
+          const x = touch.clientX - rect.left;
+          const y = touch.clientY - rect.top;
+          
+          switch(e.type) {
+            case 'touchstart':
+              handlePointerDown(x, y);
+              break;
+            case 'touchmove':
+              handlePointerMove(x, y);
+              break;
+            case 'touchend':
+              handlePointerUp(x, y);
+              break;
+          }
+        }
+        
+        // マウスイベント処理
+        function handleMouse(e) {
+          const rect = e.target.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          switch(e.type) {
+            case 'mousedown':
+              handlePointerDown(x, y);
+              break;
+            case 'mousemove':
+              handlePointerMove(x, y);
+              break;
+            case 'mouseup':
+              handlePointerUp(x, y);
+              break;
+          }
+        }
+        
+        // ポインター下処理
+        function handlePointerDown(x, y) {
+          isDrawing = true;
+          if (selectedTool === 'male' || selectedTool === 'female' || selectedTool === 'deceased_male' || selectedTool === 'deceased_female') {
+            addFamilyMemberAtPosition(selectedTool, x, y);
+          } else if (selectedTool === 'line') {
+            startLineDrawing(x, y);
+          }
+        }
+        
+        // ポインタームーブ処理
+        function handlePointerMove(x, y) {
+          if (isDrawing && selectedTool === 'line') {
+            updateLineDrawing(x, y);
+          }
+        }
+        
+        // ポインター上処理
+        function handlePointerUp(x, y) {
+          if (isDrawing && selectedTool === 'line') {
+            finishLineDrawing(x, y);
+          }
+          isDrawing = false;
+        }
+        
+        // 家族メンバー追加
+        function addFamilyMember(type) {
+          selectedTool = type;
+          // ボタンの色を変更して選択状態を示す
+          document.querySelectorAll('button[onclick^="addFamilyMember"]').forEach(btn => {
+            btn.style.opacity = '0.5';
+          });
+          event.target.style.opacity = '1';
+        }
+        
+        // 指定位置に家族メンバー追加
+        function addFamilyMemberAtPosition(type, x, y) {
+          const member = {
+            type: type,
+            x: x,
+            y: y,
+            id: Date.now()
+          };
+          genogramData.push(member);
+          redrawGenogram();
+        }
+        
+        // 直線描画開始
+        function startLineDrawing(x, y) {
+          const line = {
+            type: 'line',
+            x1: x,
+            y1: y,
+            x2: x,
+            y2: y,
+            id: Date.now(),
+            isDrawing: true
+          };
+          genogramData.push(line);
+        }
+        
+        // 直線描画更新
+        function updateLineDrawing(x, y) {
+          const lastLine = genogramData.find(member => member.type === 'line' && member.isDrawing);
+          if (lastLine) {
+            lastLine.x2 = x;
+            lastLine.y2 = y;
+            redrawGenogram();
+          }
+        }
+        
+        // 直線描画完了
+        function finishLineDrawing(x, y) {
+          const lastLine = genogramData.find(member => member.type === 'line' && member.isDrawing);
+          if (lastLine) {
+            lastLine.x2 = x;
+            lastLine.y2 = y;
+            lastLine.isDrawing = false;
+            redrawGenogram();
+          }
+        }
+        
+        // ジェノグラム再描画
+        function redrawGenogram() {
+          const canvas = document.getElementById('genogramCanvas');
+          if (!canvas) {
+            console.log('キャンバスが見つかりません');
+            return;
+          }
+          
+          const ctx = canvas.getContext('2d');
+          
+          // データが空の場合はキャンバスをクリアして終了
+          if (!genogramData || genogramData.length === 0) {
+            console.log('データが空のため、キャンバスをクリアします');
+            // キャンバスのサイズを一時的に変更してリセット
+            const originalWidth = canvas.width;
+            const originalHeight = canvas.height;
+            canvas.width = 1;
+            canvas.height = 1;
+            canvas.width = originalWidth;
+            canvas.height = originalHeight;
+            
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            return;
+          }
+          
+          // キャンバスを白で塗りつぶし
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          
+          // キャンバスクリア
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          
+          console.log('再描画開始 - データ数:', genogramData.length);
+          
+          // 家族メンバー描画
+          genogramData.forEach((member, index) => {
+            console.log(`描画中 ${index}:`, member.type, member.x, member.y);
+            drawFamilyMember(ctx, member);
+          });
+          
+          console.log('再描画完了');
+        }
+        
+        // 家族メンバー描画
+        function drawFamilyMember(ctx, member) {
+          ctx.save();
+          ctx.strokeStyle = '#333';
+          ctx.lineWidth = 2;
+          
+          if (member.type === 'male') {
+            // 男性（四角）
+            ctx.beginPath();
+            ctx.rect(member.x - 15, member.y - 15, 30, 30);
+            ctx.stroke();
+          } else if (member.type === 'female') {
+            // 女性（丸）
+            ctx.beginPath();
+            ctx.arc(member.x, member.y, 15, 0, 2 * Math.PI);
+            ctx.stroke();
+          } else if (member.type === 'deceased_male') {
+            // 死亡男性（四角 + X）
+            ctx.beginPath();
+            ctx.rect(member.x - 15, member.y - 15, 30, 30);
+            ctx.stroke();
+            // X印を描画
+            ctx.beginPath();
+            ctx.moveTo(member.x - 10, member.y - 10);
+            ctx.lineTo(member.x + 10, member.y + 10);
+            ctx.moveTo(member.x + 10, member.y - 10);
+            ctx.lineTo(member.x - 10, member.y + 10);
+            ctx.stroke();
+          } else if (member.type === 'deceased_female') {
+            // 死亡女性（丸 + X）
+            ctx.beginPath();
+            ctx.arc(member.x, member.y, 15, 0, 2 * Math.PI);
+            ctx.stroke();
+            // X印を描画
+            ctx.beginPath();
+            ctx.moveTo(member.x - 10, member.y - 10);
+            ctx.lineTo(member.x + 10, member.y + 10);
+            ctx.moveTo(member.x + 10, member.y - 10);
+            ctx.lineTo(member.x - 10, member.y + 10);
+            ctx.stroke();
+          } else if (member.type === 'line') {
+            // 直線
+            ctx.beginPath();
+            ctx.moveTo(member.x1, member.y1);
+            ctx.lineTo(member.x2, member.y2);
+            ctx.stroke();
+          }
+          
+          ctx.restore();
+        }
+        
+        // ジェノグラムクリア
+        function clearGenogram() {
+          console.log('クリア開始 - 現在のデータ数:', genogramData.length);
+          
+          // データを完全にクリア
+          genogramData = [];
+          selectedTool = 'select';
+          isDrawing = false;
+          
+          // キャンバスを完全にクリア
+          const canvas = document.getElementById('genogramCanvas');
+          if (canvas) {
+            const ctx = canvas.getContext('2d');
+            // キャンバスのサイズを一時的に変更してリセット
+            const originalWidth = canvas.width;
+            const originalHeight = canvas.height;
+            canvas.width = 1;
+            canvas.height = 1;
+            canvas.width = originalWidth;
+            canvas.height = originalHeight;
+            
+            // 白で塗りつぶし
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            console.log('キャンバスを完全にリセットしました');
+          }
+          
+          // ローカルストレージを完全にクリア
+          localStorage.removeItem('genogram_data');
+          localStorage.removeItem('genogram_image');
+          
+          // 念のため、すべてのジェノグラム関連データを削除
+          Object.keys(localStorage).forEach(key => {
+            if (key.includes('genogram')) {
+              localStorage.removeItem(key);
+            }
+          });
+          
+          console.log('クリア完了 - データ数:', genogramData.length);
+          alert('ジェノグラムをクリアしました');
+        }
+        
+        // グローバルスコープでも利用可能にする
+        window.clearGenogram = clearGenogram;
+        
+        // ジェノグラム保存
+        window.saveGenogram = function() {
+          const canvas = document.getElementById('genogramCanvas');
+          const dataURL = canvas.toDataURL('image/png');
+          
+          // ローカルストレージに保存
+          localStorage.setItem('genogram_data', JSON.stringify(genogramData));
+          localStorage.setItem('genogram_image', dataURL);
+          
+          alert('ジェノグラムを保存しました');
+        };
+        
+        // ページ読み込み時初期化
+        document.addEventListener('DOMContentLoaded', function() {
+          initGenogram();
+          
+          // ボタンのイベントリスナーを追加
+          const clearBtn = document.getElementById('clearGenogramBtn');
+          const saveBtn = document.getElementById('saveGenogramBtn');
+          
+          if (clearBtn) {
+            clearBtn.addEventListener('click', function() {
+              console.log('クリアボタンがクリックされました');
+              clearGenogram();
+            });
+          }
+          
+          if (saveBtn) {
+            saveBtn.addEventListener('click', function() {
+              console.log('保存ボタンがクリックされました');
+              saveGenogram();
+            });
+          }
+          
+          // 復元処理は一時的に無効化（クリア機能のテスト用）
+          console.log('復元処理をスキップしました');
+        });
+        </script>
+        <hr>
+      </div>
+
+
+    <!-- ジェノグラム -->
+    <fieldset style="margin-top: 20px;">
+      <legend>ジェノグラム</legend>
+      <!-- iPad対応ジェノグラム -->
+      <div style="border: 2px solid #333; background: #fff; padding: 20px; min-height: 300px; position: relative;">
+        <div style="text-align: center; margin-bottom: 15px;">
+          <strong>家族関係図</strong>
+        </div>
+        
+        <!-- ジェノグラム描画エリア -->
+        <div id="genogramContainer" style="position: relative; min-height: 200px; border: 1px dashed #ccc; padding: 15px;">
+          <!-- 家族メンバー追加ボタン -->
+          <div style="text-align: center; margin-bottom: 15px;">
+            <button type="button" onclick="addFamilyMember('male')" style="margin: 2px; padding: 8px 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">♂ 男性</button>
+            <button type="button" onclick="addFamilyMember('female')" style="margin: 2px; padding: 8px 12px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">♀ 女性</button>
+            <button type="button" onclick="addFamilyMember('deceased_male')" style="margin: 2px; padding: 8px 12px; background: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">♂ 死亡男性</button>
+            <button type="button" onclick="addFamilyMember('deceased_female')" style="margin: 2px; padding: 8px 12px; background: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">♀ 死亡女性</button>
+            <button type="button" onclick="addFamilyMember('line')" style="margin: 2px; padding: 8px 12px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">— 直線</button>
+          </div>
+          
+          <!-- ジェノグラム描画エリア -->
+          <canvas id="genogramCanvas" width="350" height="250" style="border: 1px solid #ddd; background: #fff; display: block; margin: 0 auto; touch-action: none;"></canvas>
+          
+          <div style="text-align: center; margin-top: 15px;">
+            <button type="button" id="clearGenogramBtn" onclick="clearGenogram()" style="margin: 2px; padding: 5px 10px; background: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer;">クリア</button>
+            <button type="button" id="saveGenogramBtn" onclick="saveGenogram()" style="margin: 2px; padding: 5px 10px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">保存</button>
+          </div>
+        </div>
+        
+        <!-- 凡例 -->
+        <div style="font-size: 0.8em; margin-top: 15px; text-align: center;">
+          <div style="display: inline-block; margin: 2px;">
+            <span style="display: inline-block; width: 16px; height: 16px; border: 2px solid #333; background: #fff; margin-right: 4px;"></span>男性
+          </div>
+          <div style="display: inline-block; margin: 2px;">
+            <span style="display: inline-block; width: 16px; height: 16px; border: 2px solid #333; border-radius: 50%; background: #fff; margin-right: 4px;"></span>女性
+          </div>
+          <div style="display: inline-block; margin: 2px;">
+            <span style="display: inline-block; width: 16px; height: 16px; border: 2px solid #333; background: #fff; margin-right: 4px; position: relative;">
+              <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(45deg); width: 12px; height: 2px; background: #333;"></span>
+              <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); width: 12px; height: 2px; background: #333;"></span>
+            </span>死亡男性
+          </div>
+          <div style="display: inline-block; margin: 2px;">
+            <span style="display: inline-block; width: 16px; height: 16px; border: 2px solid #333; border-radius: 50%; background: #fff; margin-right: 4px; position: relative;">
+              <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(45deg); width: 12px; height: 2px; background: #333;"></span>
+              <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); width: 12px; height: 2px; background: #333;"></span>
+            </span>死亡女性
+          </div>
+          <div style="display: inline-block; margin: 2px;">
+            <span style="display: inline-block; width: 20px; height: 2px; background: #333; margin-right: 4px;"></span>家族関係
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>ご利用者の希望・相談内容</legend>
+      <label for="user_requests">ご希望・ご相談内容を自由にご記入ください</label>
+      <textarea id="user_requests" name="user_requests" rows="4" placeholder="例：今後の生活について相談したい、支援制度について知りたい など"></textarea>
+    </fieldset>
+    <fieldset>
+      <legend>ご家族の希望・相談内容</legend>
+      <label for="family_requests">ご希望・ご相談内容を自由にご記入ください</label>
+      <textarea id="family_requests" name="family_requests" rows="4" placeholder="例：今後の生活について相談したい、支援制度について知りたい など"></textarea>
+    </fieldset>
+
+
+    <div class="nav-buttons">
+      <button type="button" onclick="location.href='form0.html'">← 戻る</button>
+      <button type="button" onclick="location.href='form2.html'">次へ →</button>
+    </div>
+  </form>
+</div>
+
+<script>
+// 家族・支援者追加
+function addFamily() {
+  const block = document.querySelector(".family-block").cloneNode(true);
+  // 入力初期化
+  block.querySelectorAll("input, select").forEach(el => el.value = "");
+  document.querySelector(".family-block").parentElement.appendChild(block);
+}
+
+// ジェノグラム描画用
+let genogramShapes = [];
+
+function clearGenogram(canvasId) {
+  genogramShapes = [];
+  const canvas = document.getElementById(canvasId);
+  if (canvas && canvas.getContext) {
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawGenogramBase(canvasId);
+  }
+}
+
+function drawGenogramBase(canvasId) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // 記入例のような初期配置
+  // 男性
+  drawMale(ctx, 60, 60, false);
+  // 女性
+  drawFemale(ctx, 140, 60, false);
+  // 死亡男性
+  drawMale(ctx, 220, 60, true);
+  // 死亡女性
+  drawFemale(ctx, 300, 60, true);
+  // 家族関係線
+  drawLine(ctx, 70, 60, 130, 60);
+  drawLine(ctx, 150, 60, 210, 60);
+  drawLine(ctx, 230, 60, 290, 60);
+
+  // ラベル
+  ctx.font = "14px sans-serif";
+  ctx.fillStyle = "#333";
+  ctx.textAlign = "center";
+  ctx.fillText("男性", 60, 100);
+  ctx.fillText("女性", 140, 100);
+  ctx.fillText("死亡男性/女性", 260, 100);
+}
+
+function drawMale(ctx, x, y, isDead) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(x, y, 18, 0, 2 * Math.PI);
+  ctx.strokeStyle = "#333";
+  ctx.lineWidth = 3;
+  ctx.stroke();
+  if (isDead) {
+    ctx.beginPath();
+    ctx.moveTo(x-13, y-13);
+    ctx.lineTo(x+13, y+13);
+    ctx.moveTo(x+13, y-13);
+    ctx.lineTo(x-13, y+13);
+    ctx.strokeStyle = "#333";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawFemale(ctx, x, y, isDead) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(x-18, y-18, 36, 36);
+  ctx.strokeStyle = "#333";
+  ctx.lineWidth = 3;
+  ctx.stroke();
+  if (isDead) {
+    ctx.beginPath();
+    ctx.moveTo(x-13, y-13);
+    ctx.lineTo(x+13, y+13);
+    ctx.moveTo(x+13, y-13);
+    ctx.lineTo(x-13, y+13);
+    ctx.strokeStyle = "#333";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawLine(ctx, x1, y1, x2, y2) {
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.strokeStyle = "#333";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+}
+
+// 初期描画
+window.addEventListener('DOMContentLoaded', function() {
+  drawGenogramBase('genogramCanvas_1');
+});
+
+// 自動保存
+const form = document.getElementById("surveyForm");
+form.addEventListener("input", () => {
+  const data = Object.fromEntries(new FormData(form));
+  localStorage.setItem("surveyData_form1", JSON.stringify(data));
+});
+
+// 復元
+window.addEventListener("load", () => {
+  const saved = localStorage.getItem("surveyData_form1");
+  if(saved) {
+    const data = JSON.parse(saved);
+    Object.keys(data).forEach(key => {
+      const el = form.elements[key];
+      if(el) {
+        if(el.type === "checkbox") el.checked = data[key] === "on";
+        else el.value = data[key];
+      }
+    });
+  }
+});
+
+// 送信時
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const user = "test_user";
+  const timestamp = new Date().toISOString();
+  const data = Object.fromEntries(new FormData(form));
+  console.log({user, timestamp, data});
+});
+</script>
+
+  <!-- プログレスバー -->
+  <div class="progress-container">
+    <div class="progress-wrapper">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-info">
+        <span class="progress-page" id="currentPage">2</span>
+        <span class="progress-total">/ 20</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // プログレスバーの更新
+    function updateProgress() {
+      const progressPercentage = (2 / 20) * 100;
+      const progressFill = document.getElementById('progressFill');
+      const currentPageElement = document.getElementById('currentPage');
+      
+      progressFill.style.width = progressPercentage + '%';
+      currentPageElement.textContent = '2';
+      progressFill.style.background = '#003366';
+    }
+    
+    // 初期プログレス更新
+    document.addEventListener('DOMContentLoaded', function() {
+      updateProgress();
+      
+      // フォームの自動保存機能
+      const form = document.getElementById('surveyForm');
+      const formNumber = 1; // form1
+      
+      if (form) {
+        // フォームデータを収集する関数
+        function collectFormData() {
+          const formData = new FormData(form);
+          const data = {};
+          
+          // 通常のフィールド
+          for (let [key, value] of formData.entries()) {
+            if (data[key]) {
+              // 同じ名前の複数フィールド（チェックボックスなど）
+              if (Array.isArray(data[key])) {
+                data[key].push(value);
+              } else {
+                data[key] = [data[key], value];
+              }
+            } else {
+              data[key] = value;
+            }
+          }
+          
+          // Canvas画像データを保存
+          const canvases = form.querySelectorAll('canvas');
+          canvases.forEach((canvas, index) => {
+            try {
+              const canvasId = canvas.id || `canvas_${index}`;
+              data[canvasId + '_image'] = canvas.toDataURL('image/png');
+              console.log(`Canvas画像を保存しました: ${canvasId}`);
+            } catch (e) {
+              console.error('Canvas保存エラー:', e);
+            }
+          });
+          
+          // 非表示項目も含めて全入力要素を確認
+          const allInputs = form.querySelectorAll('input, select, textarea');
+          allInputs.forEach(input => {
+            if (!input.name) return;
+            
+            const isProcessed = data.hasOwnProperty(input.name);
+            
+            if (input.type === 'checkbox') {
+              if (input.checked) {
+                if (!data[input.name]) {
+                  data[input.name] = [];
+                }
+                if (Array.isArray(data[input.name])) {
+                  if (!data[input.name].includes(input.value)) {
+                    data[input.name].push(input.value);
+                  }
+                } else {
+                  data[input.name] = [data[input.name], input.value];
+                }
+              }
+            } else if (input.type === 'radio') {
+              if (input.checked && !isProcessed) {
+                data[input.name] = input.value;
+              }
+            } else {
+              if (!isProcessed && input.value) {
+                data[input.name] = input.value;
+              }
+            }
+          });
+          
+          return data;
+        }
+        
+        // 入力時に自動保存
+        form.addEventListener('input', function() {
+          const data = collectFormData();
+          localStorage.setItem(`surveyData_form${formNumber}`, JSON.stringify(data));
+          console.log(`Form ${formNumber} データを自動保存しました`);
+        });
+        
+        form.addEventListener('change', function() {
+          const data = collectFormData();
+          localStorage.setItem(`surveyData_form${formNumber}`, JSON.stringify(data));
+          console.log(`Form ${formNumber} データを自動保存しました`);
+        });
+        
+        // 保存されたデータの復元
+        const savedData = localStorage.getItem(`surveyData_form${formNumber}`);
+        if (savedData) {
+          const data = JSON.parse(savedData);
+          Object.keys(data).forEach(key => {
+            const elements = form.elements[key];
+            if (elements) {
+              if (elements.length > 1) {
+                // 複数要素（ラジオボタンやチェックボックス）
+                Array.from(elements).forEach(el => {
+                  if (el.type === 'checkbox' || el.type === 'radio') {
+                    if (Array.isArray(data[key])) {
+                      el.checked = data[key].includes(el.value);
+                    } else {
+                      el.checked = el.value === data[key];
+                    }
+                  }
+                });
+              } else if (elements.length === 1) {
+                // 単一要素（複数の同名要素の1つ）
+                const el = elements[0];
+                if (el.type === 'checkbox' || el.type === 'radio') {
+                  if (Array.isArray(data[key])) {
+                    el.checked = data[key].includes(el.value);
+                  } else {
+                    el.checked = el.value === data[key];
+                  }
+                } else {
+                  el.value = data[key] || '';
+                }
+              } else {
+                // 単一要素
+                if (elements.type === 'checkbox' || elements.type === 'radio') {
+                  if (Array.isArray(data[key])) {
+                    elements.checked = data[key].includes(elements.value);
+                  } else {
+                    elements.checked = elements.value === data[key];
+                  }
+                } else {
+                  elements.value = data[key] || '';
+                }
+              }
+            }
+          });
+          console.log(`Form ${formNumber} の保存データを復元しました`);
+        }
+      }
+});
+</script>
+
+</body>
+</html>

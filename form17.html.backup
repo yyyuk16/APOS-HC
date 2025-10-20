@@ -1,0 +1,905 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>APOS-HC 調査票 - フォーム3</title>
+  <link rel="stylesheet" href="main.css">
+  <style>
+    /* セクション表示の修正 */
+    .section { 
+      display: block !important; 
+    }
+    
+    /* iPad用の追加スタイル */
+    @media screen and (min-width: 768px) {
+      body {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      
+      .container {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        padding: 25px;
+        margin: 15px 0;
+      }
+      
+      h1 {
+        font-size: 1.8em;
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 15px;
+      }
+      
+      h2 {
+        font-size: 1.4em;
+        color: #34495e;
+        margin: 25px 0 15px 0;
+        padding: 10px 0;
+        border-left: 4px solid #3498db;
+        padding-left: 15px;
+        background: linear-gradient(90deg, #f8f9fa 0%, transparent 100%);
+      }
+      
+      fieldset {
+        border: 2px solid #e0e6ed;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        background: #fafbfc;
+        transition: all 0.3s ease;
+      }
+      
+      fieldset:hover {
+        border-color: #3498db;
+        box-shadow: 0 2px 10px rgba(52, 152, 219, 0.1);
+      }
+      
+      legend {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #2c3e50;
+        padding: 0 10px;
+        background: #fff;
+        border-radius: 6px;
+        border: 2px solid #3498db;
+      }
+      
+      label {
+        display: block;
+        margin: 10px 0 5px 0;
+        font-weight: 600;
+        color: #34495e;
+        font-size: 1em;
+      }
+      
+      input[type="text"], input[type="tel"], input[type="email"], 
+      input[type="number"], select, textarea {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 1em;
+        border: 2px solid #e0e6ed;
+        border-radius: 6px;
+        background: #fff;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+        margin-top: 5px;
+      }
+      
+      input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        transform: translateY(-2px);
+      }
+      
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+        font-family: inherit;
+      }
+      
+      .daily-rhythm-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      }
+      
+      .daily-rhythm-table th {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+        padding: 12px 10px;
+        font-size: 1em;
+        font-weight: bold;
+        text-align: center;
+      }
+      
+      .daily-rhythm-table td {
+        padding: 10px;
+        border-bottom: 1px solid #e8f4f8;
+        text-align: center;
+        vertical-align: middle;
+      }
+      
+      .daily-rhythm-table td:first-child {
+        background: #f8f9fa;
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 0.9em;
+        width: 150px;
+      }
+      
+      .daily-rhythm-table input {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 0.9em;
+        border: 2px solid #e0e6ed;
+        border-radius: 6px;
+        background: #fff;
+        transition: all 0.3s ease;
+        margin: 0;
+      }
+      
+      .daily-rhythm-table input:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+      }
+      
+      .daily-rhythm-table tr:hover {
+        background: #f8f9fa;
+      }
+      
+      .note {
+        font-size: 0.9em;
+        color: #7f8c8d;
+        margin-top: 10px;
+        padding: 10px;
+        background: #ecf0f1;
+        border-radius: 6px;
+        border-left: 3px solid #95a5a6;
+      }
+      
+      .nav-buttons {
+        margin-top: 25px;
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+      }
+      
+      .nav-buttons button {
+        padding: 12px 25px;
+        font-size: 1em;
+        font-weight: 600;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        min-width: 120px;
+      }
+      
+      .nav-buttons button:first-child {
+        background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+        color: white;
+      }
+      
+      .nav-buttons button:last-child {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+      }
+      
+      .nav-buttons button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      }
+      
+      .nav-buttons button:active {
+        transform: translateY(-1px);
+      }
+      
+      /* プログレスバーのスタイル */
+      .progress-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-top: 1px solid #e0e0e0;
+        padding: 20px;
+        z-index: 1000;
+      }
+      
+      .progress-wrapper {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      
+      .progress-bar {
+        width: 100%;
+        height: 6px;
+        background: #f0f0f0;
+        border-radius: 3px;
+        overflow: hidden;
+        margin-bottom: 15px;
+      }
+      
+      .progress-fill {
+        height: 100%;
+        background: #003366;
+        border-radius: 3px;
+        transition: width 0.5s ease;
+        width: 90%;
+      }
+      
+      .progress-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.1em;
+        color: #333;
+        font-weight: 500;
+      }
+      
+      .progress-page {
+        color: #003366;
+        font-weight: 600;
+      }
+      
+      .progress-total {
+        color: #999;
+      }
+      
+      /* フォームの下部に余白を追加（プログレスバーの分） */
+      body {
+        padding-bottom: 100px;
+      }
+    }
+    
+    /* タブレット用の追加調整 */
+    @media screen and (max-width: 1024px) and (min-width: 768px) {
+      .daily-rhythm-table td:first-child {
+        width: 140px;
+      }
+      
+      .daily-rhythm-table input {
+        font-size: 0.85em;
+        padding: 6px 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+<h1>APOS-HC 調査票</h1>
+<form id="surveyForm">
+<div class="section" id="section-lifestyle-habits">
+    <h2>Ⅰ　使用している薬と服薬の管理</h2>
+    <table style="width:100%; border-collapse:collapse; margin-bottom:1.5em;">
+        <div style="margin: 1.2em 0 1.5em 0; padding: 1em; background: #f5fafd; border-radius: 10px; border: 1px solid #b0d6e6; text-align: left;">
+          <div style="font-size: 1.1em; font-weight: bold; color: #2c3e50; margin-bottom: 0.3em;">
+            現在使っている薬と本人に合った使い方（過去７日間）
+            
+          </div>
+          <div style="font-size:0.95em; color: #555;">
+            ※服薬、注射、坐薬、点鼻薬等含む
+            <table style="width:100%; border-collapse:collapse; margin-bottom:1em; font-size:0.95em;">
+                <tr>
+                
+          </div>
+          
+        </div>
+      <tr>
+          </div>
+        </td>
+        <td style="width:20%; border:1px solid #b0d6e6; text-align:center; background:#eaf6fb;">薬の分類</td>
+        <td style="width:55%; border:1px solid #b0d6e6; text-align:center; background:#eaf6fb;">薬剤名・剤数を右に記入</td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #b0d6e6;">
+          ①風邪・ｲﾝﾌﾙｴﾝｻﾞ･ｺﾛﾅ
+        </td>
+        <td style="border:1px solid #b0d6e6;">
+          <input type="text" name="med_name_1" style="width:98%;">
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #b0d6e6;">
+           ②熱と痛みの薬　　　
+        </td>
+        <td style="border:1px solid #b0d6e6;">
+          <input type="text" name="med_name_2" style="width:98%;">
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #b0d6e6;">
+          ③花粉症/呼吸器の薬
+        </td>
+        <td style="border:1px solid #b0d6e6;">
+          <input type="text" name="med_name_3" style="width:98%;">
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #b0d6e6;">
+          ④皮膚の薬
+        </td>
+        <td style="border:1px solid #b0d6e6;">
+          <input type="text" name="med_name_4" style="width:98%;">
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #b0d6e6;">
+          ⑤胃腸の薬
+        </td>
+        <td style="border:1px solid #b0d6e6;">
+          <input type="text" name="med_name_5" style="width:98%;">
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #b0d6e6;">
+          ⑥肝・胆・膵の薬
+        </td>
+        <td style="border:1px solid #b0d6e6;">
+          <input type="text" name="med_name_6" style="width:98%;">
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #b0d6e6;">
+          ⑦血圧と脳卒中
+        </td>
+        <td style="border:1px solid #b0d6e6;">
+          <input type="text" name="med_name_7" style="width:98%;">
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #b0d6e6;">
+          ⑧心臓の薬
+        </td>
+        <td style="border:1px solid #b0d6e6;">
+          <input type="text" name="med_name_8" style="width:98%;">
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #b0d6e6;">
+          ⑨腎臓・泌尿・痔
+        </td>
+        <td style="border:1px solid #b0d6e6;">
+          <input type="text" name="med_name_9" style="width:98%;">
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #b0d6e6;">
+          ⑩脳に働く薬
+        </td>
+        <td style="border:1px solid #b0d6e6;">
+          <input type="text" name="med_name_10" style="width:98%;">
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #b0d6e6;">
+          ⑪心の薬
+        </td>
+        <td style="border:1px solid #b0d6e6;">
+          <input type="text" name="med_name_11" style="width:98%;">
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #b0d6e6;">
+          ⑫脂質異常の薬
+        </td>
+        <td style="border:1px solid #b0d6e6;">
+          <input type="text" name="med_name_12" style="width:98%;">
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #b0d6e6;">
+          ⑬糖尿病の薬
+        </td>
+        <td style="border:1px solid #b0d6e6;">
+          <input type="text" name="med_name_13" style="width:98%;">
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #b0d6e6;">
+          ⑭痛風と甲状腺
+        </td>
+        <td style="border:1px solid #b0d6e6;">
+          <input type="text" name="med_name_14" style="width:98%;">
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #b0d6e6;">
+          ⑮骨の薬
+        </td>
+        <td style="border:1px solid #b0d6e6;">
+          <input type="text" name="med_name_15" style="width:98%;">
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #b0d6e6;">
+        ⑯血液と血管
+        </td>
+        <td style="border:1px solid #b0d6e6;">
+          <input type="text" name="med_name_16" style="width:98%;">
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #b0d6e6;">
+          ⑰膠原病とリュウマチ
+        </td>
+        <td style="border:1px solid #b0d6e6;">
+          <input type="text" name="med_name_17" style="width:98%;">
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #b0d6e6;">
+          ⑱眼の薬
+        </td>
+        <td style="border:1px solid #b0d6e6;">
+          <input type="text" name="med_name_18" style="width:98%;">
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #b0d6e6;">
+          ⑲耳と鼻の薬
+        </td>
+        <td style="border:1px solid #b0d6e6;">
+          <input type="text" name="med_name_17" style="width:98%;">
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #b0d6e6;">
+          ⑳細菌感染症薬
+        </td>
+        <td style="border:1px solid #b0d6e6;">
+          <input type="text" name="med_name_17" style="width:98%;">
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #b0d6e6;">
+          ㉑女性の薬
+        </td>
+        <td style="border:1px solid #b0d6e6;">
+          <input type="text" name="med_name_17" style="width:98%;">
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #b0d6e6;">
+          ㉒ﾋﾞﾀﾐﾝ･ﾐﾈﾗﾙ･栄養
+        </td>
+        <td style="border:1px solid #b0d6e6;">
+          <input type="text" name="med_name_17" style="width:98%;">
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #b0d6e6;">
+          ㉓漢方薬
+        </td>
+        <td style="border:1px solid #b0d6e6;">
+          <input type="text" name="med_name_17" style="width:98%;">
+        </td>
+      </tr>
+      <tr>
+        <td style="border:1px solid #b0d6e6;">
+          ㉔その他(売薬・塗布薬含む)
+
+        </td>
+        <td style="border:1px solid #b0d6e6;">
+          <input type="text" name="med_name_17" style="width:98%;">
+        </td>
+      </tr>
+    </table>
+
+
+<table style="width:100%; border-collapse:collapse; margin-bottom:1.5em;">
+  <tr>
+    <td style="border:1px solid #b0d6e6; width:40px; text-align:center;">
+      2
+    </td>
+    <td style="border:1px solid #b0d6e6; width:160px;">
+      副作用・効果
+    </td>
+    <td style="border:1px solid #b0d6e6;">
+      <label for="side_effect_select" style="margin-right:10px;">1 副作用</label>
+      <select id="side_effect_select" name="side_effect" style="width:98%; margin-right:10px;">
+        <option value="">選択してください</option>
+        <option value="なし">なし</option>
+        <option value="あり">あり</option>
+      </select>
+      <span id="side_effect_detail_label" style="margin-left:10px; display:none;">（具体的に記入）：</span>
+      <input type="text" name="side_effect_detail" id="side_effect_detail_input" style="width:40%; display:none;">
+      <script>
+        // セレクトボックスの選択に応じて記述欄を表示/非表示
+        document.addEventListener('DOMContentLoaded', function() {
+          var select = document.getElementById('side_effect_select');
+          var detailLabel = document.getElementById('side_effect_detail_label');
+          var detailInput = document.getElementById('side_effect_detail_input');
+          function toggleDetail() {
+            if (select.value === 'あり') {
+              detailLabel.style.display = '';
+              detailInput.style.display = '';
+            } else {
+              detailLabel.style.display = 'none';
+              detailInput.style.display = 'none';
+              detailInput.value = '';
+            }
+          }
+          select.addEventListener('change', toggleDetail);
+          toggleDetail();
+        });
+      </script>
+    </td>
+  </tr>
+</table>
+
+
+<table style="width:100%; border-collapse:collapse; margin-bottom:1.5em;">
+  <tr>
+    <td style="border:1px solid #b0d6e6; width:40px; text-align:center;">
+      3
+    </td>
+    <td style="border:1px solid #b0d6e6; width:160px;">
+      薬の飲み方
+    </td>
+    <td style="border:1px solid #b0d6e6;">
+      <select name="medicine_usage" style="width:98%;">
+        <option value="">選択してください</option>
+        <option value="0">0：処方通りに自分で管理し使用できる</option>
+        <option value="0a">0-a：医師からの処方無し</option>
+        <option value="1">1：自分で管理し使用できない</option>
+      </select>
+      <!-- 1が選択された場合に追加のプルダウンを表示 -->
+      <div id="medicine_detail_select_wrapper" style="display:none; margin-top:10px;">
+          <div id="medicine_detail_checkbox_group" style="margin-bottom:8px;">
+            <label><input type="checkbox" name="medicine_detail[]" value="a"> a. 薬の飲み方を自己判断でやめたり、薬をためている、複数受診や売薬が多数ある</label><br>
+            <label><input type="checkbox" name="medicine_detail[]" value="b"> b. 薬剤数が5剤以上に調整されるよう医師・薬剤師に提案されていない（ポリファーマシー）</label><br>
+            <label><input type="checkbox" name="medicine_detail[]" value="c"> c. 服用や使用に不安や抵抗感・疑問などあるが、医師・薬剤師に相談していない</label><br>
+            <label><input type="checkbox" name="medicine_detail[]" value="d"> d. 拘縮・変形・嚥下困難で、1人では使用ができない</label><br>
+            <label><input type="checkbox" name="medicine_detail[]" value="e"> e. 一包化したり、飲みにくい薬や塗布薬を、負担にならない様に調整されていない</label><br>
+            <label><input type="checkbox" name="medicine_detail[]" value="f"> f. 症状により飲み分ける緩下剤・睡眠剤・鎮痛剤などが別分包されていない</label><br>
+            <label><input type="checkbox" name="medicine_detail[]" value="g"> g. 服用することを忘れる、薬カレンダーやケースを使用しているが正確に使用できていない・誤薬がある</label><br>
+            <label><input type="checkbox" name="medicine_detail[]" value="h"> h. 売薬を飲んだり、つけたりし症状が改善しなくても受診していない、長期連用･過剰摂取が心配される</label>
+      </div>
+      <script>
+        // 「薬の飲み方」プルダウンの値によって詳細プルダウンを表示/非表示
+        document.addEventListener('DOMContentLoaded', function() {
+          var mainSelect = document.querySelector('select[name="medicine_usage"]');
+          var detailWrapper = document.getElementById('medicine_detail_select_wrapper');
+          var detailSelect = document.getElementById('medicine_detail_select');
+          function toggleDetailSelect() {
+            if (mainSelect.value === '1') {
+              detailWrapper.style.display = '';
+            } else {
+              detailWrapper.style.display = 'none';
+              detailSelect.value = '';
+            }
+          }
+          mainSelect.addEventListener('change', toggleDetailSelect);
+          toggleDetailSelect();
+        });
+      </script>
+  </tr>
+</table>
+
+<table style="border-collapse:collapse; width:100%; margin-top:20px;">
+  <tr>
+    <th colspan="2" style="border:1px solid #888; background:#f2f6fa; text-align:left; padding:4px;">
+      薬分類の説明
+    </th>
+  </tr>
+  <tr>
+    <td style="border:1px solid #888; padding:2px; width:90px; vertical-align:top;">
+        花粉症の薬
+    </td>
+    <td style="border:1px solid #888; padding:2px;">
+      <b>（内服・点鼻・点眼）の薬花粉症薬、免疫療法　/　呼吸器の薬：咳、痰、喘息の薬、減感作療法、COPD（慢性閉そく性肺疾患）の薬</b>
+    </b>  </td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #888; padding:2px; vertical-align:top;">
+        皮膚の薬
+    </td>
+    <td style="border:1px solid #888; padding:2px;">
+      <b>乾燥・かゆみ（保湿・外用）、アトピー（外用）、じん麻疹、湿疹（外用）、ニキビ、水虫、疥癬、水痘・帯状疱疹、褥瘡</b>
+    </td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #888; padding:2px; vertical-align:top;">
+        胃腸の薬
+    </td>
+    <td style="border:1px solid #888; padding:2px;">
+      <b>健胃消化、粘膜保護、制酸、胃炎、潰瘍、嘔吐、便秘、下痢、腸炎</b>
+      
+    </td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #888; padding:2px; vertical-align:top;">
+        腎-泌尿・痔
+    </td>
+    <td style="border:1px solid #888; padding:2px;">
+      <b>腎臓薬、膀胱炎、頻尿・尿失禁、尿崩症、排尿困難、前立腺肥大、腎・尿管結石、淋病、クラミジア、痔</b>
+    </td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #888; padding:2px; vertical-align:top;">
+        脳に働く薬
+    </td>
+    <td style="border:1px solid #888; padding:2px;">
+      <b>てんかん、パーキンソン病、脳代謝改善薬、認知症の薬、多発性硬化症</b>
+    </td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #888; padding:2px; vertical-align:top;">
+      心の薬
+    </td>
+    <td style="border:1px solid #888; padding:2px;">
+      <b>心身症、不眠症、うつ、躁うつ、不安障害、パニック障害、発達障害、精神病、アルコール依存症の薬</b>
+    </td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #888; padding:2px; vertical-align:top;">
+      血液と血管
+    </td>
+    <td style="border:1px solid #888; padding:2px;">
+      <b>止血剤、血栓、造血剤、抹消動脈疾患の薬</b>
+    </td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #888; padding:2px; vertical-align:top;">
+      細菌感染薬
+    </td>
+    <td style="border:1px solid #888; padding:2px;">
+      <b>ぺ二シリン、セフェム、ペネム、マクロライド、テトラサイクリン、キノロン、その他の抗菌薬、結核薬、クラミジア、真菌、寄生虫、疥癬、ウイルス、エイズ　等の服薬・塗布薬</b>
+    </td>
+  </tr>
+  <tr>
+    <td style="border:1px solid #888; padding:2px; vertical-align:top;">
+      女性の薬
+    </td>
+    <td style="border:1px solid #888; padding:2px;">
+      <b>生理痛、不育症、流・早産防止、妊娠中、子宮内膜症、子宮筋腫、不妊症、月経前緊張症、女性ホルモン、経口避妊薬、緊急避妊薬、クラミジア、更年期障害、ホルモン補充療法</b>
+    </td>
+  </tr>
+
+  </tr>
+
+</table>
+    </fieldset>
+  
+      <div class="nav-buttons">
+        <button type="button" onclick="location.href='form16.html'">← 戻る</button>
+        <button type="button" onclick="location.href='form18.html'">次へ →</button>
+      </div>
+    </form>
+  </div>
+  
+  <script>
+  // 高額費用の利用：理由欄表示
+  function toggleExpensiveCostDetail() {
+    const val = document.getElementById('expensive_cost_usage').value;
+    const reasonDiv = document.getElementById('expensive_cost_reason');
+    if (val === '2a' || val === '2b') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費医療の利用：理由欄表示
+  function togglePublicMedicalReason() {
+    const val = document.getElementById('public_medical_usage').value;
+    const reasonDiv = document.getElementById('public_medical_reason');
+    if (val === '2') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費医療の詳細：病名入力欄表示
+  function toggleMedicalDiseaseInput() {
+    const val = document.getElementById('public_medical_detail').value;
+    const inputDiv = document.getElementById('medical_disease_input');
+    if (val === '5' || val === '3') {
+      inputDiv.style.display = 'block';
+    } else {
+      inputDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費制度の利用：理由欄表示
+  function togglePublicSystemReason() {
+    const val = document.getElementById('public_system_usage').value;
+    const reasonDiv = document.getElementById('public_system_reason');
+    if (val === '2') {
+      reasonDiv.style.display = 'block';
+    } else {
+      reasonDiv.style.display = 'none';
+    }
+  }
+  
+  // 公費制度の詳細：詳細入力欄表示
+  function toggleSystemDetailInput() {
+    const val = document.getElementById('public_system_detail').value;
+    const inputDiv = document.getElementById('system_detail_input');
+    if (val === '1' || val === '2') {
+      inputDiv.style.display = 'block';
+    } else {
+      inputDiv.style.display = 'none';
+    }
+  }
+
+  // フォームの自動保存機能
+  const form = document.ventListener('input', () => {
+    const data = Object.fromEntries(new FormData(form));
+    localStorage.setItem('surveyData_form2', JSON.stringify(data));
+  });
+
+  // 保存されたデータの復元
+  window.addEventListener('load', () => {
+    const saved = localStorage.getItem('surveyData_form2');
+    if (saved) {
+      const data = JSON.parse(saved);
+      Object.keys(data).forEach(key => {
+        const el = form.elements[key];
+        if (el) {
+          el.value = data[key];
+        }
+      });
+    }
+  });
+</script>
+
+  <!-- プログレスバー -->
+  <div class="progress-container">
+    <div class="progress-wrapper">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-info">
+        <span class="progress-page" id="currentPage">18</span>
+        <span class="progress-total">/ 20</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // プログレスバーの更新
+    function updateProgress() {
+      const progressPercentage = (18 / 20) * 100;
+      const progressFill = document.getElementById('progressFill');
+      const currentPageElement = document.getElementById('currentPage');
+      
+      progressFill.style.width = progressPercentage + '%';
+      currentPageElement.textContent = '18';
+      progressFill.style.background = '#003366';
+    }
+    
+    // 初期プログレス更新
+    document.addEventListener('DOMContentLoaded', function() {
+      updateProgress();
+      
+      // フォームの自動保存機能
+      const form = document.getElementById('surveyForm');
+      const formNumber = 17;
+      
+      if (form) {
+        function collectFormData() {
+          const formData = new FormData(form);
+          const data = {};
+          for (let [key, value] of formData.entries()) {
+            if (data[key]) {
+              if (Array.isArray(data[key])) {
+                data[key].push(value);
+              } else {
+                data[key] = [data[key], value];
+              }
+            } else {
+              data[key] = value;
+            }
+          }
+          const canvases = form.querySelectorAll('canvas');
+          canvases.forEach((canvas, index) => {
+            try {
+              const canvasId = canvas.id || `canvas_${index}`;
+              data[canvasId + '_image'] = canvas.toDataURL('image/png');
+            } catch (e) {
+              console.error('Canvas保存エラー:', e);
+            }
+          });
+          const allInputs = form.querySelectorAll('input, select, textarea');
+          allInputs.forEach(input => {
+            if (!input.name) return;
+            const isProcessed = data.hasOwnProperty(input.name);
+            if (input.type === 'checkbox') {
+              if (input.checked) {
+                if (!data[input.name]) data[input.name] = [];
+                if (Array.isArray(data[input.name])) {
+                  if (!data[input.name].includes(input.value)) data[input.name].push(input.value);
+                } else {
+                  data[input.name] = [data[input.name], input.value];
+                }
+              }
+            } else if (input.type === 'radio') {
+              if (input.checked && !isProcessed) data[input.name] = input.value;
+            } else {
+              if (!isProcessed && input.value) data[input.name] = input.value;
+            }
+          });
+          return data;
+        }
+        
+        form.addEventListener('input', function() {
+          const data = collectFormData();
+          localStorage.setItem(`surveyData_form${formNumber}`, JSON.stringify(data));
+          console.log(`Form ${formNumber} データを自動保存しました`);
+        });
+        
+        form.addEventListener('change', function() {
+          const data = collectFormData();
+          localStorage.setItem(`surveyData_form${formNumber}`, JSON.stringify(data));
+          console.log(`Form ${formNumber} データを自動保存しました`);
+        });
+        
+        const savedData = localStorage.getItem(`surveyData_form${formNumber}`);
+        if (savedData) {
+          const data = JSON.parse(savedData);
+          Object.keys(data).forEach(key => {
+            const elements = form.elements[key];
+            if (elements) {
+              if (elements.length > 1) {
+                Array.from(elements).forEach(el => {
+                  if (el.type === 'checkbox' || el.type === 'radio') {
+                    if (Array.isArray(data[key])) {
+                      el.checked = data[key].includes(el.value);
+                    } else {
+                      el.checked = el.value === data[key];
+                    }
+                  }
+                });
+              } else if (elements.length === 1) {
+                const el = elements[0];
+                if (el.type === 'checkbox' || el.type === 'radio') {
+                  if (Array.isArray(data[key])) {
+                    el.checked = data[key].includes(el.value);
+                  } else {
+                    el.checked = el.value === data[key];
+                  }
+                } else {
+                  el.value = data[key] || '';
+                }
+              } else {
+                if (elements.type === 'checkbox' || elements.type === 'radio') {
+                  if (Array.isArray(data[key])) {
+                    elements.checked = data[key].includes(elements.value);
+                  } else {
+                    elements.checked = elements.value === data[key];
+                  }
+                } else {
+                  elements.value = data[key] || '';
+                }
+              }
+            }
+          });
+          console.log(`Form ${formNumber} の保存データを復元しました`);
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
+
+
+
