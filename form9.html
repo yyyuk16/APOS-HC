@@ -568,10 +568,13 @@
       <tr>
         <td>1.<br>電話の<br>利用</td>
         <td>
-          <label><input type="radio" name="iadl_phone" value="0" required>0. 自由に１人で電話をかけることができる</label><br>
-          <label><input type="radio" name="iadl_phone" value="1">1. いくつかのよく知っている番号であればかけることができる</label><br>
-          <label><input type="radio" name="iadl_phone" value="2">2. 電話にての対応はできるが、かけることはできない</label><br>
-          <label><input type="radio" name="iadl_phone" value="3">3. まったく電話を使うことができない</label>
+          <select name="iadl_phone" required style="width: 98%;">
+            <option value="">選択</option>
+            <option value="0">0. 自由に１人で電話をかけることができる</option>
+            <option value="1">1. いくつかのよく知っている番号であればかけることができる</option>
+            <option value="2">2. 電話にての対応はできるが、かけることはできない</option>
+            <option value="3">3. まったく電話を使うことができない</option>
+          </select>
         </td>
         <td>
           <input type="text" name="iadl_phone_note" style="width:95%;" placeholder="メモ">
@@ -580,80 +583,104 @@
       <tr>
         <td>2.<br>日用品の<br>買い物</td>
         <td>
-            <label><input type="radio" name="iadl_shopping" value="0" required>0. 全ての買い物を自分で行うことができる</label><br>
-            <label><input type="radio" name="iadl_shopping" value="1">1. 少額の買い物は自分で行うことができる</label><br>
-            <label><input type="radio" name="iadl_shopping" value="2">2. 誰かが付き添ってくれれば買い物ができる</label><br>
-            <label><input type="radio" name="iadl_shopping" value="3">3. まったく買い物はできない</label>
+          <select name="iadl_shopping" required style="width: 98%;">
+            <option value="">選択</option>
+            <option value="0">0. 全ての買い物を自分で行うことができる</option>
+            <option value="1">1. 少額の買い物は自分で行うことができる</option>
+            <option value="2">2. 誰かが付き添ってくれれば買い物ができる</option>
+            <option value="3">3. まったく買い物はできない</option>
+          </select>
         </td>
         <td><input type="text" name="iadl_shopping_note" style="width:95%;" placeholder="メモ"></td>
       </tr>
       <tr>
         <td>3.<br>食事の<br>支度</td>
         <td>
-          <label><input type="radio" name="iadl_housework" value="0" required>0. 献立を考え、人数にあった材料を用意し、調理ができる</label><br>
-          <label><input type="radio" name="iadl_housework" value="1">1. 材料が用意してあれば、献立を考え、自分が食べる調理ができる</label><br>
-          <label><input type="radio" name="iadl_housework" value="2">2. 材料を用意してあっても、献立を考えて調理することはできない</label><br>
-          <label><input type="radio" name="iadl_housework" value="3">3. 他者に献立や支度、調理をすべてしてもらう</label>
-        <td><input type="text" name="iadl_housework_note" style="width:95%;" placeholder="メモ"></td>
+          <select name="iadl_housework" required style="width: 98%;">
+            <option value="">選択</option>
+            <option value="0">0. 献立を考え、人数にあった材料を用意し、調理ができる</option>
+            <option value="1">1. 材料が用意してあれば、献立を考え、自分が食べる調理ができる</option>
+            <option value="2">2. 材料を用意してあっても、献立を考えて調理することはできない</option>
+            <option value="3">3. 他者に献立や支度、調理をすべてしてもらう</option>
+          </select>
+          <td><input type="text" name="iadl_housework_note" style="width:95%;" placeholder="メモ"></td>
       </tr>
       <tr>
         <td>4.<br>掃除・食器洗い<br>ゴミ出し等の家事</td>
         <td>
-          <label><input type="radio" name="iadl_toilet" value="0" required>0. 1人で家事をすることができる</label><br>
-          <label><input type="radio" name="iadl_toilet" value="1">1. 食事のあとの食器を洗ったり簡単なことはできる</label><br>
-          <label><input type="radio" name="iadl_toilet" value="2">2. 他者の助けがなければ家事をすることができない</label><br>
-          <label><input type="radio" name="iadl_toilet" value="3">3. まったく家事をすることができない</label>
+          <select name="iadl_toilet" required style="width: 98%;">
+            <option value="">選択</option>
+            <option value="0">0. 1人で家事をすることができる</option>
+            <option value="1">1. 食事のあとの食器を洗ったり簡単なことはできる</option>
+            <option value="2">2. 他者の助けがなければ家事をすることができない</option>
+            <option value="3">3. まったく家事をすることができない</option>
+          </select>
         </td>
         <td><input type="text" name="iadl_toilet_note" style="width:95%;" placeholder="メモ"></td>
       </tr>
       <tr>
         <td>5.<br>洗濯</td>
         <td>
-          <label><input type="radio" name="iadl_clean" value="0" required>0. 洗濯機等を使い、1人で一連の作業ができる（洗濯物を洗濯機に入れる、洗剤を入れる、取り出す、干す一連の動作）</label><br>
-          <label><input type="radio" name="iadl_clean" value="1">1. 洗濯機に入れられるが洗剤入れはだめ、取り出してもらえれば干せる</label><br>
-          <label><input type="radio" name="iadl_clean" value="2">2. 一連の作業は他者の助けがなければ洗濯をすることができない</label><br>
-          <label><input type="radio" name="iadl_clean" value="3">3. 他者に洗濯してもらう、まったく洗濯をすることができない</label>
+          <select name="iadl_clean" required style="width: 98%;">
+            <option value="">選択</option>
+            <option value="0">0. 洗濯機等を使い、1人で一連の作業ができる（洗濯物を洗濯機に入れる、洗剤を入れる、取り出す、干す一連の動作）</option>
+            <option value="1">1. 洗濯機に入れられるが洗剤入れはだめ、取り出してもらえれば干せる</option>
+            <option value="2">2. 一連の作業は他者の助けがなければ洗濯をすることができない</option>
+            <option value="3">3. 他者に洗濯してもらう、まったく洗濯をすることができない</option>
+          </select>
         </td>
         <td><input type="text" name="iadl_clean_note" style="width:95%;" placeholder="メモ"></td>
       </tr>
       <tr>
         <td>6.<br>移動・外出</td>
         <td>
-          <label><input type="radio" name="iadl_move" value="0" required>0. 自動車の運転、電車・バスを利用して１人で出かけることができる</label><br>
-          <label><input type="radio" name="iadl_move" value="1">1. タクシーや家族の車を頼んで出かけられるが、電車やバスは利用できない</label><br>
-          <label><input type="radio" name="iadl_move" value="2">2. 付き添いがあれば車や電車・バスを利用することができる</label><br>
-          <label><input type="radio" name="iadl_move" value="3">3. 介助で付き添われてタクシーや自動車で出かけられる</label><br>
-          <label><input type="radio" name="iadl_move" value="4">4. まったく乗り物で出かけることができない</label>
+          <select name="iadl_move" required style="width: 98%;">
+            <option value="">選択</option>
+            <option value="0">0. 自動車の運転、電車・バスを利用して１人で出かけることができる</option>
+            <option value="1">1. タクシーや家族の車を頼んで出かけられるが、電車やバスは利用できない</option>
+            <option value="2">2. 付き添いがあれば車や電車・バスを利用することができる</option>
+            <option value="3">3. 介助で付き添われてタクシーや自動車で出かけられる</option>
+            <option value="4">4. まったく乗り物で出かけることができない</option>
+          </select>
         </td>
         <td><input type="text" name="iadl_move_note" style="width:95%;" placeholder="メモ"></td>
       </tr>
       <tr>
         <td>7.<br>金銭の<br>管理</td>
         <td>
-          <label><input type="radio" name="iadl_money" value="0" required>0. 自分で家賃、請求書の支払い、銀行などでの処理・確認ができる</label><br>
-          <label><input type="radio" name="iadl_money" value="1">1. 日常の買い物の金銭管理ができる</label><br>
-          <label><input type="radio" name="iadl_money" value="2">2. 小遣い以外、買い物・銀行の預貯金の処理には付き添いが必要</label><br>
-          <label><input type="radio" name="iadl_money" value="3">3. 金銭を扱えない、管理もできない</label>
+          <select name="iadl_money" required style="width:98%;">
+            <option value="">選択</option>
+            <option value="0">0. 自分で家賃、請求書の支払い、銀行などでの処理・確認ができる</option>
+            <option value="1">1. 日常の買い物の金銭管理ができる</option>
+            <option value="2">2. 小遣い以外、買い物・銀行の預貯金の処理には付き添いが必要</option>
+            <option value="3">3. 金銭を扱えない、管理もできない</option>
+          </select>
         </td>
         <td><input type="text" name="iadl_money_note" style="width:95%;" placeholder="メモ"></td>
       </tr>
       <tr>
         <td>8.<br>薬の<br>管理</td>
         <td>
-          <label><input type="radio" name="iadl_medicine" value="0" required>0. 正しい時間に、適切な処方薬を自分で準備して使用することができる</label><br>
-          <label><input type="radio" name="iadl_medicine" value="1">1. 前もって薬カレンダーや服薬ボックスに用意されれば服薬できる</label><br>
-          <label><input type="radio" name="iadl_medicine" value="2">2. 毎回だれかに確認してもらえばできる</label><br>
-          <label><input type="radio" name="iadl_medicine" value="3">3. 自分では服薬、管理ができない</label>
+          <select name="iadl_medicine" required style="width: 98%;">
+            <option value="">選択</option>
+            <option value="0">0. 正しい時間に、適切な処方薬を自分で準備して使用することができる</option>
+            <option value="1">1. 前もって薬カレンダーや服薬ボックスに用意されれば服薬できる</option>
+            <option value="2">2. 毎回だれかに確認してもらえばできる</option>
+            <option value="3">3. 自分では服薬、管理ができない</option>
+          </select>
         </td>
         <td><input type="text" name="iadl_medicine_note" style="width:95%;" placeholder="メモ"></td>
       </tr>
       <tr>
         <td>9.<br>冷暖房の　<br>管理</td>
         <td>
-          <label><input type="radio" name="iadl_decision" value="0" required>0. 適温を自分で判断して安全に操作ができる</label><br>
-          <label><input type="radio" name="iadl_decision" value="1">1. 他者の助言・見守りがあれば自分で操作ができる</label><br>
-          <label><input type="radio" name="iadl_decision" value="2">2. 他者の判断や介助が必要である</label><br>
-          <label><input type="radio" name="iadl_decision" value="3">3. 判断も操作も全面依存である</label>
+          <select name="iadl_decision" required style="width:98%;">
+            <option value="">選択</option>
+            <option value="0">0. 適温を自分で判断して安全に操作ができる</option>
+            <option value="1">1. 他者の助言・見守りがあれば自分で操作ができる</option>
+            <option value="2">2. 他者の判断や介助が必要である</option>
+            <option value="3">3. 判断も操作も全面依存である</option>
+          </select>
         </td>
         <td><input type="text" name="iadl_decision_note" style="width:95%;" placeholder="メモ"></td>
       </tr>

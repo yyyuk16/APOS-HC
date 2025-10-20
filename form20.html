@@ -148,7 +148,7 @@
           messageElement.innerHTML = `
             <strong style="color: #e74c3c;">エラー：ユーザー情報が見つかりません</strong><br>
             <span style="font-size: 0.9em;">最初のページから再度開始してください。</span><br>
-            <button onclick="location.href='/'" style="margin-top: 15px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">最初に戻る</button>
+            <button onclick="location.href='form.html'" style="margin-top: 15px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">最初に戻る</button>
           `;
         }
         return;
@@ -253,7 +253,7 @@
                   セッション: ${session}回目<br>
                   保存ID: ${result.id || '---'}
                 </span><br>
-                <button onclick="location.href='/'" style="margin-top: 15px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">最初に戻る</button>
+                <button onclick="location.href='form.html'" style="margin-top: 15px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">最初に戻る</button>
               `;
             }
             
@@ -272,7 +272,7 @@
                 <strong style="color: #e74c3c;">データの保存に失敗しました。</strong><br>
                 <span style="font-size: 0.9em;">管理者にお問い合わせください。</span><br>
                 <span style="font-size: 0.8em; color: #999;">エラー: ${response.status}</span><br>
-                <button onclick="location.href='/'" style="margin-top: 15px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">最初に戻る</button>
+                <button onclick="location.href='form.html'" style="margin-top: 15px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">最初に戻る</button>
               `;
             }
           }
@@ -287,7 +287,7 @@
               <strong style="color: #e74c3c;">通信エラーが発生しました。</strong><br>
               <span style="font-size: 0.9em;">サーバーに接続できません。管理者にお問い合わせください。</span><br>
               <span style="font-size: 0.8em; color: #999;">エラー: ${error.message}</span><br>
-              <button onclick="location.href='/'" style="margin-top: 15px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">最初に戻る</button>
+              <button onclick="location.href='form.html'" style="margin-top: 15px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">最初に戻る</button>
             `;
           }
         }
@@ -299,7 +299,7 @@
             ご協力いただき、ありがとうございました。<br>
             <strong style="color: #f39c12;">保存するデータが見つかりませんでした。</strong><br>
             <span style="font-size: 0.9em;">フォームに入力してから完了ページに進んでください。</span><br>
-            <button onclick="location.href='/'" style="margin-top: 15px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">最初に戻る</button>
+            <button onclick="location.href='form.html'" style="margin-top: 15px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">最初に戻る</button>
           `;
         }
       }

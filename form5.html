@@ -434,7 +434,7 @@
               }
             });
           </script>
-
+</fieldset>
     <div class="nav-buttons">
       <button type="button" onclick="location.href='form4.html'">← 戻る</button>
       <button type="button" onclick="location.href='form6.html'">次へ →</button>
@@ -527,7 +527,7 @@
         <div class="progress-fill" id="progressFill"></div>
       </div>
       <div class="progress-info">
-        <span class="progress-page" id="currentPage">7</span>
+        <span class="progress-page" id="currentPage">6</span>
         <span class="progress-total">/ 20</span>
       </div>
     </div>
@@ -536,12 +536,12 @@
   <script>
     // プログレスバーの更新
     function updateProgress() {
-      const progressPercentage = (7 / 20) * 100;
+      const progressPercentage = (6 / 20) * 100;
       const progressFill = document.getElementById('progressFill');
       const currentPageElement = document.getElementById('currentPage');
       
       progressFill.style.width = progressPercentage + '%';
-      currentPageElement.textContent = '7';
+      currentPageElement.textContent = '6';
       progressFill.style.background = '#003366';
     }
     

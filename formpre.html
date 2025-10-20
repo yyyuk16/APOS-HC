@@ -396,11 +396,34 @@
       <div class="instructions">
         <h3>使用方法</h3>
         <ul>
-          <li>身体図の痛みがある部位をマウスや指で手書きで囲んでください</li>
-          <li>描画完了後、痛みの程度（0〜4）を選択してください</li>
-          <li>複数箇所の痛みを記録できます</li>
+          <li>まず痛みレベルを選択してください</li>
+          <li>身体図の痛みがある部位を指で囲んでください</li>
+          <li>複数箇所の痛みを記録できます（レベルごとに色が変わります）</li>
           <li>「リセット」ボタンで全ての記録を消去できます</li>
         </ul>
+      </div>
+
+      <!-- 痛みレベル選択ボタン -->
+      <div style="text-align: center; margin: 20px 0; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <h3 style="margin-bottom: 15px; color: #2c3e50; font-size: 1.3em;">痛みレベルを選択してから囲んでください</h3>
+        <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
+        
+          <button type="button" onclick="selectPainLevelToDraw(1)" id="painBtn1" style="padding: 12px 20px; border: 3px solid #ffc107; background: #fff3cd; color: #856404; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.3s; opacity: 1; transform: scale(1.05);">
+            1. 時折の痛み
+          </button>
+          <button type="button" onclick="selectPainLevelToDraw(2)" id="painBtn2" style="padding: 12px 20px; border: 3px solid #fdcb6e; background: #ffeaa7; color: #d63031; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.3s; opacity: 0.5;">
+            2. 日常生活に支障
+          </button>
+          <button type="button" onclick="selectPainLevelToDraw(3)" id="painBtn3" style="padding: 12px 20px; border: 3px solid #e17055; background: #fab1a0; color: #d63031; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.3s; opacity: 0.5;">
+            3. 著しく支障
+          </button>
+          <button type="button" onclick="selectPainLevelToDraw(4)" id="painBtn4" style="padding: 12px 20px; border: 3px solid #d63031; background: #ff7675; color: white; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.3s; opacity: 0.5;">
+            4. 耐えられない激痛
+          </button>
+        </div>
+        <p style="margin: 0; color: #666; font-size: 1.1em;">
+          現在選択中: <span id="currentLevelText" style="font-weight: bold; color: #ffc107; font-size: 1.2em;">1. 時折の痛み</span>
+        </p>
       </div>
 
       <div class="pain-legend">
@@ -454,31 +477,6 @@
     </div>
   </div>
 
-  <!-- 痛みレベル選択モーダル（ポップアップ位置調整対応） -->
-  <div id="painModal" class="modal" style="display:none;">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <h3>痛みの程度を選択してください</h3>
-      <div class="pain-levels">
-        <button class="pain-level-btn level-0" onclick="selectPainLevel(0)">
-          <strong>0．無し</strong>
-        </button>
-        <button class="pain-level-btn level-1" onclick="selectPainLevel(1)">
-          <strong>1．時折、又は断続的な痛み</strong>
-        </button>
-        <button class="pain-level-btn level-2" onclick="selectPainLevel(2)">
-          <strong>2．時に調子の悪い日もある。痛みのため日常生活動作に支障をきたすこともある</strong>
-        </button>
-        <button class="pain-level-btn level-3" onclick="selectPainLevel(3)">
-          <strong>3．しばしばひどい痛みがある。痛みにより日常生活や集中力に著しく支障をきたす</strong>
-        </button>
-        <button class="pain-level-btn level-4" onclick="selectPainLevel(4)">
-          <strong>4．持続的な耐えられない激しい痛みが持続的にある</strong>
-        </button>
-      </div>
-      </div>
-    </div>
-  </div>
 
   <script>
     let canvas, ctx;
@@ -490,9 +488,7 @@
     let currentCanvasType = null; // 'front' or 'back'
     let bodyImg = null;
     let backBodyImg = null;
-    let modalScreenX = null;
-    let modalScreenY = null;
-    let modalCanvas = null;
+    let selectedPainLevel = 1; // 選択中の痛みレベル（デフォルト1）
 
     // 痛みレベルの色定義
     const painColors = {
@@ -502,6 +498,36 @@
       3: '#e17055',  // 赤オレンジ
       4: '#d63031'   // 赤
     };
+
+    // 痛みレベル選択関数
+    function selectPainLevelToDraw(level) {
+      selectedPainLevel = level;
+      
+      // ボタンのスタイルを更新
+      for (let i = 0; i <= 4; i++) {
+        const btn = document.getElementById('painBtn' + i);
+        if (btn) {
+          btn.style.opacity = (i === level) ? '1' : '0.5';
+          btn.style.transform = (i === level) ? 'scale(1.05)' : 'scale(1)';
+        }
+      }
+      
+      // テキスト更新
+      const texts = [
+        '0. 無し',
+        '1. 時折の痛み',
+        '2. 日常生活に支障',
+        '3. 著しく支障',
+        '4. 耐えられない激痛'
+      ];
+      const textElement = document.getElementById('currentLevelText');
+      if (textElement) {
+        textElement.textContent = texts[level];
+        textElement.style.color = painColors[level];
+      }
+      
+      console.log('痛みレベル選択:', level);
+    }
 
     // 初期化
     function init() {
@@ -534,6 +560,9 @@
       canvas.addEventListener('mouseup', function(event) {
         stopDrawing(event, 'front');
       });
+      canvas.addEventListener('mouseleave', function(event) {
+        if (isDrawing) stopDrawing(event, 'front');
+      });
       canvas.addEventListener('touchstart', function(event) {
         handleTouch(event, 'front');
       }, { passive: false });
@@ -554,6 +583,9 @@
       backCanvas.addEventListener('mouseup', function(event) {
         stopDrawing(event, 'back');
       });
+      backCanvas.addEventListener('mouseleave', function(event) {
+        if (isDrawing) stopDrawing(event, 'back');
+      });
       backCanvas.addEventListener('touchstart', function(event) {
         handleTouch(event, 'back');
       }, { passive: false });
@@ -564,14 +596,18 @@
         handleTouch(event, 'back');
       }, { passive: false });
 
+      // ドキュメント全体のmouseupでも終了させる（キャンバス外で指が離れた場合の対策）
+      document.addEventListener('mouseup', function(event) {
+        if (isDrawing && currentCanvasType) {
+          stopDrawing(event, currentCanvasType);
+        }
+      });
+
       // ウィンドウリサイズイベント
       window.addEventListener('resize', resizeCanvas);
 
       // 保存されたデータを復元
       loadData();
-
-      // モーダルを必ず非表示にしておく
-      closeModal();
     }
 
     // キャンバスサイズ調整
@@ -642,35 +678,54 @@
     // 痛みエリアの描画
     function drawPainPoints(context, areas) {
       areas.forEach(area => {
-        if (area.path && area.path.length > 0) {
-          context.fillStyle = painColors[area.level];
-          context.globalAlpha = 0.6;
-          
-          context.beginPath();
-          context.moveTo(area.path[0].x, area.path[0].y);
-          for (let i = 1; i < area.path.length; i++) {
-            context.lineTo(area.path[i].x, area.path[i].y);
-          }
-          context.closePath();
-          context.fill();
-          
-          context.globalAlpha = 1.0;
-          context.strokeStyle = '#2c3e50';
-          context.lineWidth = 2;
-          context.stroke();
+        if (!area.path || area.path.length === 0) return;
 
-          // 痛みレベルを表示（エリアの中央に）
-          const centerX = area.path.reduce((sum, p) => sum + p.x, 0) / area.path.length;
-          const centerY = area.path.reduce((sum, p) => sum + p.y, 0) / area.path.length;
-          
-          context.fillStyle = 'white';
-          context.strokeStyle = '#2c3e50';
-          context.lineWidth = 3;
-          context.font = 'bold 14px sans-serif';
-          context.textAlign = 'center';
-          context.strokeText(area.level, centerX, centerY + 5);
-          context.fillText(area.level, centerX, centerY + 5);
+        // 面の描画（半透明）
+        context.save();
+        context.fillStyle = painColors[area.level] || '#d63031';
+        context.globalAlpha = 0.6;
+        context.beginPath();
+        context.moveTo(area.path[0].x, area.path[0].y);
+        for (let i = 1; i < area.path.length; i++) {
+          context.lineTo(area.path[i].x, area.path[i].y);
         }
+        context.closePath();
+        context.fill();
+        context.restore();
+
+        // 枠線
+        context.save();
+        context.strokeStyle = '#2c3e50';
+        context.lineWidth = 2;
+        context.beginPath();
+        context.moveTo(area.path[0].x, area.path[0].y);
+        for (let i = 1; i < area.path.length; i++) {
+          context.lineTo(area.path[i].x, area.path[i].y);
+        }
+        context.closePath();
+        context.stroke();
+        context.restore();
+
+        // 中央座標
+        const centerX = area.path.reduce((sum, p) => sum + p.x, 0) / area.path.length;
+        const centerY = area.path.reduce((sum, p) => sum + p.y, 0) / area.path.length;
+
+        // ラベル（白丸バッジ + 数字）を必ず前面に
+        context.save();
+        const r = 12;
+        context.beginPath();
+        context.arc(centerX, centerY, r, 0, Math.PI * 2);
+        context.fillStyle = '#ffffff';
+        context.fill();
+        context.lineWidth = 2;
+        context.strokeStyle = '#2c3e50';
+        context.stroke();
+        context.fillStyle = '#2c3e50';
+        context.font = 'bold 14px sans-serif';
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        context.fillText(String(area.level ?? ''), Math.round(centerX), Math.round(centerY));
+        context.restore();
       });
     }
 
@@ -717,7 +772,7 @@
 
     // 描画終了
     function stopDrawing(event, type) {
-      if (!isDrawing || currentCanvasType !== type || currentPath.length < 3) {
+      if (!isDrawing || currentCanvasType !== type) {
         isDrawing = false;
         currentPath = [];
         if (type === 'front') {
@@ -731,20 +786,42 @@
       event.preventDefault();
       isDrawing = false;
       
-      // 痛みレベル選択モーダルを表示
-      modalScreenX = event.clientX;
-      modalScreenY = event.clientY;
-      modalCanvas = (type === 'front') ? canvas : backCanvas;
+      // 閉じていない場合は自動的に閉ループにして扱う
+      const first = currentPath[0];
+      const last = currentPath[currentPath.length - 1];
+      const dx = first.x - last.x;
+      const dy = first.y - last.y;
+      if (Math.sqrt(dx*dx + dy*dy) > 5) {
+        currentPath.push({ x: first.x, y: first.y });
+      }
       
-      showPainModal();
+      // モーダルを表示せず、選択済みの痛みレベルで直接保存
+      if (currentCanvasType === 'front') {
+        painAreas.push({
+          path: [...currentPath],
+          level: selectedPainLevel
+        });
+        drawBody();
+      } else if (currentCanvasType === 'back') {
+        backPainAreas.push({
+          path: [...currentPath],
+          level: selectedPainLevel
+        });
+        drawBackBody();
+      }
+      
+      currentPath = [];
+      currentCanvasType = null;
+      
+      console.log('痛みエリアを追加しました。レベル:', selectedPainLevel);
     }
 
-    // 現在描画中のパスを描画
+    // 現在描画中のパスを描画（選択中の痛みレベルの色で表示）
     function drawCurrentPath(context) {
       if (currentPath.length < 2) return;
       
-      context.strokeStyle = '#3498db';
-      context.lineWidth = 3;
+      context.strokeStyle = painColors[selectedPainLevel];
+      context.lineWidth = 4;
       context.globalAlpha = 0.8;
       
       context.beginPath();
@@ -785,115 +862,6 @@
       }
     }
 
-    // 痛みレベル選択モーダル表示
-    function showPainModal() {
-      const modal = document.getElementById('painModal');
-      const modalContent = modal.querySelector('.modal-content');
-
-      // まず一旦非表示にしてから
-      modal.style.display = 'none';
-      modal.classList.remove('popup');
-      modalContent.style.left = '';
-      modalContent.style.top = '';
-      modalContent.style.position = '';
-      modalContent.style.transform = '';
-
-      // 画面上の座標が取得できていればポップアップ表示
-      if (modalScreenX !== null && modalScreenY !== null && modalCanvas) {
-        // ポップアップ用クラス
-        modal.classList.add('popup');
-        modal.style.display = 'block';
-
-        // キャンバスの親要素の位置を基準にする
-        const canvasRect = modalCanvas.getBoundingClientRect();
-        const scrollX = window.scrollX || window.pageXOffset;
-        const scrollY = window.scrollY || window.pageYOffset;
-
-        // モーダルの左上座標（ページ座標）
-        let left = modalScreenX + scrollX;
-        let top = modalScreenY + scrollY;
-
-        // モーダルサイズを一時的に表示して取得
-        modalContent.style.visibility = 'hidden';
-        modalContent.style.display = 'block';
-        modalContent.style.position = 'absolute';
-        modalContent.style.left = '0px';
-        modalContent.style.top = '0px';
-
-        // 取得
-        const modalW = modalContent.offsetWidth;
-        const modalH = modalContent.offsetHeight;
-
-        // 画面端で見切れないように調整
-        const margin = 10;
-        const winW = window.innerWidth;
-        const winH = window.innerHeight;
-
-        if (left + modalW + margin > winW) {
-          left = winW - modalW - margin;
-        }
-        if (left < margin) left = margin;
-        if (top + modalH + margin > winH + scrollY) {
-          top = winH + scrollY - modalH - margin;
-        }
-        if (top < margin + scrollY) top = margin + scrollY;
-
-        // 位置セット
-        modalContent.style.left = left + 'px';
-        modalContent.style.top = top + 'px';
-        modalContent.style.visibility = 'visible';
-        modalContent.style.display = 'block';
-        modalContent.style.position = 'absolute';
-        modalContent.style.transform = 'none';
-
-        // pointer-events有効化
-        modal.style.pointerEvents = 'none';
-        modalContent.style.pointerEvents = 'auto';
-
-      } else {
-        // 通常の中央表示
-        modal.classList.remove('popup');
-        modal.style.display = 'none'; // ここをflexからnoneに変更
-        modalContent.style.left = '';
-        modalContent.style.top = '';
-        modalContent.style.position = '';
-        modalContent.style.transform = '';
-      }
-    }
-
-    // 痛みレベル選択
-    function selectPainLevel(level) {
-      if (currentPath.length > 0 && currentCanvasType) {
-        if (currentCanvasType === 'front') {
-          painAreas.push({
-            path: [...currentPath],
-            level: level
-          });
-          drawBody();
-        } else if (currentCanvasType === 'back') {
-          backPainAreas.push({
-            path: [...currentPath],
-            level: level
-          });
-          drawBackBody();
-        }
-        currentPath = [];
-        closeModal();
-      }
-    }
-
-    // モーダルを閉じる
-    function closeModal() {
-      const modal = document.getElementById('painModal');
-      modal.style.display = 'none';
-      modal.classList.remove('popup');
-      modalScreenX = null;
-      modalScreenY = null;
-      modalCanvas = null;
-      currentPath = [];
-      currentCanvasType = null;
-      isDrawing = false;
-    }
 
     // キャンバスリセット
     function resetCanvas() {
@@ -915,13 +883,13 @@
         timestamp: new Date().toISOString()
       };
 
-      localStorage.setItem('painData', JSON.stringify(data));
+      localStorage.setItem('painData_pain', JSON.stringify(data));
       alert('データを保存しました。');
     }
 
     // データ読み込み
     function loadData() {
-      const saved = localStorage.getItem('painData');
+      const saved = localStorage.getItem('painData_pain');
       if (saved) {
         try {
           const data = JSON.parse(saved);
@@ -951,22 +919,6 @@
       }
     }
 
-    // モーダル外クリックで閉じる
-    window.onclick = function(event) {
-      const modal = document.getElementById('painModal');
-      if (modal.style.display !== 'none') {
-        // ポップアップ表示中はmodal自体が画面全体を覆わないので、modal-content外クリックで閉じる
-        if (modal.classList.contains('popup')) {
-          if (!modal.querySelector('.modal-content').contains(event.target)) {
-            closeModal();
-          }
-        } else {
-          if (event.target === modal) {
-            closeModal();
-          }
-        }
-      }
-    }
 
     // ページ読み込み時に初期化
     document.addEventListener('DOMContentLoaded', function() {

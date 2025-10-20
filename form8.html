@@ -417,7 +417,7 @@
         </select>
       </fieldset>
 
-
+    </fieldset>
 
     <div class="nav-buttons">
       <button type="button" onclick="location.href='form7.html'">← 戻る</button>
@@ -511,7 +511,7 @@
         <div class="progress-fill" id="progressFill"></div>
       </div>
       <div class="progress-info">
-        <span class="progress-page" id="currentPage">6</span>
+        <span class="progress-page" id="currentPage">9</span>
         <span class="progress-total">/ 20</span>
       </div>
     </div>
@@ -520,12 +520,12 @@
   <script>
     // プログレスバーの更新
     function updateProgress() {
-      const progressPercentage = (6 / 20) * 100;
+      const progressPercentage = (9 / 20) * 100;
       const progressFill = document.getElementById('progressFill');
       const currentPageElement = document.getElementById('currentPage');
       
       progressFill.style.width = progressPercentage + '%';
-      currentPageElement.textContent = '6';
+      currentPageElement.textContent = '9';
       progressFill.style.background = '#003366';
     }
     

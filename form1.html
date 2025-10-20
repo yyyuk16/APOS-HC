@@ -729,6 +729,7 @@
         let genogramData = [];
         let isDrawing = false;
         let selectedTool = 'select';
+        let isEraserMode = false;
         
         // Canvas初期化
         function initGenogram() {
@@ -796,10 +797,15 @@
         
         // ポインター下処理
         function handlePointerDown(x, y) {
-          isDrawing = true;
+          if (isEraserMode) {
+            eraseAtPosition(x, y);
+            return;
+          }
+          
           if (selectedTool === 'male' || selectedTool === 'female' || selectedTool === 'deceased_male' || selectedTool === 'deceased_female') {
             addFamilyMemberAtPosition(selectedTool, x, y);
           } else if (selectedTool === 'line') {
+            isDrawing = true;
             startLineDrawing(x, y);
           }
         }
@@ -822,11 +828,96 @@
         // 家族メンバー追加
         function addFamilyMember(type) {
           selectedTool = type;
+          isEraserMode = false;
           // ボタンの色を変更して選択状態を示す
-          document.querySelectorAll('button[onclick^="addFamilyMember"]').forEach(btn => {
+          document.querySelectorAll('button[onclick^="addFamilyMember"], button[onclick^="toggleEraser"]').forEach(btn => {
             btn.style.opacity = '0.5';
           });
           event.target.style.opacity = '1';
+        }
+        
+        // 消しゴムモード切り替え
+        function toggleEraser() {
+          isEraserMode = !isEraserMode;
+          selectedTool = 'select';
+          
+          // ボタンの色を変更して選択状態を示す
+          document.querySelectorAll('button[onclick^="addFamilyMember"], button[onclick^="toggleEraser"]').forEach(btn => {
+            btn.style.opacity = '0.5';
+          });
+          
+          const eraserBtn = document.getElementById('eraserBtn');
+          if (eraserBtn) {
+            eraserBtn.style.opacity = isEraserMode ? '1' : '0.5';
+            eraserBtn.textContent = isEraserMode ? '消しゴム ON' : '消しゴム';
+          }
+        }
+        
+        // 指定位置の図形を消去
+        function eraseAtPosition(x, y) {
+          let erased = false;
+          
+          // 図形を逆順でチェック（後から描いたものを優先）
+          for (let i = genogramData.length - 1; i >= 0; i--) {
+            const member = genogramData[i];
+            
+            if (member.type === 'male' || member.type === 'female' || member.type === 'deceased_male' || member.type === 'deceased_female') {
+              // 図形の範囲内かチェック
+              const distance = Math.sqrt((x - member.x) ** 2 + (y - member.y) ** 2);
+              if (distance <= 20) { // 20px以内なら消去
+                genogramData.splice(i, 1);
+                erased = true;
+                break;
+              }
+            } else if (member.type === 'line') {
+              // 線の近くかチェック
+              const distance = distanceToLine(x, y, member.x1, member.y1, member.x2, member.y2);
+              if (distance <= 10) { // 10px以内なら消去
+                genogramData.splice(i, 1);
+                erased = true;
+                break;
+              }
+            }
+          }
+          
+          if (erased) {
+            redrawGenogram();
+            console.log('図形を消去しました');
+          }
+        }
+        
+        // 点から線までの距離を計算
+        function distanceToLine(px, py, x1, y1, x2, y2) {
+          const A = px - x1;
+          const B = py - y1;
+          const C = x2 - x1;
+          const D = y2 - y1;
+          
+          const dot = A * C + B * D;
+          const lenSq = C * C + D * D;
+          
+          if (lenSq === 0) {
+            return Math.sqrt(A * A + B * B);
+          }
+          
+          let param = dot / lenSq;
+          
+          let xx, yy;
+          
+          if (param < 0) {
+            xx = x1;
+            yy = y1;
+          } else if (param > 1) {
+            xx = x2;
+            yy = y2;
+          } else {
+            xx = x1 + param * C;
+            yy = y1 + param * D;
+          }
+          
+          const dx = px - xx;
+          const dy = py - yy;
+          return Math.sqrt(dx * dx + dy * dy);
         }
         
         // 指定位置に家族メンバー追加
@@ -843,6 +934,12 @@
         
         // 直線描画開始
         function startLineDrawing(x, y) {
+          // 既存の描画中の線があれば完了させる
+          const existingLine = genogramData.find(member => member.type === 'line' && member.isDrawing);
+          if (existingLine) {
+            existingLine.isDrawing = false;
+          }
+          
           const line = {
             type: 'line',
             x1: x,
@@ -873,6 +970,7 @@
             lastLine.y2 = y;
             lastLine.isDrawing = false;
             redrawGenogram();
+            console.log('線を描画完了しました');
           }
         }
         
@@ -886,17 +984,12 @@
           
           const ctx = canvas.getContext('2d');
           
-          // データが空の場合はキャンバスをクリアして終了
+          // キャンバスを完全にクリア
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          
+          // データが空の場合は白で塗りつぶして終了
           if (!genogramData || genogramData.length === 0) {
-            console.log('データが空のため、キャンバスをクリアします');
-            // キャンバスのサイズを一時的に変更してリセット
-            const originalWidth = canvas.width;
-            const originalHeight = canvas.height;
-            canvas.width = 1;
-            canvas.height = 1;
-            canvas.width = originalWidth;
-            canvas.height = originalHeight;
-            
+            console.log('データが空のため、キャンバスを白で塗りつぶします');
             ctx.fillStyle = '#ffffff';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             return;
@@ -905,9 +998,6 @@
           // キャンバスを白で塗りつぶし
           ctx.fillStyle = '#ffffff';
           ctx.fillRect(0, 0, canvas.width, canvas.height);
-          
-          // キャンバスクリア
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
           
           console.log('再描画開始 - データ数:', genogramData.length);
           
@@ -979,22 +1069,30 @@
           genogramData = [];
           selectedTool = 'select';
           isDrawing = false;
+          isEraserMode = false;
+          
+          // ボタンの状態をリセット
+          document.querySelectorAll('button[onclick^="addFamilyMember"], button[onclick^="toggleEraser"]').forEach(btn => {
+            btn.style.opacity = '0.5';
+          });
+          
+          const eraserBtn = document.getElementById('eraserBtn');
+          if (eraserBtn) {
+            eraserBtn.textContent = '消しゴム';
+          }
           
           // キャンバスを完全にクリア
           const canvas = document.getElementById('genogramCanvas');
           if (canvas) {
             const ctx = canvas.getContext('2d');
-            // キャンバスのサイズを一時的に変更してリセット
-            const originalWidth = canvas.width;
-            const originalHeight = canvas.height;
-            canvas.width = 1;
-            canvas.height = 1;
-            canvas.width = originalWidth;
-            canvas.height = originalHeight;
             
-            // 白で塗りつぶし
+            // キャンバスを白で塗りつぶし
             ctx.fillStyle = '#ffffff';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // キャンバスをクリア
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
             console.log('キャンバスを完全にリセットしました');
           }
           
@@ -1068,18 +1166,19 @@
         </div>
         
         <!-- ジェノグラム描画エリア -->
-        <div id="genogramContainer" style="position: relative; min-height: 200px; border: 1px dashed #ccc; padding: 15px;">
+          <div id="genogramContainer" style="position: relative; min-height: 360px; border: 1px dashed #ccc; padding: 15px;">
           <!-- 家族メンバー追加ボタン -->
           <div style="text-align: center; margin-bottom: 15px;">
-            <button type="button" onclick="addFamilyMember('male')" style="margin: 2px; padding: 8px 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">♂ 男性</button>
-            <button type="button" onclick="addFamilyMember('female')" style="margin: 2px; padding: 8px 12px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">♀ 女性</button>
-            <button type="button" onclick="addFamilyMember('deceased_male')" style="margin: 2px; padding: 8px 12px; background: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">♂ 死亡男性</button>
-            <button type="button" onclick="addFamilyMember('deceased_female')" style="margin: 2px; padding: 8px 12px; background: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">♀ 死亡女性</button>
-            <button type="button" onclick="addFamilyMember('line')" style="margin: 2px; padding: 8px 12px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;">— 直線</button>
+            <button type="button" onclick="addFamilyMember('male')" style="margin: 2px; padding: 8px 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; opacity: 0.5;">♂ 男性</button>
+            <button type="button" onclick="addFamilyMember('female')" style="margin: 2px; padding: 8px 12px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; opacity: 0.5;">♀ 女性</button>
+            <button type="button" onclick="addFamilyMember('deceased_male')" style="margin: 2px; padding: 8px 12px; background: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; opacity: 0.5;">♂ 死亡男性</button>
+            <button type="button" onclick="addFamilyMember('deceased_female')" style="margin: 2px; padding: 8px 12px; background: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; opacity: 0.5;">♀ 死亡女性</button>
+            <button type="button" onclick="addFamilyMember('line')" style="margin: 2px; padding: 8px 12px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; opacity: 0.5;">— 直線</button>
+            <button type="button" id="eraserBtn" onclick="toggleEraser()" style="margin: 2px; padding: 8px 12px; background: #ffc107; color: black; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; opacity: 0.5;">消しゴム</button>
           </div>
           
           <!-- ジェノグラム描画エリア -->
-          <canvas id="genogramCanvas" width="350" height="250" style="border: 1px solid #ddd; background: #fff; display: block; margin: 0 auto; touch-action: none;"></canvas>
+          <canvas id="genogramCanvas" width="600" height="360" style="border: 1px solid #ddd; background: #fff; display: block; margin: 0 auto; touch-action: none;"></canvas>
           
           <div style="text-align: center; margin-top: 15px;">
             <button type="button" id="clearGenogramBtn" onclick="clearGenogram()" style="margin: 2px; padding: 5px 10px; background: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer;">クリア</button>
@@ -1144,7 +1243,7 @@ function addFamily() {
 // ジェノグラム描画用
 let genogramShapes = [];
 
-function clearGenogram(canvasId) {
+function clearGenogramDemo(canvasId) {
   genogramShapes = [];
   const canvas = document.getElementById(canvasId);
   if (canvas && canvas.getContext) {

@@ -493,7 +493,8 @@
       
       photoPreviewArea.appendChild(newImg);
       photoSaveArea.style.display = '';
-      cameraPhotoCanvas.style.display = '';
+      // キャンバスは表示しない（画像プレビューのみ表示）
+      cameraPhotoCanvas.style.display = 'none';
     });
 
 

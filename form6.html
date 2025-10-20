@@ -578,7 +578,7 @@
           </div>
         </fieldset>
 <fieldset> 
-        <legend>2. 予防接種（MA）</legend>
+        <legend>2. 予防接種</legend>
         <div style="margin-bottom: 0.5em;">
           <div style="display: flex; flex-wrap: wrap; align-items: center;">
             <!-- ０．接種ありラジオボタン追加 -->
@@ -619,7 +619,11 @@
               </label>
             </div>
           </div>
-        
+
+          <div id="vaccinated_none_section" style="display:none; margin-top:0.5em;">
+            1．すべて未接種の場合その理由：
+            <input type="text" name="vaccination_none_reason" placeholder="理由を記入" style="margin-left:1em; width: 20em;">
+          </div>
 
           <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -655,25 +659,23 @@
               }
             });
           </script>
-        </div>
-          <div style="margin-top:0.5em;">
-            1．すべて未接種の場合その理由：
-            <input type="text" name="vaccination_none_reason" placeholder="理由を記入" style="margin-left:1em; width: 20em;">
-          </div>
       </fieldset>
 
       <fieldset>
         <legend>3. 感染対策</legend>
         <div style="margin-bottom: 0.5em;">
-          <label><input type="radio" name="infection_control" value="0" required>0. 感染症を正確に理解し、他者への感染予防や適切な治療・感染管理を心がけている</label><br>
-          <label><input type="radio" name="infection_control" value="1">1. やや感染管理を理解し、他者への感染予防がさせない行動をとり、適切な治療を受けている</label><br>
-          <label><input type="radio" name="infection_control" value="2">2. 自身の感染症に理解はあるが、他人への感染には心がけない</label><br>
-          <label><input type="radio" name="infection_control" value="3">3. ケア提供者からの治療や感染管理を受け取るが、自分から治療や予防管理はしない</label><br>
-          <label><input type="radio" name="infection_control" value="4">4. 治療計画や感染ガイドラインに従うことを拒否している、できない状態</label>
+          <select name="infection_control" required style="width:100%; max-width:35em;">
+            <option value="" disabled selected>選択してください</option>
+            <option value="0">0. 感染症を正確に理解し、他者への感染予防や適切な治療・感染管理を心がけている</option>
+            <option value="1">1. やや感染管理を理解し、他者への感染予防がさせない行動をとり、適切な治療を受けている</option>
+            <option value="2">2. 自身の感染症に理解はあるが、他人への感染には心がけない</option>
+            <option value="3">3. ケア提供者からの治療や感染管理を受け取るが、自分から治療や予防管理はしない</option>
+            <option value="4">4. 治療計画や感染ガイドラインに従うことを拒否している、できない状態</option>
+          </select>
         </div>
       </fieldset>
 
-
+    </fieldset>
     <div class="nav-buttons">
       <button type="button" onclick="location.href='form5.html'">← 戻る</button>
       <button type="button" onclick="location.href='form7.html'">次へ →</button>
@@ -766,7 +768,7 @@
         <div class="progress-fill" id="progressFill"></div>
       </div>
       <div class="progress-info">
-        <span class="progress-page" id="currentPage">8</span>
+        <span class="progress-page" id="currentPage">7</span>
         <span class="progress-total">/ 20</span>
       </div>
     </div>
@@ -775,12 +777,12 @@
   <script>
     // プログレスバーの更新
     function updateProgress() {
-      const progressPercentage = (8 / 20) * 100;
+      const progressPercentage = (7 / 20) * 100;
       const progressFill = document.getElementById('progressFill');
       const currentPageElement = document.getElementById('currentPage');
       
       progressFill.style.width = progressPercentage + '%';
-      currentPageElement.textContent = '8';
+      currentPageElement.textContent = '7';
       progressFill.style.background = '#003366';
     }
     

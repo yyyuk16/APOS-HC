@@ -291,24 +291,15 @@
     <legend>１.　NPI-Q(BPSD：行動・心理障害評価)の項目</legend>
     <div style="margin-bottom: 18px;">
       <span style="font-weight:bold;">情報提供者：</span>
-      <label style="margin-right: 12px;">
-        <input type="radio" name="information_provider" value="1" required> 1. 配偶者
-   
-      <label style="margin-right: 12px;">
-        <input type="radio" name="information_provider" value="2"> 2. 子供
-      </label>
-      <label style="margin-right: 12px;">
-        <input type="radio" name="information_provider" value="3"> 3. 子供の配偶者
-      </label>
-      <label style="margin-right: 12px;">
-        <input type="radio" name="information_provider" value="4"> 4. 介護福祉士・ヘルパー
-      </label>
-      <label style="margin-right: 12px;">
-        <input type="radio" name="information_provider" value="5"> 5. 訪問看護師
-      </label>
-      <label style="margin-right: 12px;">
-        <input type="radio" name="information_provider" value="6" id="information_provider_6"> 6. その他
-      </label>
+      <select name="information_provider" id="information_provider_select" required style="margin-right:8px;">
+        <option value="">選択してください</option>
+        <option value="1">1. 配偶者</option>
+        <option value="2">2. 子供</option>
+        <option value="3">3. 子供の配偶者</option>
+        <option value="4">4. 介護福祉士・ヘルパー</option>
+        <option value="5">5. 訪問看護師</option>
+        <option value="6">6. その他</option>
+      </select>
       <input type="text" name="information_provider_other" id="information_provider_other" style="display:none; width:320px; margin-left:8px;" placeholder="その他の場合はご記入ください">
     </div>
     <script>
