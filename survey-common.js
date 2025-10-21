@@ -1,241 +1,157 @@
-/**
- * APOS-HC アンケートシステム - 共通スクリプト
- * すべてのフォーム（form0～form19）で使用
- */
+// 入力バリデーション共通処理
+// - 各フォームの「次へ」ボタンは onclick で遷移指定されているため、
+//   そのボタンをフックして required 未入力の要素を検出し、
+//   フォーム内に赤字のエラーメッセージを表示して遷移をブロックする。
 
-/**
- * ユーザーIDベースのlocalStorageキー管理
- * user_idが設定されている場合はそれを使用、なければ一時IDを生成
- */
-function ensurePid() {
-  // まずuser_idを確認（form.htmlで設定される）
-  let pid = localStorage.getItem('user_id');
-  if (pid) {
-    return pid;
-  }
-  
-  // user_idがない場合は既存のapos_pidを確認
-  pid = localStorage.getItem('apos_pid');
-  if (!pid) {
-    // どちらもない場合は一時的なIDを生成
-    pid = 'temp_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
-    localStorage.setItem('apos_pid', pid);
-    console.warn('警告: user_idが設定されていません。一時IDを使用します:', pid);
-  }
-  return pid;
-}
+(function() {
+  // 画面ロード時にセットアップ
+  document.addEventListener('DOMContentLoaded', function() {
+    // 「次へ →」ボタンを特定（onclick に formN.html への遷移が含まれる）
+    const nextButton = findNextButton();
+    if (!nextButton) return;
 
-/**
- * フォーム番号に対応するlocalStorageキーを生成
- * @param {number} formNumber - フォーム番号（0～19）
- * @returns {string} localStorageキー
- */
-function getFormStorageKey(formNumber) {
-  return `surveyData_${ensurePid()}_form${formNumber}`;
-}
+    // 既存の遷移先を保持
+    const nextHref = extractNextHref(nextButton.getAttribute('onclick'));
+    if (!nextHref) return;
 
-/**
- * フォームデータを収集する関数
- * チェックボックス、ラジオボタン、Canvas画像にも対応
- * @param {HTMLFormElement} form - フォーム要素
- * @returns {Object} フォームデータ
- */
-function collectFormData(form) {
-  const formData = new FormData(form);
-  const data = {};
-  
-  // 通常のフィールド
-  for (let [key, value] of formData.entries()) {
-    if (data[key]) {
-      // 同じ名前の複数フィールド（チェックボックスなど）
-      if (Array.isArray(data[key])) {
-        data[key].push(value);
-      } else {
-        data[key] = [data[key], value];
+    // クリック時にバリデーションを実行
+    nextButton.addEventListener('click', function(e) {
+      // 直リンク遷移を止める
+      e.preventDefault();
+
+      const form = document.querySelector('form');
+      if (!form) {
+        // 念のためフォームが無い場合は従来通り遷移
+        window.location.href = nextHref;
+        return;
       }
-    } else {
-      data[key] = value;
-    }
-  }
-  
-  // Canvas画像データを保存
-  const canvases = form.querySelectorAll('canvas');
-  canvases.forEach((canvas, index) => {
-    try {
-      const canvasId = canvas.id || `canvas_${index}`;
-      data[canvasId + '_image'] = canvas.toDataURL('image/png');
-      console.log(`Canvas画像を保存しました: ${canvasId}`);
-    } catch (e) {
-      console.error('Canvas保存エラー:', e);
-    }
+
+      const invalids = validateFormRequired(form);
+      if (invalids.length > 0) {
+        // 最初のエラーにスクロール
+        invalids[0].element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // インライン onclick を含む他リスナーも含め完全に停止
+        e.stopImmediatePropagation();
+        return; // 遷移ブロック
+      }
+
+      // 問題なければ遷移
+      window.location.href = nextHref;
+    }, { capture: true });
   });
-  
-  // 非表示項目も含めて全入力要素を確認
-  const allInputs = form.querySelectorAll('input, select, textarea');
-  allInputs.forEach(input => {
-    if (!input.name) return;
-    
-    // すでにFormDataで処理されているかチェック
-    const isProcessed = data.hasOwnProperty(input.name);
-    
-    if (input.type === 'checkbox') {
-      // チェックボックスは配列として保存
-      if (input.checked) {
-        if (!data[input.name]) {
-          data[input.name] = [];
-        }
-        if (Array.isArray(data[input.name])) {
-          if (!data[input.name].includes(input.value)) {
-            data[input.name].push(input.value);
-          }
-        } else {
-          data[input.name] = [data[input.name], input.value];
-        }
-      }
-    } else if (input.type === 'radio') {
-      // ラジオボタンはチェックされているもののみ
-      if (input.checked && !isProcessed) {
-        data[input.name] = input.value;
-      }
-    } else {
-      // その他の入力要素（非表示でも値があれば保存）
-      if (!isProcessed && input.value) {
-        data[input.name] = input.value;
-      }
-    }
-  });
-  
-  return data;
-}
 
-/**
- * フォームデータを復元する関数
- * @param {HTMLFormElement} form - フォーム要素
- * @param {Object} data - 復元するデータ
- */
-function restoreFormData(form, data) {
-  Object.keys(data).forEach(key => {
-    // Canvas画像の復元
-    if (key.endsWith('_image')) {
-      const canvasId = key.replace('_image', '');
-      const canvas = document.getElementById(canvasId);
-      if (canvas) {
-        const ctx = canvas.getContext('2d');
-        const img = new Image();
-        img.onload = function() {
-          ctx.drawImage(img, 0, 0);
-        };
-        img.src = data[key];
-        console.log(`Canvas画像を復元しました: ${canvasId}`);
-      }
-      return;
-    }
-    
-    const elements = form.elements[key];
-    if (elements) {
-      if (elements.length > 1) {
-        // 複数要素（ラジオボタンやチェックボックス）
-        Array.from(elements).forEach(el => {
-          if (el.type === 'checkbox' || el.type === 'radio') {
-            if (Array.isArray(data[key])) {
-              el.checked = data[key].includes(el.value);
-            } else {
-              el.checked = el.value === data[key];
-            }
-          }
-        });
-      } else if (elements.length === 1) {
-        // 単一要素（複数の同名要素の1つ）
-        const el = elements[0];
-        if (el.type === 'checkbox' || el.type === 'radio') {
-          if (Array.isArray(data[key])) {
-            el.checked = data[key].includes(el.value);
-          } else {
-            el.checked = el.value === data[key];
-          }
-        } else {
-          el.value = data[key] || '';
-        }
-      } else {
-        // 単一要素
-        if (elements.type === 'checkbox' || elements.type === 'radio') {
-          if (Array.isArray(data[key])) {
-            elements.checked = data[key].includes(elements.value);
-          } else {
-            elements.checked = elements.value === data[key];
-          }
-        } else {
-          elements.value = data[key] || '';
-        }
-      }
-    }
-  });
-}
+  // 次へボタンを探す（戻るではなく「次へ」を優先）
+  function findNextButton() {
+    // 候補取得: onclick に遷移指定を含むボタン
+    const buttons = Array.from(document.querySelectorAll('.nav-buttons button, button'));
+    const candidates = buttons.filter(btn => {
+      const oc = (btn.getAttribute('onclick') || '').replace(/\s+/g, '');
+      return /location\.href='form\d+\.html'/.test(oc) || /window\.location\.href='form\d+\.html'/.test(oc);
+    });
 
-/**
- * フォームの自動保存機能を初期化
- * @param {number} formNumber - フォーム番号（0～19）
- */
-function initFormAutoSave(formNumber) {
-  const form = document.getElementById('surveyForm');
-  if (!form) {
-    console.error('surveyFormが見つかりません');
-    return;
+    if (candidates.length === 0) return null;
+
+    // 1) テキストで「次へ」や矢印を含むものを優先
+    const byLabel = candidates.find(btn => {
+      const label = (btn.textContent || '').trim();
+      return (/次へ/.test(label) || /→/.test(label)) && !(/戻る/.test(label) || /←/.test(label));
+    });
+    if (byLabel) return byLabel;
+
+    // 2) それ以外はナビゲーションの後ろ側（通常「次へ」）を採用
+    return candidates[candidates.length - 1] || candidates[0];
   }
-  
-  const storageKey = getFormStorageKey(formNumber);
-  
-  // 入力時に自動保存
-  form.addEventListener('input', function() {
-    const data = collectFormData(form);
-    localStorage.setItem(storageKey, JSON.stringify(data));
-    console.log(`Form ${formNumber} データを自動保存しました (key: ${storageKey})`);
-  });
-  
-  form.addEventListener('change', function() {
-    const data = collectFormData(form);
-    localStorage.setItem(storageKey, JSON.stringify(data));
-    console.log(`Form ${formNumber} データを自動保存しました (key: ${storageKey})`);
-  });
-  
-  // 保存されたデータの復元
-  const savedData = localStorage.getItem(storageKey);
-  if (savedData) {
-    try {
-      const data = JSON.parse(savedData);
-      restoreFormData(form, data);
-      console.log(`Form ${formNumber} の保存データを復元しました (key: ${storageKey})`);
-    } catch (error) {
-      console.error(`Form ${formNumber} のデータ復元エラー:`, error);
+
+  // onclick 文字列から遷移先を取り出す
+  function extractNextHref(onclickStr) {
+    if (!onclickStr) return null;
+    const m = onclickStr.match(/['\"](form\d+\.html)['\"]/);
+    return m ? m[1] : null;
+  }
+
+  // required 要素の未入力を検出し、各項目の直下にエラーメッセージを表示
+  function validateFormRequired(form) {
+    // 既存エラーメッセージをクリア
+    form.querySelectorAll('.error-message').forEach(n => n.remove());
+    form.querySelectorAll('.error').forEach(n => n.classList.remove('error'));
+
+    const elements = Array.from(form.querySelectorAll('[required]'));
+    const invalids = [];
+
+    elements.forEach(el => {
+      const isValid = checkFilled(el);
+      if (!isValid) {
+        invalids.push({ element: el });
+        markError(el);
+      }
+    });
+
+    // フォーム先頭にも総合メッセージ（任意）
+    if (invalids.length > 0) {
+      const topMsg = document.createElement('div');
+      topMsg.className = 'error-message-global';
+      topMsg.textContent = '未入力の必須項目があります。赤字表示の箇所を入力してください。';
+      const firstFieldset = form.querySelector('fieldset, h1, h2, .container') || form;
+      firstFieldset.parentNode.insertBefore(topMsg, firstFieldset);
+    }
+
+    return invalids;
+  }
+
+  // 入力チェック（型別）
+  function checkFilled(el) {
+    const tag = el.tagName.toLowerCase();
+    const type = (el.getAttribute('type') || '').toLowerCase();
+
+    if (tag === 'input') {
+      if (type === 'radio' || type === 'checkbox') {
+        // 同名グループ内で1つ以上チェック
+        const group = Array.from(document.querySelectorAll(`input[name="${cssEscape(el.name)}"]`));
+        return group.some(i => i.checked);
+      }
+      return !!el.value.trim();
+    }
+
+    if (tag === 'select') {
+      return el.value !== '' && el.value != null;
+    }
+
+    if (tag === 'textarea') {
+      return !!el.value.trim();
+    }
+
+    return true;
+  }
+
+  // エラー表示
+  function markError(el) {
+    // 見た目強調
+    el.classList.add('error');
+
+    // メッセージ要素を挿入（ラベルの直後 or 要素の直後）
+    const msg = document.createElement('div');
+    msg.className = 'error-message';
+    msg.textContent = 'この項目は必須です。';
+
+    const parentLabel = el.closest('label');
+    if (parentLabel && parentLabel.parentNode) {
+      parentLabel.parentNode.insertBefore(msg, parentLabel.nextSibling);
+    } else if (el.parentNode) {
+      el.parentNode.insertBefore(msg, el.nextSibling);
     }
   }
-}
 
-/**
- * ユーザー情報を確認
- * user_idが設定されていない場合は警告を表示
- */
-function checkUserInfo() {
-  const userId = localStorage.getItem('user_id');
-  const session = localStorage.getItem('session');
-  
-  if (!userId) {
-    console.warn('警告: user_idが設定されていません。form.htmlから開始してください。');
-    return false;
+  // CSS セレクタ用エスケープ
+  function cssEscape(str) {
+    return str.replace(/([\\:\.\[\],=])/g, '\\$1');
   }
-  
-  if (!session) {
-    console.warn('警告: sessionが設定されていません。form.htmlから開始してください。');
-  }
-  
-  console.log('ユーザー情報:', { userId, session });
-  return true;
-}
+})();
 
-// ページ読み込み時にユーザー情報を確認
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', checkUserInfo);
-} else {
-  checkUserInfo();
-}
+// 各フォームで使用するストレージキー生成関数（グローバル）
+// 例: survey_form_4_user_{userId}_session_{session}
+window.getFormStorageKey = function(formNumber) {
+  var userId = localStorage.getItem('user_id') || 'guest';
+  var session = localStorage.getItem('session') || '1';
+  return 'survey_form_' + String(formNumber) + '_user_' + userId + '_session_' + session;
+};
 
