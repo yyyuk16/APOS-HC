@@ -342,7 +342,7 @@
       </label>
       <div style="margin: 6px 0;">
         <button type="button" id="openCameraBtn">カメラを起動</button>
-        <input type="file" id="fileInputPhoto" accept="image/*" style="display:inline-block;margin-left:12px;">
+        <input type="file" id="fileInputPhoto" accept="image/*" capture="environment" style="display:inline-block;margin-left:12px;">
       </div>
       <video id="cameraPreview" width="320" height="240" autoplay style="display:none; border:1px solid #888;"></video>
       <canvas id="cameraPhotoCanvas" width="320" height="240" style="display:none;"></canvas>
@@ -453,19 +453,39 @@
     const roomPhotoInput = document.getElementById('room_photo_image');
     let localStream = null;
 
-    // カメラ起動
+    // 外カメラ優先でストリーム取得（段階的フォールバック）
+    async function getRearPreferredStream() {
+      // 1) exact 縛りで外カメラ
+      const constraintsExact = { video: { facingMode: { exact: 'environment' } } };
+      // 2) ヒント指定で外カメラ
+      const constraintsIdeal = { video: { facingMode: 'environment' } };
+      // 3) 何も指定しない（デフォルト）
+      const constraintsDefault = { video: true };
+
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        throw new Error('このブラウザは getUserMedia に対応していません');
+      }
+
+      try {
+        return await navigator.mediaDevices.getUserMedia(constraintsExact);
+      } catch (_) {
+        try {
+          return await navigator.mediaDevices.getUserMedia(constraintsIdeal);
+        } catch (_) {
+          return await navigator.mediaDevices.getUserMedia(constraintsDefault);
+        }
+      }
+    }
+
+    // カメラ起動（外カメラ優先）
     openCameraBtn.addEventListener('click', async function() {
       try {
-        if (!!navigator.mediaDevices && !!navigator.mediaDevices.getUserMedia) {
-          localStream = await navigator.mediaDevices.getUserMedia({ video: true });
-          cameraPreview.srcObject = localStream;
-          cameraPreview.style.display = '';
-          cameraButtons.style.display = '';
-          photoPreviewImage.style.display = 'none';
-          photoSaveArea.style.display = 'none';
-        } else {
-          alert('カメラ機能がサポートされていません。');
-        }
+        localStream = await getRearPreferredStream();
+        cameraPreview.srcObject = localStream;
+        cameraPreview.style.display = '';
+        cameraButtons.style.display = '';
+        photoPreviewImage.style.display = 'none';
+        photoSaveArea.style.display = 'none';
       } catch (err) {
         alert('カメラが使用できません: ' + err.message);
       }
