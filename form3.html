@@ -344,9 +344,9 @@
         <button type="button" id="openCameraBtn">カメラを起動</button>
         <input type="file" id="fileInputPhoto" accept="image/*" capture="environment" style="display:inline-block;margin-left:12px;">
       </div>
-      <video id="cameraPreview" width="320" height="240" autoplay style="display:none; border:1px solid #888;"></video>
+      <video id="cameraPreview" width="320" height="240" autoplay playsinline webkit-playsinline muted style="display:none; border:1px solid #888;"></video>
       <canvas id="cameraPhotoCanvas" width="320" height="240" style="display:none;"></canvas>
-      <div id="cameraButtons" style="margin: 6px 0; display:none;">
+      <div id="cameraButtons" style="margin: 6px 0; display:none; position: relative; z-index: 2000;">
         <button type="button" id="takePhotoBtn">撮影</button>
         <button type="button" id="closeCameraBtn">カメラ停止</button>
       </div>
@@ -482,10 +482,14 @@
       try {
         localStream = await getRearPreferredStream();
         cameraPreview.srcObject = localStream;
+        // iOSなどでの自動再生対策
+        try { await cameraPreview.play(); } catch (_) {}
         cameraPreview.style.display = '';
         cameraButtons.style.display = '';
         photoPreviewImage.style.display = 'none';
         photoSaveArea.style.display = 'none';
+        // ボタンが画面外に行かないようにスクロール
+        cameraButtons.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } catch (err) {
         alert('カメラが使用できません: ' + err.message);
       }
