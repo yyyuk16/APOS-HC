@@ -342,7 +342,8 @@
       </label>
       <div style="margin: 6px 0;">
         <button type="button" id="openCameraBtn">カメラを起動</button>
-        <input type="file" id="fileInputPhoto" accept="image/*" capture="environment" style="display:inline-block;margin-left:12px;">
+        <button type="button" id="openNativeCameraBtn" style="margin-left:12px;">カメラアプリで撮影</button>
+        <input type="file" id="fileInputPhoto" accept="image/*" capture="environment" style="display:none;">
       </div>
       <video id="cameraPreview" width="320" height="240" autoplay playsinline webkit-playsinline muted style="display:none; border:1px solid #888;"></video>
       <canvas id="cameraPhotoCanvas" width="320" height="240" style="display:none;"></canvas>
@@ -441,6 +442,7 @@
 
     // ---- カメラ・写真追加部分 ----
     const openCameraBtn = document.getElementById('openCameraBtn');
+    const openNativeCameraBtn = document.getElementById('openNativeCameraBtn');
     const fileInputPhoto = document.getElementById('fileInputPhoto');
     const cameraPreview = document.getElementById('cameraPreview');
     const takePhotoBtn = document.getElementById('takePhotoBtn');
@@ -554,6 +556,12 @@
         };
         reader.readAsDataURL(file);
       }
+    });
+
+    // ネイティブのカメラアプリを起動（端末対応時）
+    openNativeCameraBtn.addEventListener('click', function() {
+      // モバイル端末では capture+accept によりカメラアプリが起動する実装が多い
+      fileInputPhoto.click();
     });
 
     // 画像保存ボタンとinput連動（重複防止）
