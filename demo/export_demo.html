@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APOS-HC デモデータ一覧</title>
+  <style>
+    :root { --blue:#1f80c4; --mint:#87d299; --bg:#f5fbf7; }
+    body { font-family: system-ui,sans-serif; background: var(--bg); margin:0; }
+    .wrap { max-width: 960px; margin: 24px auto; background:#fff; border-radius:16px; padding:24px 20px; box-shadow:0 6px 24px rgba(0,0,0,.08);}
+    h1 { color:var(--blue); text-align:center; }
+    .actions { text-align:right; margin-bottom:12px; }
+    button {
+      background: var(--mint); color:#064; border:none; padding:10px 18px;
+      border-radius:10px; font-weight:600; cursor:pointer;
+      box-shadow:0 4px 10px rgba(0,0,0,.08);
+    }
+    table { border-collapse: collapse; width: 100%; font-size:15px; }
+    th, td { border:1px solid #ccd; padding:8px 10px; text-align:left; }
+    th { background:#eaf6ef; color:#046; position:sticky; top:0; }
+    tbody tr:nth-child(even){ background:#f8fbf9; }
+    .msg { margin-top:8px; font-size:14px; color:#666; }
+    .err { color:#b00; white-space:pre-wrap; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>APOS-HC デモデータ一覧</h1>
+    <div class="actions">
+      <button id="reloadBtn">最新のCSVを読み込む</button>
+      <button id="downloadBtn">CSVをダウンロード</button>
+    </div>
+    <div id="tableContainer">📂 CSVを読み込み中...</div>
+    <div id="status" class="msg"></div>
+  </div>
+
+  <script>
+    const tableContainer = document.getElementById("tableContainer");
+    const statusEl = document.getElementById("status");
+
+    // CSVテキストを表に変換
+    function renderCSV(csvText) {
+      const rows = csvText.trim().split("\n").map(r => r.split(","));
+      if (rows.length === 0) {
+        tableContainer.innerHTML = "⚠ データがありません。";
+        return;
+      }
+      const header = rows[0];
+      const bodyRows = rows.slice(1);
+      let html = "<table><thead><tr>";
+      header.forEach(h => html += `<th>${h}</th>`);
+      html += "</tr></thead><tbody>";
+      bodyRows.forEach(r => {
+        html += "<tr>" + r.map(c => `<td>${c}</td>`).join("") + "</tr>";
+      });
+      html += "</tbody></table>";
+      tableContainer.innerHTML = html;
+    }
+
+    async function loadCSV() {
+      statusEl.textContent = "";
+      try {
+        const res = await fetch("/api/export_demo");
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const csvText = await res.text();
+        renderCSV(csvText);
+        statusEl.textContent = "✅ 読み込み完了 (" + new Date().toLocaleString() + ")";
+      } catch (err) {
+        statusEl.textContent = "❌ CSV取得エラー: " + err.message;
+        statusEl.classList.add("err");
+        tableContainer.innerHTML = "";
+      }
+    }
+
+    document.getElementById("reloadBtn").onclick = loadCSV;
+    document.getElementById("downloadBtn").onclick = () => {
+      window.open("/api/export_demo/download", "_blank");
+    };
+
+    loadCSV(); // 初回読み込み
+  </script>
+</body>
+</html>

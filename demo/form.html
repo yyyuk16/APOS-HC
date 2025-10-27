@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <title>APOS-HC 簡易入力バージョン</title>
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(180deg, #f4f8fb 0%, #e9f6f0 100%);
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #333;
+    }
+    .container {
+      max-width: 700px;
+      background: #fff;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      text-align: center;
+    }
+    h1 {
+      color: #1f80c4;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+    .note {
+      background: #f0f9f3;
+      border-left: 6px solid #87d299;
+      padding: 15px 18px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      text-align: left;
+      margin-bottom: 35px;
+    }
+    label {
+      display: block;
+      text-align: left;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #e0e6ed;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    button {
+      font-size: 1.2rem;
+      padding: 18px 40px;
+      border: none;
+      border-radius: 12px;
+      background-color: #87d299;
+      color: #fff;
+      cursor: pointer;
+      width: 260px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      transition: 0.2s;
+      margin-top: 30px;
+    }
+    button:hover {
+      background-color: #1f80c4;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>APOS-HC 簡易入力バージョン</h1>
+    <div class="note">
+      ⚠️ このフォームは <strong>簡易入力バージョン</strong> です。<br>
+      入力内容はテスト用フォルダ（<code>forms_demo / exports_demo</code>）に保存されます。
+    </div>
+
+    <label for="officeId">事業所番号：</label>
+    <input id="officeId" type="text" placeholder="例：001">
+
+    <label for="personalId">個人番号：</label>
+    <input id="personalId" type="text" placeholder="例：A001">
+
+    <button onclick="startDemo()">はじめる</button>
+  </div>
+
+  <script>
+    function startDemo() {
+      const officeId = document.getElementById('officeId').value.trim();
+      const personalId = document.getElementById('personalId').value.trim();
+
+      if (!officeId || !personalId) {
+        alert('事業所番号と個人番号を入力してください。');
+        return;
+      }
+
+      const userId = `${officeId}_${personalId}`;
+
+      // 🔽 FastAPIで使う形式に対応
+      localStorage.setItem('user_id', userId);
+      localStorage.setItem('office_id', officeId);
+      localStorage.setItem('person_id', personalId);
+      localStorage.setItem('demo_mode', 'true');
+
+      window.location.href = 'form0.html';
+    }
+  </script>
+
+</body>
+</html>

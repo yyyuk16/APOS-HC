@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>APOS-HC 送信完了</title>
+  <style>
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(180deg, #f4f8fb 0%, #e9f6f0 100%);
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 700px;
+      background: #fff;
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      text-align: center;
+    }
+    h1 {
+      color: #27ae60;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    p {
+      color: #555;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+    button {
+      font-size: 1rem;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 10px;
+      background-color: #1f80c4;
+      color: #fff;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #27ae60;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>✅ 送信が完了しました！</h1>
+    <p>
+      ご協力ありがとうございました。<br>
+      データは <strong>サーバー（/exports_demo/demo_records.csv）</strong> に保存されました。
+    </p>
+    <button onclick="location.href='form.html'">最初に戻る</button>
+  </div>
+</body>
+</html>
